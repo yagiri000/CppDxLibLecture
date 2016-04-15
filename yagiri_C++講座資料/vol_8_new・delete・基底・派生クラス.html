@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="github_hu.css" type="text/css" />
+</head>
+<body>
+<h1 id="c講座資料-vol_8">C++講座資料 vol_8</h1>
+<h2 id="newとdelete">newとdelete</h2>
+<p>newを使うと、プログラムの実行中にメモリを確保し、オブジェクトを生成できる。 newすると生成したオブジェクトへのポインタが返ってくる。生成したオブジェクトを見失わないように、ポインタを格納する変数を用意する必要がある。</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="kw">class</span> myclass{
+<span class="kw">public</span>:
+    <span class="dt">int</span> x;
+
+    myclass(<span class="dt">int</span> xx):
+    x(xx)
+    {
+
+    }
+
+};
+
+<span class="dt">int</span> main(){
+
+    myclass* ptr = <span class="kw">new</span> myclass(<span class="dv">32</span>);
+    
+    std::cout &lt;&lt; <span class="st">&quot;myclassのxの値 : &quot;</span> &lt;&lt; ptr-&gt;x &lt;&lt; std::endl;
+    
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<p>deleteを使うと、プログラム実行中にnewで確保された領域を開放することが出来る。<br />deleteには開放する領域のポインタを渡す。<br />下の例では、xの値を表示した後deleteするので、メイン関数を抜ける前にデストラクタが呼ばれる。<br />deleteされた後にptrのxの値を表示するとカオスな値が入っている（動作未定義）。見てみよう。<br />deleteしなかったらデストラクタがいつ呼ばれるか確認してみよう。</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="kw">class</span> myclass{
+<span class="kw">public</span>:
+    <span class="dt">int</span> x;
+    
+    myclass(<span class="dt">int</span> xx):
+    x(xx)
+    {
+        std::cout &lt;&lt; <span class="st">&quot;コンストラクタが呼ばれました&quot;</span> &lt;&lt; std::endl;
+    }
+    
+    ~myclass(){
+        std::cout &lt;&lt; <span class="st">&quot;デストラクタが呼ばれました&quot;</span> &lt;&lt; std::endl;
+    }
+};
+
+<span class="dt">int</span> main(){
+    std::cout &lt;&lt; <span class="st">&quot;メイン関数に入りました&quot;</span> &lt;&lt; std::endl;
+
+    myclass* ptr = <span class="kw">new</span> myclass(<span class="dv">12</span>);
+    
+    std::cout &lt;&lt; <span class="st">&quot;myclassのxの値 : &quot;</span> &lt;&lt; ptr-&gt;x &lt;&lt; std::endl;
+    
+    <span class="kw">delete</span> ptr;
+
+    std::cout &lt;&lt; <span class="st">&quot;メイン関数を抜けました&quot;</span> &lt;&lt; std::endl;
+
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<h2 id="演習問題">演習問題</h2>
+<ol style="list-style-type: decimal">
+<li>以下のようなクラスを定義した。myclassへのポインタのvectorを用意し、適当な値のa(0~10ぐらい)を持ったデータ10個をnewで生成・格納し、表示した後にaが5以下の要素を削除せよ。<br />&gt;ヒント：vectorの要素のmyclassへのポインタを削除しただけでは動的に確保した領域は解放されていない。<br />&gt;現時点ではremove_ifを使うとdeleteを呼べないので、whileやforとeraseを使って削除をすること。</li>
+</ol>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="kw">class</span> myclass{
+<span class="kw">public</span>:
+    <span class="dt">int</span> a;
+
+    myclass(<span class="dt">int</span> aa):
+        a(aa)
+    {
+    }
+};</code></pre>
+<h2 id="基底クラスと派生クラス">基底クラスと派生クラス</h2>
+<p>クラスを継承することで、新しいクラスを定義することが出来る。<br />継承元のクラスを基底クラス、継承先のクラスを派生クラスという。<br />派生クラスは基底クラスのメンバを持つ。</p>
+<p>下の例の場合derivedクラスがbaseクラスを継承している。</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="kw">class</span> base{
+<span class="kw">public</span>:
+    base(<span class="dt">int</span> xx):
+        x(xx)
+    {
+    }
+    <span class="dt">int</span> x;
+    <span class="dt">void</span> show(){
+        std::cout &lt;&lt; <span class="st">&quot;x:&quot;</span> &lt;&lt; x &lt;&lt; std::endl;
+    }
+};
+
+<span class="kw">class</span> derived : <span class="kw">public</span> base{
+<span class="kw">public</span>:
+    derived(<span class="dt">int</span> xx):
+        base(xx)
+    {
+    }
+};
+
+
+<span class="dt">int</span> main(<span class="dt">void</span>){
+
+    base obj_b(<span class="dv">12</span>);
+    obj_b.show();
+
+    derived obj_d(<span class="dv">23</span>);
+    obj_d.show();
+
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<blockquote>
+<p>書き方</p>
+</blockquote>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">class</span> 派生クラス名 : アクセス 基底クラス名{
+<span class="kw">public</span>:
+    派生クラス名(引数1,引数2, ...):
+        基底クラス名(引数1,引数2, ...)
+    {
+    }
+};</code></pre>
+<p>上記の基底クラス名(引数1,引数2, ...)　で基底クラスのコンストラクタを呼ぶことが出来る。<br />基底クラス名(引数1,引数2, ...)　には基底クラスに渡す引数を書く。 アクセスがpublicだと基本クラスのpublicメンバが派生クラスのpublicメンバに、privateだと基本クラスのpublicメンバが派生クラスのprivateメンバになる。</p>
+<h2 id="演習問題dxライブラリ">演習問題(DXライブラリ)</h2>
+<p>（1. 2.…と順番に解いていって下さい。 これまでコードを書いてきたプロジェクトとは別に新しくプロジェクトを作ってください。）</p>
+<ol style="list-style-type: decimal">
+<li><p>enemy型へのポインタを要素に持つvectorを用意し、newを使って敵を複数生成せよ。</p></li>
+<li><p>画面外に行った敵を削除せよ。newで動的確保した領域も解放すること。</p></li>
+</ol>
+</body>
+</html>

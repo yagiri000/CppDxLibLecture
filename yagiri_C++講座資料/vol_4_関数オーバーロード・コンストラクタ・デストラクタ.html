@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="github_hu.css" type="text/css" />
+</head>
+<body>
+<h1 id="c講座資料-vol_4">C++講座資料 vol_4</h1>
+<h2 id="関数オーバーロード">関数オーバーロード</h2>
+<p>C++では、引数が異なる同じ名前の関数を定義できる。そのように関数を多重定義することを関数オーバーロードという。 実行中に、引数によって呼ばれる関数が選択される。</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="co">//絶対値を返す関数、myabsを3通りにオーバーロードする</span>
+<span class="dt">int</span> myabs(<span class="dt">int</span> n){
+    std::cout &lt;&lt; <span class="st">&quot;int型のmyabsが呼ばれました&quot;</span> &lt;&lt; std::endl;
+    <span class="kw">if</span>(n &gt; <span class="dv">0</span>){
+        <span class="kw">return</span> n;
+    }<span class="kw">else</span>{
+        <span class="kw">return</span> -n;
+    }
+}
+
+<span class="dt">float</span> myabs(<span class="dt">float</span> n){
+    std::cout &lt;&lt; <span class="st">&quot;float型のmyabsが呼ばれました&quot;</span> &lt;&lt; std::endl;
+    <span class="kw">if</span>(n &gt; <span class="dv">0</span>){
+        <span class="kw">return</span> n;
+    }<span class="kw">else</span>{
+        <span class="kw">return</span> -n;
+    }
+}
+
+<span class="dt">double</span> myabs(<span class="dt">double</span> n){
+    std::cout &lt;&lt; <span class="st">&quot;double型のmyabsが呼ばれました&quot;</span> &lt;&lt; std::endl;
+    <span class="kw">if</span>(n &gt; <span class="dv">0</span>){
+        <span class="kw">return</span> n;
+    }<span class="kw">else</span>{
+        <span class="kw">return</span> -n;
+    }
+}
+
+
+<span class="dt">int</span> main(){
+
+    <span class="dt">int</span> a = <span class="dv">-10</span>;
+    <span class="dt">float</span> b = <span class="fl">-2.</span><span class="er">71f</span>;
+    <span class="dt">double</span> c = <span class="fl">-3.</span><span class="dv">14</span>;
+    
+    std::cout &lt;&lt; myabs(a) &lt;&lt; std::endl &lt;&lt; std::endl;
+    std::cout &lt;&lt; myabs(b) &lt;&lt; std::endl &lt;&lt; std::endl;
+    std::cout &lt;&lt; myabs(c) &lt;&lt; std::endl &lt;&lt; std::endl;
+
+
+    <span class="kw">return</span> <span class="dv">0</span>;
+
+}</code></pre>
+<blockquote>
+<p>引数の数によって呼ばれる関数が変わる。</p>
+</blockquote>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="dt">void</span> myfunc(<span class="dt">int</span> a){
+    std::cout &lt;&lt; <span class="st">&quot;引数１つのmyfuncが呼ばれました。引数は &quot;</span> &lt;&lt; a &lt;&lt; std::endl;
+}
+
+<span class="dt">void</span> myfunc(<span class="dt">int</span> a, <span class="dt">int</span> b){
+    std::cout &lt;&lt; <span class="st">&quot;引数２つのmyfuncが呼ばれました。引数は &quot;</span> &lt;&lt; a &lt;&lt; <span class="st">&quot; &quot;</span> &lt;&lt; b &lt;&lt; std::endl;
+}
+
+<span class="dt">int</span> main(){
+    myfunc(<span class="dv">1</span>);
+    myfunc(<span class="dv">2</span>, <span class="dv">3</span>);
+
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<h2 id="演習問題">演習問題</h2>
+<ol style="list-style-type: decimal">
+<li>引数で受け取った値の2乗を返す関数mysquare()を作成せよ。mysquare()をint,float,double型の3通りに対応できるようオーバーロードしなさい。</li>
+</ol>
+<h2 id="コンストラクタ">コンストラクタ</h2>
+<p>C++ではクラス生成時に呼び出されるコンストラクタというものを定義できる。 関数オーバーロードと同じ要領で、コンストラクタは複数定義できる。</p>
+<blockquote>
+<p>コンストラクタの書き方</p>
+</blockquote>
+<pre class="sourceCode cpp"><code class="sourceCode cpp">クラスの名前(引数){
+    初期化処理...
+}</code></pre>
+<blockquote>
+<p>obj1は引数(1, 2)で初期化。obj2は引数無しで初期化なので自動的に(0, 0)が入る。</p>
+</blockquote>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="kw">class</span> point{
+<span class="kw">public</span>:
+    <span class="dt">int</span> x;
+    <span class="dt">int</span> y;
+    
+    point(){
+        std::cout &lt;&lt; <span class="st">&quot;引数なしのコンストラクタが呼ばれました&quot;</span> &lt;&lt; std::endl;
+        x = <span class="dv">0</span>;
+        y = <span class="dv">0</span>;
+    }
+    
+    point(<span class="dt">int</span> xx, <span class="dt">int</span> yy){
+        std::cout &lt;&lt; <span class="st">&quot;引数ありのコンストラクタが呼ばれました&quot;</span> &lt;&lt; std::endl;
+        x = xx;
+        y = yy;
+    }
+};
+
+<span class="dt">int</span> main(){
+
+    point obj1(<span class="dv">1</span>, <span class="dv">2</span>);
+    std::cout &lt;&lt; obj1.x &lt;&lt; <span class="st">&quot; &quot;</span> &lt;&lt; obj1.y &lt;&lt; std::endl;
+    
+    point obj2;
+    std::cout &lt;&lt; obj2.x &lt;&lt; <span class="st">&quot; &quot;</span> &lt;&lt; obj2.y &lt;&lt; std::endl;
+    
+    <span class="kw">return</span> <span class="dv">0</span>;
+
+}</code></pre>
+<blockquote>
+<p>コンストラクタの数値の初期化は以下のようにも書くことができる。<br />自分で定義したクラスをなど初期化する場合、こう書いたほうが、インスタンスのコピーが発生しなくなるため処理が早くなる。(このコードはコピペじゃなく実際打ってみよう)</p>
+</blockquote>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="kw">class</span> point{
+<span class="kw">public</span>:
+    <span class="dt">int</span> x;
+    <span class="dt">int</span> y;
+    
+    point(<span class="dt">int</span> xx, <span class="dt">int</span> yy):
+    x(xx),
+    y(yy)   
+    {
+        
+    }
+};
+
+<span class="dt">int</span> main(){
+
+    point obj(<span class="dv">1</span>, <span class="dv">2</span>);
+    std::cout &lt;&lt; obj.x &lt;&lt; <span class="st">&quot; &quot;</span> &lt;&lt; obj.y &lt;&lt; std::endl;
+    
+    <span class="kw">return</span> <span class="dv">0</span>;
+
+}</code></pre>
+<h2 id="デストラクタ">デストラクタ</h2>
+<p>オブジェクトが破棄されるときにデストラクタが呼ばれる。</p>
+<blockquote>
+<p>デストラクタの書き方。~(チルダ）をつける</p>
+</blockquote>
+<p>~クラスの名前(){ 処理... }</p>
+<blockquote>
+<p>メイン関数を抜ける時オブジェクトが破棄されるのでデストラクタが呼ばれる。</p>
+</blockquote>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="kw">class</span> myclass{
+<span class="kw">public</span>:
+    ~myclass(){
+        std::cout &lt;&lt; <span class="st">&quot;デストラクタが呼ばれました&quot;</span> &lt;&lt; std::endl;
+    }
+};
+
+<span class="dt">int</span> main(){
+    std::cout &lt;&lt; <span class="st">&quot;メイン関数に入りました&quot;</span> &lt;&lt; std::endl;
+
+    myclass obj;
+
+    std::cout &lt;&lt; <span class="st">&quot;メイン関数を抜けました&quot;</span> &lt;&lt; std::endl;
+
+    <span class="kw">return</span> <span class="dv">0</span>;
+
+}</code></pre>
+<h2 id="演習問題-1">演習問題</h2>
+<ol style="list-style-type: decimal">
+<li>以下の様なクラスpointを作った。コンストラクタとデストラクタを作れ。<br />コンストラクタ・デストラクタがよばれたら、&quot;～が呼ばれました&quot;と出力するようにせよ。コンストラクタは引数有りのものと引数なし（引数なしの時はx=0,y=0)のものを作ること。<br />コンストラクタの初期化の部分は今回教えた形式で書け。</li>
+</ol>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">class</span> point{
+    <span class="kw">public</span>:
+        <span class="dt">int</span> x, y;
+
+        <span class="co">//以下にコンストラクタとデストラクタ書く</span>
+}</code></pre>
+</body>
+</html>

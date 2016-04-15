@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="github_hu.css" type="text/css" />
+</head>
+<body>
+<h1 id="c講座資料-vol_12">C++講座資料 vol_12</h1>
+<p>今回はC++の中でも特に書き方が変態的なラムダ式を扱う。</p>
+<h2 id="ラムダ式">ラムダ式</h2>
+<p>remove_ifを使う時、大きなプログラムになると削除するかを判定する関数の定義と使う部分が離れてしまう。 そこでC++11からはラムダ式というものが導入された。 例えば2で割り切れるかを返す関数オブジェクトを生成する場合</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="dt">int</span> main(){
+    
+    <span class="co">//2で割り切れるかどうかを返す関数オブジェクトを生成</span>
+    <span class="kw">auto</span> isMultiple2 = [](<span class="dt">int</span> num){<span class="kw">return</span> (num % <span class="dv">2</span>) == <span class="dv">0</span>;};
+      
+    std::cout &lt;&lt; isMultiple2(<span class="dv">3</span>) &lt;&lt; std::endl;
+    std::cout &lt;&lt; isMultiple2(<span class="dv">4</span>) &lt;&lt; std::endl;
+      
+    <span class="kw">return</span> <span class="dv">0</span>;
+    
+}</code></pre>
+<p>上のコードの</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp">[](<span class="dt">int</span> num){<span class="kw">return</span> (num % <span class="dv">2</span>) == <span class="dv">0</span>;}</code></pre>
+<p>の部分がラムダ式だ。 ラムダ式の型はautoで推論させている。(仕様上未定義なため)</p>
+<p>ラムダ式の書き方</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp">[](引数){処理};</code></pre>
+<p>ところで返り値の型を指定していないことに気づいただろうか? これは多くの場合(ラムダ式内部でforを使うとかしない限り)指定しなくてよいものだ。 ラムダ式の返り値を明示的に指定する場合は</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp">[](引数)-&gt;返り値の型{
+    処理
+};</code></pre>
+<p>のように()のあとに「-&gt;(返り値の型)」という形式にする。</p>
+<h2 id="ラムダ式とremove_if">ラムダ式とremove_if</h2>
+<p>ラムダ式を用いると、remove_if関数の近くに条件を判定する関数を書くことが出来る。</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;vector&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="dt">int</span> main(){
+
+    std::vector&lt;<span class="dt">int</span>&gt; vec;<span class="co">//int型の動的配列</span>
+
+    <span class="kw">for</span>(<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">10</span>; i++){
+        vec.push_back(i);
+    }
+
+    <span class="co">//表示</span>
+    <span class="kw">for</span>(<span class="kw">auto</span> i = vec.begin(); i &lt; vec.end(); ++i){
+        std::cout &lt;&lt; *i &lt;&lt; <span class="st">&quot; &quot;</span>;
+    }
+    std::cout &lt;&lt; std::endl;
+
+    
+    <span class="co">//3の倍数かどうかを返す関数</span>
+    <span class="kw">auto</span> isMulThree = 
+        [](<span class="dt">int</span> x){
+            <span class="kw">return</span> (x % <span class="dv">3</span>) == <span class="dv">0</span>;
+        };
+    
+    <span class="co">//vecの中から3の倍数を後ろに詰める</span>
+    <span class="kw">auto</span> rmviter = std::remove_if(vec.begin(), vec.end(), isMulThree);
+
+    <span class="co">//実際に削除</span>
+    vec.erase( rmviter, vec.end() );
+
+
+    <span class="co">//表示</span>
+    <span class="kw">for</span>(<span class="kw">auto</span> i = vec.begin(); i &lt; vec.end(); ++i){
+        std::cout &lt;&lt; *i &lt;&lt; <span class="st">&quot; &quot;</span>;
+    }
+    std::cout &lt;&lt; std::endl;
+
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<p>remove_if関数の中に条件を判定する関数を直接書くことが出来る。</p>
+<p>下の例では、第三引数に直接ラムダ式を書いている。</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;vector&gt;</span>
+<span class="ot">#include &lt;algorithm&gt;</span>
+
+<span class="dt">int</span> main(){
+
+    std::vector&lt;<span class="dt">int</span>&gt; vec;<span class="co">//int型の動的配列</span>
+
+    <span class="kw">for</span>(<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">10</span>; i++){
+        vec.push_back(i);
+    }
+
+    <span class="co">//表示</span>
+    <span class="kw">for</span>(<span class="kw">auto</span> i = vec.begin(); i &lt; vec.end(); ++i){
+        std::cout &lt;&lt; *i &lt;&lt; <span class="st">&quot; &quot;</span>;
+    }
+    std::cout &lt;&lt; std::endl;
+
+    
+    
+    
+    <span class="co">//vecの中から3の倍数を後ろに詰める</span>
+    <span class="kw">auto</span> rmviter = std::remove_if(vec.begin(),vec.end(),
+        [](<span class="dt">int</span> x){
+            <span class="kw">return</span> (x % <span class="dv">3</span>) == <span class="dv">0</span>;
+        }
+    );
+
+    <span class="co">//実際に削除</span>
+    vec.erase( rmviter, vec.end() );
+
+
+    <span class="co">//表示</span>
+    <span class="kw">for</span>(<span class="kw">auto</span> i = vec.begin(); i &lt; vec.end(); ++i){
+        std::cout &lt;&lt; *i &lt;&lt; <span class="st">&quot; &quot;</span>;
+    }
+    std::cout &lt;&lt; std::endl;
+
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<h2 id="演習問題">演習問題</h2>
+<ol style="list-style-type: decimal">
+<li><p>受け取った値を2倍にして返す関数をラムダ式を用いて作成せよ。</p></li>
+<li><p>int型のvectorに0から9を入れ、remove_ifとラムダ式を用いて2の倍数を削除せよ。</p></li>
+<li><p>以下のようなクラスmyclassを定義した。myclassへのスマートポインタのvectorを用意し、適当な値のa(0~10ぐらい)を持ったデータを10個格納し、aが5以下の要素をremove_ifを用いて削除せよ。<br />myclassへのスマートポインタのvectorとは、<code>std:vector&lt;std::shared_ptr&lt;myclass&gt;&gt; vec</code>である。</p></li>
+</ol>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">class</span> myclass{
+<span class="kw">public</span>:
+    <span class="dt">int</span> a;
+    myclass(<span class="dt">int</span> aa):
+        a(aa)
+    {
+    }
+};</code></pre>
+<h2 id="演習問題dxライブラリ">演習問題(DXライブラリ)</h2>
+<p>（1. 2.…と順番に解いていって下さい。 これまでコードを書いてきたプロジェクトとは別に新しくプロジェクトを作ってください。）</p>
+<ol style="list-style-type: decimal">
+<li>enemyのクラスへのスマートポインタを要素に持つvectorを用意し、敵を複数生成せよ。<br />領域確保はnewではなく、std::make_sharedを使うこと。要素の削除にはalgorithmのremove_ifを使い、その条件の指定にはラムダ式を使用せよ。</li>
+</ol>
+</body>
+</html>

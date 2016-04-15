@@ -1,0 +1,403 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="github_hu.css" type="text/css" />
+</head>
+<body>
+<h1 id="c講座資料-vol_9">C++講座資料 vol_9</h1>
+<h2 id="基底クラスへのポインタ">基底クラスへのポインタ</h2>
+<p>基底クラスへのポインタには、派生クラスのポインタを入れることが出来る。</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="kw">class</span> base{
+<span class="kw">public</span>:
+    <span class="dt">int</span> x;
+
+    base(<span class="dt">int</span> xx):
+        x(xx)
+    {
+    }
+
+    <span class="dt">void</span> show(){
+        std::cout &lt;&lt; <span class="st">&quot;show関数が呼ばれました。　xは:&quot;</span> &lt;&lt; x &lt;&lt; std::endl;
+    }
+};
+
+<span class="kw">class</span> derived : <span class="kw">public</span> base{
+<span class="kw">public</span>:
+    derived(<span class="dt">int</span> xx) : base(xx)
+    {
+    }
+    
+};
+
+<span class="dt">int</span> main(<span class="dt">void</span>){
+
+    base obj_b(<span class="dv">100</span>);
+    derived obj_d(<span class="dv">200</span>);
+
+    obj_b.show();
+    obj_d.show();
+
+    std::cout &lt;&lt; std::endl;
+
+    base *ptr1 = &amp;obj_b;
+    base *ptr2 = &amp;obj_d; <span class="co">//基底クラスへのポインタに派生クラスのポインタを入れられる</span>
+    
+    ptr1-&gt;show();
+    ptr2-&gt;show();
+    
+    std::cout &lt;&lt; std::endl;
+
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<h2 id="仮想関数">仮想関数</h2>
+<p>基底クラスでvirtualをつけ仮想関数を作り、派生クラスでその関数をオーバーライドすることで、派生クラスを指している基底クラスへのポインタから、派生クラスで再定義された関数を呼び出すことが出来るようになる。<br />以下のshow関数のように、クラスの関数の前にvirtualをつけることで仮想関数を定義できる。</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="kw">class</span> base{
+<span class="kw">public</span>:
+    <span class="dt">int</span> x;
+
+    base(<span class="dt">int</span> xx):
+        x(xx)
+    {
+
+    }
+
+    <span class="kw">virtual</span> <span class="dt">void</span> show(){
+        std::cout &lt;&lt; <span class="st">&quot;基底クラスのshow関数が呼ばれました。　xは:&quot;</span> &lt;&lt; x &lt;&lt; std::endl;
+    }
+};
+
+<span class="kw">class</span> derived : <span class="kw">public</span> base{
+<span class="kw">public</span>:
+    derived(<span class="dt">int</span> xx) : base(xx)
+    {
+    }
+
+    <span class="dt">void</span> show(){
+        std::cout &lt;&lt; <span class="st">&quot;派生クラスのshow関数が呼ばれました。　xは:&quot;</span> &lt;&lt; x &lt;&lt; std::endl;
+    }
+};
+
+<span class="dt">int</span> main(<span class="dt">void</span>){
+
+    base obj_b(<span class="dv">100</span>);
+    derived obj_d(<span class="dv">200</span>);
+
+    obj_b.show();
+    obj_d.show();
+
+    std::cout &lt;&lt; std::endl;
+
+    base *ptr1 = &amp;obj_b;
+    base *ptr2 = &amp;obj_d; <span class="co">// ptr2は、派生クラスを指している基底クラスへのポインタ</span>
+    
+    ptr1-&gt;show();
+    ptr2-&gt;show();
+    
+    std::cout &lt;&lt; std::endl;
+
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<blockquote>
+<p>newで動的に領域を確保したバージョン（そんなに変わりはない）</p>
+</blockquote>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="kw">class</span> base{
+<span class="kw">public</span>:
+    <span class="dt">int</span> x;
+
+    base(<span class="dt">int</span> xx):
+        x(xx)
+    {
+    }
+
+    <span class="kw">virtual</span> <span class="dt">void</span> show(){
+        std::cout &lt;&lt; <span class="st">&quot;基底クラスのshow関数が呼ばれました。　xは:&quot;</span> &lt;&lt; x &lt;&lt; std::endl;
+    }
+};
+
+<span class="kw">class</span> derived : <span class="kw">public</span> base{
+<span class="kw">public</span>:
+    derived(<span class="dt">int</span> xx) : base(xx)
+    {
+    }
+
+    <span class="dt">void</span> show(){
+        std::cout &lt;&lt; <span class="st">&quot;派生クラスのshow関数が呼ばれました。　xは:&quot;</span> &lt;&lt; x &lt;&lt; std::endl;
+    }
+};
+
+
+<span class="dt">int</span> main(<span class="dt">void</span>){
+
+    base *ptr1 = <span class="kw">new</span> base(<span class="dv">100</span>);
+    base *ptr2 = <span class="kw">new</span> derived(<span class="dv">200</span>);
+    
+    ptr1-&gt;show();
+    ptr2-&gt;show();
+    
+    std::cout &lt;&lt; std::endl;
+
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<blockquote>
+<p>newで動的に領域を確保したバージョン、その２。派生クラスが複数になっただけ。</p>
+</blockquote>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="kw">class</span> I_Enemy{
+<span class="kw">public</span>:
+    <span class="dt">int</span> x;
+    
+    <span class="co">//コンストラクタ</span>
+    I_Enemy(<span class="dt">int</span> xx):
+        x(xx)
+    {
+    }
+
+    <span class="kw">virtual</span> <span class="dt">void</span> show(){
+        std::cout &lt;&lt; <span class="st">&quot;基底クラスのshow関数が呼ばれました。　xは:&quot;</span> &lt;&lt; x &lt;&lt; std::endl;
+    }
+};
+
+<span class="kw">class</span> EnemyA : <span class="kw">public</span> I_Enemy{
+<span class="kw">public</span>:
+    
+    EnemyA(<span class="dt">int</span> xx) : I_Enemy(xx){
+
+    }
+
+    <span class="dt">void</span> show(){
+        std::cout &lt;&lt; <span class="st">&quot;EnemyAクラスのshow関数が呼ばれました。 xは:&quot;</span> &lt;&lt; x &lt;&lt; std::endl;
+    }
+};
+
+
+<span class="kw">class</span> EnemyB : <span class="kw">public</span> I_Enemy{
+<span class="kw">public</span>:
+    
+    EnemyB(<span class="dt">int</span> xx) : I_Enemy(xx){
+
+    }
+
+    <span class="dt">void</span> show(){
+        std::cout &lt;&lt; <span class="st">&quot;EnemyBクラスのshow関数が呼ばれました。 xは:&quot;</span> &lt;&lt; x &lt;&lt; std::endl;
+    }
+};
+
+
+<span class="kw">class</span> EnemyC : <span class="kw">public</span> I_Enemy{
+<span class="kw">public</span>:
+    
+    EnemyC(<span class="dt">int</span> xx) : I_Enemy(xx){
+
+    }
+
+    <span class="dt">void</span> show(){
+        std::cout &lt;&lt; <span class="st">&quot;EnemyCクラスのshow関数が呼ばれました。 xは:&quot;</span> &lt;&lt; x &lt;&lt; std::endl;
+    }
+};
+
+
+
+<span class="dt">int</span> main(<span class="dt">void</span>){
+
+    I_Enemy *ptr1 = <span class="kw">new</span> EnemyA(<span class="dv">100</span>);
+    I_Enemy *ptr2 = <span class="kw">new</span> EnemyB(<span class="dv">200</span>);
+    I_Enemy *ptr3 = <span class="kw">new</span> EnemyC(<span class="dv">300</span>);
+    
+    ptr1-&gt;show();
+    ptr2-&gt;show();
+    ptr3-&gt;show();
+
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<h2 id="継承によるポリモーフィズム">継承によるポリモーフィズム</h2>
+<p>例えばシューティングで敵A,敵B,敵Cを作りたいとする。もし、敵A,敵B,敵Cの配列をそれぞれ作って管理しようとすると大変だし、敵が一種類増えるたびに新しい配列を作らなければならない。 下のようにEnemyの基底クラスI_Enemyを定義し、それを継承すれば、派生クラスを一つの配列で扱うことが可能になる。</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+<span class="ot">#include &lt;vector&gt;</span>
+
+<span class="kw">class</span> I_Enemy{
+<span class="kw">public</span>:
+    <span class="dt">int</span> x;
+    
+    <span class="co">//コンストラクタ</span>
+    I_Enemy(<span class="dt">int</span> xx):
+        x(xx)
+    {
+    }
+
+    <span class="kw">virtual</span> <span class="dt">void</span> show(){
+        std::cout &lt;&lt; <span class="st">&quot;基底クラスのshow関数が呼ばれました。　xは:&quot;</span> &lt;&lt; x &lt;&lt; std::endl;
+    }
+};
+
+<span class="kw">class</span> EnemyA : <span class="kw">public</span> I_Enemy{
+<span class="kw">public</span>:
+    
+    EnemyA(<span class="dt">int</span> xx) : I_Enemy(xx){
+
+    }
+
+    <span class="dt">void</span> show(){
+        std::cout &lt;&lt; <span class="st">&quot;EnemyAクラスのshow関数が呼ばれました。 xは:&quot;</span> &lt;&lt; x &lt;&lt; std::endl;
+    }
+};
+
+
+<span class="kw">class</span> EnemyB : <span class="kw">public</span> I_Enemy{
+<span class="kw">public</span>:
+    
+    EnemyB(<span class="dt">int</span> xx) : I_Enemy(xx){
+
+    }
+
+    <span class="dt">void</span> show(){
+        std::cout &lt;&lt; <span class="st">&quot;EnemyBクラスのshow関数が呼ばれました。 xは:&quot;</span> &lt;&lt; x &lt;&lt; std::endl;
+    }
+};
+
+
+<span class="kw">class</span> EnemyC : <span class="kw">public</span> I_Enemy{
+<span class="kw">public</span>:
+    
+    EnemyC(<span class="dt">int</span> xx) : I_Enemy(xx){
+
+    }
+
+    <span class="dt">void</span> show(){
+        std::cout &lt;&lt; <span class="st">&quot;EnemyCクラスのshow関数が呼ばれました。 xは:&quot;</span> &lt;&lt; x &lt;&lt; std::endl;
+    }
+};
+
+
+
+<span class="dt">int</span> main(<span class="dt">void</span>){
+    std::vector&lt;I_Enemy*&gt; vec;
+
+    vec.push_back(<span class="kw">new</span> EnemyA(<span class="dv">100</span>));
+    vec.push_back(<span class="kw">new</span> EnemyB(<span class="dv">200</span>));
+    vec.push_back(<span class="kw">new</span> EnemyC(<span class="dv">300</span>));
+
+    <span class="co">//違うクラスなのに、同じ配列で扱えた！！！！！</span>
+    <span class="kw">for</span>(<span class="kw">auto</span> i = vec.begin(); i &lt; vec.end(); ++i){
+        (*i)-&gt;show();
+    }
+
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<h2 id="純粋仮想関数">純粋仮想関数</h2>
+<p>純粋仮想関数を作ると、そのクラスはインスタンス化出来なくなる。 上の例では敵A,B,Cの基底クラスにI_Enemyが定義されているが、このようなクラスをインターフェイスを定義するクラスという。 純粋仮想関数はインターフェイスを定義するクラスを作るときに使い、誤ってインターフェイスを定義するクラスを生成してしまうのを防げる。</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="kw">class</span> base{
+<span class="kw">public</span>:
+    <span class="dt">double</span> x;
+
+    base(<span class="dt">int</span> xx):
+        x(xx)
+    {
+    }
+
+    <span class="kw">virtual</span> <span class="dt">void</span> show() = <span class="dv">0</span>;
+};
+
+<span class="kw">class</span> derived : <span class="kw">public</span> base{
+<span class="kw">public</span>:
+    derived(<span class="dt">int</span> xx): base(xx)
+    {
+    }
+
+    <span class="dt">void</span> show(){
+        std::cout &lt;&lt; <span class="st">&quot;派生クラスのshowが呼ばれました。 xは:&quot;</span> &lt;&lt; x &lt;&lt; std::endl;
+    }
+};
+
+<span class="dt">int</span> main(<span class="dt">void</span>){
+    base *ptr1 = <span class="kw">new</span> derived(<span class="dv">100</span>);
+    ptr1-&gt;show();
+
+    <span class="co">//コメントを外すと純粋仮想関数をもつクラスをインスタンス化してしまうのでコンパイルエラー</span>
+    <span class="co">//base b(100);</span>
+    <span class="co">//base *ptr2 = new base(100);</span>
+
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<blockquote>
+<p>純粋仮想関数　書き方</p>
+</blockquote>
+<p>virtual 返り値の型 関数名() = 0; 例：virtual void show() = 0;</p>
+<h2 id="演習問題">演習問題</h2>
+<ol style="list-style-type: decimal">
+<li><p>以下の様なクラスを作った。I_animalクラスを継承したクラスをもう２つ作れ。</p></li>
+<li><p>I_animal型へのポインタを要素に持つvectorにnewで動的確保したI_animalの派生クラスへのポインタを適当に複数入れた後、すべてのインスタンスのtalk関数を呼び出せ。</p></li>
+<li><p>I_animalのtalk関数を純粋仮想関数にせよ。</p></li>
+</ol>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">class</span> I_animal{
+<span class="kw">public</span>:
+    <span class="dt">double</span> weight;<span class="co">//重さ</span>
+
+    I_animal(<span class="dt">int</span> w) : weight(w){
+
+    }
+
+    <span class="kw">virtual</span> <span class="dt">void</span> talk(){
+        std::cout &lt;&lt; <span class="st">&quot;基底クラスのtalk関数が呼ばれました。 重さは:&quot;</span> &lt;&lt; weight &lt;&lt; std::endl;
+    }
+};
+
+<span class="kw">class</span> dog : <span class="kw">public</span> I_animal{
+<span class="kw">public</span>:
+    dog(<span class="dt">int</span> w) : I_animal(w){
+
+    }
+
+    <span class="dt">void</span> talk(){
+        std::cout &lt;&lt; <span class="st">&quot;わんわん　重さは:&quot;</span> &lt;&lt; weight &lt;&lt; std::endl;
+    }
+};
+
+<span class="kw">class</span> yojo : <span class="kw">public</span> I_animal{
+<span class="kw">public</span>:
+    yojo(<span class="dt">int</span> w) : I_animal(w){
+
+    }
+
+    <span class="dt">void</span> talk(){
+        std::cout &lt;&lt; <span class="st">&quot;ふぇぇ…　重さは:&quot;</span> &lt;&lt; weight &lt;&lt; std::endl;
+    }
+};</code></pre>
+<h2 id="演習問題dxライブラリ">演習問題(DXライブラリ)</h2>
+<ul>
+<li>継承によるポリモーフィズムを用いて、敵を数種類作れ。</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; }
+code > span.dt { color: #902000; }
+code > span.dv { color: #40a070; }
+code > span.bn { color: #40a070; }
+code > span.fl { color: #40a070; }
+code > span.ch { color: #4070a0; }
+code > span.st { color: #4070a0; }
+code > span.co { color: #60a0b0; font-style: italic; }
+code > span.ot { color: #007020; }
+code > span.al { color: #ff0000; font-weight: bold; }
+code > span.fu { color: #06287e; }
+code > span.er { color: #ff0000; font-weight: bold; }
+  </style>
+  <link rel="stylesheet" href="github_hu.css" type="text/css" />
+</head>
+<body>
+<h1 id="c講座資料-vol_1">C++講座資料 vol_1</h1>
+<p>今回はC++でのHello World、クラスの基本的な使い方について学ぶ。 演習では、実際にDXライブラリを用いてplayer,enemyを生成する。</p>
+<h2 id="hello-world">Hello World!</h2>
+<p>C++流のHello World! C++ではstd::coutが用意されており、それを使って出力ができる。<br />std::　とは、「stdという名前空間にある」という意味。</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="dt">int</span> main(){
+
+    std::cout &lt;&lt; <span class="st">&quot;Hello World!!&quot;</span> &lt;&lt; std::endl;
+    
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<h2 id="いろいろ出力">いろいろ出力</h2>
+<p>Cのprintf関数では%dや%sなどを使って型を指定する必要があったが、std::coutでは型を指定しなくても自動的に型を判定・表示してくれる。</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="dt">int</span> main(){
+
+    <span class="dt">int</span> a = <span class="dv">12</span>;
+    <span class="dt">double</span> b = <span class="fl">3.</span><span class="dv">14</span>;
+    <span class="dt">char</span> str[<span class="dv">100</span>] = <span class="st">&quot;abcde&quot;</span>;
+    
+    std::cout &lt;&lt; a &lt;&lt; <span class="st">&quot; &quot;</span> &lt;&lt; b &lt;&lt; <span class="st">&quot; &quot;</span> &lt;&lt; str &lt;&lt; std::endl;
+    
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<h2 id="入力">入力</h2>
+<p>std::cinを使うと入力されたデータを変数に入れられる。</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="dt">int</span> main(){
+ 
+    <span class="dt">int</span> input;
+    std::cout &lt;&lt; <span class="st">&quot;年齢を入力してください&quot;</span> &lt;&lt; std::endl;
+    std::cin &gt;&gt; input;<span class="co">//inputに入力された数値を代入</span>
+  
+    std::cout &lt;&lt; <span class="st">&quot;あなたは&quot;</span>&lt;&lt; input &lt;&lt; <span class="st">&quot;歳なんですね。&quot;</span> &lt;&lt; std::endl;    
+ 
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<h2 id="クラスの基本的な書き方">クラスの基本的な書き方</h2>
+<p>クラスの要素には . （コンマ）を使ってアクセスできる。 クラスは変数を要素に持つことができ、メンバ変数という。</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="kw">class</span> myclass{
+<span class="kw">public</span>:
+    <span class="dt">int</span> a;
+    <span class="dt">int</span> b;
+};
+
+<span class="dt">int</span> main(){
+
+    myclass obj;
+    obj.a = <span class="dv">10</span>;
+    obj.b = <span class="dv">20</span>;
+    std::cout &lt;&lt; obj.a &lt;&lt; <span class="st">&quot; &quot;</span> &lt;&lt; obj.b &lt;&lt; std::endl;
+    
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<p>二次元上の座標を表すクラス、pointを作ってみた。 クラスの要素には . （コンマ）を使ってアクセスできる。 クラスは関数を要素に持つことができ、メンバ関数という。（下の例ではsetdata関数がメンバ関数）</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="kw">class</span> point{
+<span class="kw">public</span>:
+    <span class="dt">int</span> x;
+    <span class="dt">int</span> y;
+    <span class="dt">void</span> setdata(<span class="dt">int</span> xx, <span class="dt">int</span> yy){
+        x = xx;
+        y = yy;
+    }
+};
+
+<span class="dt">int</span> main(){
+
+    point obj;
+    obj.setdata(<span class="dv">13</span>, <span class="dv">29</span>);
+    std::cout &lt;&lt; obj.x &lt;&lt; <span class="st">&quot; &quot;</span> &lt;&lt; obj.y &lt;&lt; std::endl;
+    
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<h2 id="コンストラクタ">コンストラクタ</h2>
+<p>さっきの例ではpointクラスを作った後、setdata関数をいちいち呼ばなければならない。 初期化をいちいち行うのは手間がかかるので、C++ではクラス生成時に呼び出されるコンストラクタというものを定義できる。</p>
+<blockquote>
+<p>コンストラクタの書き方</p>
+</blockquote>
+<p>クラスの名前(引数){ 初期化処理... }</p>
+<blockquote>
+<p>pointクラスのコンストラクタ例</p>
+</blockquote>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="kw">class</span> point{
+<span class="kw">public</span>:
+    <span class="dt">int</span> x;
+    <span class="dt">int</span> y;
+    
+    point(<span class="dt">int</span> xx, <span class="dt">int</span> yy){
+        x = xx;
+        y = yy;
+    }
+};
+
+<span class="dt">int</span> main(){
+
+    point obj(<span class="dv">1</span>, <span class="dv">2</span>);
+    std::cout &lt;&lt; obj.x &lt;&lt; <span class="st">&quot; &quot;</span> &lt;&lt; obj.y &lt;&lt; std::endl;
+    
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<h2 id="アクセス修飾子">アクセス修飾子</h2>
+<p>publicやprivateをアクセス修飾子と言う。 publicの要素はクラス外からアクセスでき（公開）、 privateの要素はクラス外からアクセスできない（非公開）。 何も指定されていなければprivateメンバになる。</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="kw">class</span> myclass
+{
+    <span class="dt">int</span> a;
+<span class="kw">public</span>:
+    <span class="dt">int</span> b;
+<span class="kw">private</span>:
+    <span class="dt">int</span> c;
+};
+
+<span class="dt">int</span> main(){
+
+    myclass obj;
+    
+    <span class="co">//コメントを外すとコンパイルエラー</span>
+    
+    <span class="co">//obj.a = 100;</span>
+    <span class="co">//obj.c = 100;</span>
+
+    obj.b = <span class="dv">100</span>;
+    
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<blockquote>
+<p>publicメンバ関数を通じて非公開メンバにアクセス可能。</p>
+</blockquote>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="kw">class</span> myclass
+{
+    <span class="dt">int</span> a;
+<span class="kw">public</span>:
+    <span class="dt">int</span> b;
+    <span class="dt">void</span> setdata(<span class="dt">int</span> sa, <span class="dt">int</span> sb, <span class="dt">int</span> sc){
+        a = sa;
+        b = sb;
+        c = sc;
+    }
+    
+    <span class="dt">void</span> showdata(){
+        std::cout &lt;&lt; a &lt;&lt; <span class="st">&quot; &quot;</span> &lt;&lt; b &lt;&lt; <span class="st">&quot; &quot;</span> &lt;&lt; c &lt;&lt; <span class="st">&quot; &quot;</span> &lt;&lt; std::endl;
+    }
+<span class="kw">private</span>:
+    <span class="dt">int</span> c;
+};
+
+<span class="dt">int</span> main(){
+
+    myclass obj;
+    
+    <span class="co">//コメントを外すとコンパイルエラー</span>
+    
+    <span class="co">//obj.a = 100;</span>
+    <span class="co">//obj.c = 100;</span>
+
+    obj.setdata(<span class="dv">6</span>, <span class="dv">13</span>, <span class="dv">20</span>);
+    obj.showdata();
+    
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<h2 id="const変数">const変数</h2>
+<p>constをつけると値を変更不可能な変数を作ることができる。#defineの代わりに使って、定数を設定する時などに使える。</p>
+<pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="ot">#include &lt;iostream&gt;</span>
+
+<span class="dt">int</span> main(<span class="dt">void</span>){
+
+    <span class="dt">const</span> <span class="dt">int</span> a = <span class="dv">100</span>;
+
+    <span class="co">//コメントを外すとコンパイルエラー</span>
+    <span class="co">//a = 200;</span>
+
+    std::cout &lt;&lt; <span class="st">&quot;aの値は:&quot;</span> &lt;&lt; a &lt;&lt; std::endl;
+
+    <span class="kw">return</span> <span class="dv">0</span>;
+}</code></pre>
+<h2 id="演習問題">演習問題</h2>
+<ol style="list-style-type: decimal">
+<li><p>以下のプログラムをstd::coutとstd::cinを使って書き直せ。</p>
+<pre><code>#include &lt;iostream&gt;
+
+int main() {
+    int input; //入力用
+
+    printf(&quot;整数値を入力してください：&quot;);
+    scanf(&quot;%d&quot;, &amp;input);
+
+    printf(&quot;入力された値は、%dです。\n&quot;, input);
+
+    return 0;
+}</code></pre></li>
+<li><p>以下の様なクラスtri_pointを作った。<br />適当なコンストラクタを作れ。<br />x,y,zの値を表示するメンバ関数showを作れ。<br />x*y*zの値を表示するメンバ関数show_multipleを作れ。</p>
+<pre><code>class tri_point{
+public:
+    int x, y, z;
+};</code></pre></li>
+</ol>
+<h2 id="演習問題dxライブラリ">演習問題(DXライブラリ)</h2>
+<p>（1. 2.…と順番に解いていって下さい。 これまでコードを書いてきたプロジェクトとは別に新しくプロジェクトを作ってください。）</p>
+<ol style="list-style-type: decimal">
+<li><p>以下の様なplayerクラスを作り、矢印キーで動くようにせよ。</p>
+<pre><code>class player{
+public:
+    double x, y;
+
+    player(){
+        x = 400;
+        y = 500;
+    }
+    void update(){
+        //ここを実装
+        //矢印キーで移動
+
+    }
+    //自機（円）を描画
+    void draw(){
+        DrawCircle(x, y, 10, GetColor(0, 0, 255), 1);
+    }
+};</code></pre></li>
+<li><p>playerクラスの実体を作り、メインループ内でupdate関数とdraw関数を呼び出してplayerクラスを動作させよ。</p></li>
+<li><p>以下の様なenemyクラスを作り、playerクラスと同様に実体を作り動作を確認せよ。<br />今回作るenemyはただ下に移動するだけでよい。</p>
+<pre><code>class enemy{
+public:
+    double x, y;
+
+    //ここに座標を指定できるようなコンストラクタを実装  
+
+    void update(){
+        //ここを実装
+        //下方向に移動
+
+    }
+    //敵（円）を描画
+    void draw(){
+        DrawCircle(x, y, 10, GetColor(255, 0, 0), 1);
+    }
+};</code></pre></li>
+<li><p>player.hとenemy.hを作り、playerクラスとenemyクラスをファイル分けせよ。</p></li>
+</ol>
+</body>
+</html>
