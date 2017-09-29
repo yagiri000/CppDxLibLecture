@@ -57,7 +57,7 @@ int main(){
 TODO : DxLibでstring型を使う例
 TODO : DxLibの関数例
 
-> DxLibでの使用例．```DrawFontXXX関数```の引数は```const char*```型で，string型ではないので，string型のメンバ関数```XXX```関数を用いて```const char*```型を取得する．
+> DxLibでの使用例．```DrawFormatStringToHandle関数```の```FormatString ```引数は```char*```型で，string型ではないので，string型のメンバ関数```XXX```関数を用いて```const char*```型を取得する．
 
 ```cpp
 

@@ -44,7 +44,7 @@ DxLib.hをインクルードしているプログラムはDxLibを使ったア�
 
 #include <iostream>
 
-int main(void){
+int main(){
     std::cout << "aaa" << std::endl;
     return 0;
 }
@@ -55,7 +55,7 @@ int main(void){
 
 #include <iostream>
 
-int main(void){
+int main(){
     std::cout << "bbb" << std::endl;
     return 0;
 }
@@ -66,7 +66,7 @@ int main(void){
 
 #include <iostream>
 
-int main(void){
+int main(){
     std::cout << "ccc" << std::endl;
     return 0;
 }
