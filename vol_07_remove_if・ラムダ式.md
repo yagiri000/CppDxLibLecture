@@ -1,4 +1,4 @@
-#C++DxLib講座資料
+# C++DxLib講座資料
 
 今回は前回とは別の、vectorの要素を削除する方法を学ぶ。演習問題では前回と同様敵を削除する。  
 vectorはコンテナの一種である。algorithmヘッダーにコンテナに対して削除・ソートなどを行う事ができる。
@@ -23,7 +23,7 @@ vec.erase( rmvIter, vec.end() );
 remove\_ifの第一引数には削除するかを判定する範囲の先頭、第二引数には終端を書く。
 remove\_ifの第三引数には削除の条件を返す関数の名前を書く。（正確には関数ポインタ）
 
->3の倍数を削除する例
+> 3の倍数を削除する例
 
 ```cpp
 #include <iostream>
@@ -68,7 +68,7 @@ int main(){
 }
 ```
 
->remove\_ifの第三引数には、remove\_ifが対象にするvectorの中身を引数に取り、bool型(trueかfalse)を返す関数を入れる。以下が例。
+> remove\_ifの第三引数には、remove\_ifが対象にするvectorの中身を引数に取り、bool型(trueかfalse)を返す関数を入れる。以下が例。
 
 ```cpp
 bool Func(配列の要素の型 x){
@@ -241,7 +241,7 @@ int main(){
 			public:
 				double x, y;
 				double vx, vy;
-				Enemy(const Vec2& _pos);
+				Enemy(double _x, double _y);
 				void update();
 				void draw();
 			};
@@ -252,16 +252,19 @@ int main(){
 		```cpp
 			# include "Enemy.h"
 
-			Enemy::Enemy(const Vec2& _pos):
-				pos(_pos),
-				velocity(RandomVec2(5.0))
+			Enemy::Enemy(double _x, double _y):
+				x(_x),
+				y(_y),
+				vx(0.0),
+				vy(0.0),
 			{
-				// RandomVec2(double length)
-				// 半径length(今回は5.0)の2次元ベクトルを返す
+				// 適当な速度を設定
+				vx = (double)(rand() % 10 - 5);
+				vy = (double)(rand() % 10 - 5);
 			}
 
 			void Enemy::update() {
-				pos += velocity;
+				x += vx; y += vy;
 			}
 
 			void Enemy::draw() {

@@ -110,7 +110,7 @@ int main(){
 }
 ```
 
->newで動的に領域を確保したバージョン（そんなに変わりはない）
+> newで動的に領域を確保したバージョン（そんなに変わりはない）
 
 ```cpp
 #include <iostream>
@@ -156,7 +156,7 @@ int main(){
 }
 ```
 
->newで動的に領域を確保したバージョン、その２。派生クラスが複数になっただけ。
+> newで動的に領域を確保したバージョン、その２。派生クラスが複数になっただけ。
 
 ```cpp
 #include <iostream>
@@ -361,7 +361,7 @@ int main() {
 }
 ```
 
->純粋仮想関数　書き方
+> 純粋仮想関数　書き方
 
 virtual 返り値の型 関数名() = 0;
 例：virtual void show() = 0;
@@ -424,7 +424,7 @@ public:
 ##  ヒント : 宣言と定義を分ける場合のoverrideの書き方  
 以下の例はDerivedクラス内でshow関数をオーバーライドした例。override指定子はクラス内の関数宣言(.hのほう)にはつけるが、関数定義(cppのほう)にはつけない。
 
-> Derived.h
+>  Derived.h
 
 ```cpp
 class Derived : public IBase {
@@ -433,7 +433,7 @@ public:
 };
 ```
 
-> Derived.cpp
+>  Derived.cpp
 
 ```cpp
 void Derived::show() {

@@ -71,8 +71,8 @@ int main(){
 ## 演習問題(コンソール)
 
 1. 以下のようなクラスを定義した。MyClassへのポインタのvectorを用意し、適当な値のa(0~10ぐらい)を持ったデータ10個をnewで生成・格納し、表示した後にaが5以下の要素を削除せよ。  
->ヒント：vectorの要素のMyClassへのポインタを削除しただけでは動的に確保した領域は解放されていない。  
->現時点ではremove_ifを使うとdeleteを呼べないので、whileとeraseを使って削除をすること。  
+> ヒント：vectorの要素のMyClassへのポインタを削除しただけでは動的に確保した領域は解放されていない。  
+> 現時点ではremove_ifを使うとdeleteを呼べないので、whileとeraseを使って削除をすること。  
 
 
 ```cpp
@@ -146,7 +146,7 @@ int main(){
 }
 ```
 
->書き方
+> 書き方
 
 ```cpp
 class 派生クラス名 : アクセス 基底クラス名{
@@ -167,7 +167,7 @@ public:
 以下のようなEnenyクラスを用意した。
 
 
->Enemy.h
+> Enemy.h
 
 ```cpp
 #pragma once
@@ -179,27 +179,32 @@ public:
 
 	double x, y;
 	double vx, vy;
-	Enemy(const Vec2& _pos);
+	Enemy(double _x, double _y);
 	void update();
 	void draw();
 };
 ```
 
->Enemy.cpp
+> Enemy.cpp
 
 ```cpp
 # include "Enemy.h"
 
 const double Enemy::Radius = 30.0;
 
-Enemy::Enemy(const Vec2& _pos):
-	pos(_pos),
-	velocity(RandomVec2(5.0))
+Enemy::Enemy(double _x, double _y):
+	x(_x),
+	y(_y),
+	vx(0.0),
+	vy(0.0),
 {
+	// 適当な速度を設定
+	vx = (double)(rand() % 10 - 5);
+	vy = (double)(rand() % 10 - 5);
 }
 
 void Enemy::update() {
-	pos += velocity;
+	x += vx; y += vy;
 }
 
 void Enemy::draw() {

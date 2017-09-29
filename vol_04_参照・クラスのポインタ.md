@@ -1,5 +1,70 @@
 # C++DxLib講座資料
 
+
+## string型
+
+C++標準ライブラリ(STL)のstring型を使うと、Cのchar型に比べ、より簡単に文字列を扱うことが出来る。  
++演算子で文字列の結合、==演算子で文字列の比較が出来る。  
+string型を使用するときは、stringヘッダーをインクルードする。（string.hではないことに注意！）  
+
+```cpp
+#include <iostream>
+#include <string>
+
+int main(){
+    std::string str1 = "いかろちゃん";
+    std::string str2 = "かわいい";
+    
+    std::cout << str1 << std::endl;
+    std::cout << str2 << std::endl;
+    
+    std::string str3;
+    // +で文字列の結合ができる
+    str3 = str1 + str2;
+    
+    std::cout << str3 << std::endl;
+    
+    // ==で文字列の比較ができる trueなので1が出力される
+    std::cout << (str3 == (str1+str2)) << std::endl;
+    
+    return 0;
+}
+```
+
+
+> std::to_string関数を使うと、int型、double型等の変数をstring型に変換できる。
+
+```cpp
+#include <iostream>
+#include <string>
+
+int main(){
+    std::string str = "いかろちゃんかわいい";
+	int ix = 23;
+	double dx = 3.14;
+	
+	str += " ";
+	str += std::to_string(ix);
+	str += " ";
+	str += std::to_string(dx);
+    
+    std::cout << str << std::endl;
+    
+    return 0;
+}
+```
+
+TODO : DxLibでstring型を使う例
+TODO : DxLibの関数例
+
+> DxLibでの使用例．```DrawFontXXX関数```の引数は```const char*```型で，string型ではないので，string型のメンバ関数```XXX```関数を用いて```const char*```型を取得する．
+
+```cpp
+
+
+
+```
+
 ## bool型
 
 C++には真偽を表すためだけの型、bool型が存在する。  
@@ -88,7 +153,7 @@ int main(){
 ```
 
 
->{}だけでもスコープを作ることができる
+> {}だけでもスコープを作ることができる
 
 ```cpp
 #include <iostream>
@@ -111,7 +176,7 @@ int main(){
 swap関数を実装するためにポインタを用いる事があったかもしれない。 C++ではそれを扱いやすくした参照(リファレンス)というものが存在する。  
 
 
->ポインタを用いたaとbを入れ替える関数
+> ポインタを用いたaとbを入れ替える関数
 
 ```cpp
 #include <iostream>
@@ -138,7 +203,7 @@ int main(){
 }  
 ```
 
->よくない例。下のように書くと、関数内でaとbのコピーが出来て、コピーのaとbが入れ替えられ、関数を抜けた時点で破棄されるので、main関数内のaとbは入れ替えられない。
+> よくない例。下のように書くと、関数内でaとbのコピーが出来て、コピーのaとbが入れ替えられ、関数を抜けた時点で破棄されるので、main関数内のaとbは入れ替えられない。
 
 ```cpp
 #include <iostream>
@@ -165,7 +230,7 @@ int main(){
 }
 ```
 
->参照を用いたaとbを入れ替える関数。正しくaとbの値が入れ替わっており、かつポインタを用いた例より読みやすく書けていることがわかる。  
+> 参照を用いたaとbを入れ替える関数。正しくaとbの値が入れ替わっており、かつポインタを用いた例より読みやすく書けていることがわかる。  
 
 ```cpp
 #include <iostream>
@@ -192,7 +257,7 @@ int main() {
 }
 ```
 
->参照を用いてHogeに別名をつけることが出来る。
+> 参照を用いてHogeに別名をつけることが出来る。
 
 ```cpp
 #include <iostream>
@@ -213,7 +278,7 @@ int main(){
 }
 ```
 
->ポインタを使っても同じことが出来るが、*や&をつけるのに手間がかかり、ミスをしてバグを起こしやすいので、これからは参照を使おう。
+> ポインタを使っても同じことが出来るが、*や&をつけるのに手間がかかり、ミスをしてバグを起こしやすいので、これからは参照を使おう。
 
 ```cpp
 #include <iostream>
@@ -277,7 +342,7 @@ int main() {
 
 ## ポインタ（復習）
 
->2通りの方法でaの値とアドレスを表示
+> 2通りの方法でaの値とアドレスを表示
 
 ```cpp
 #include <iostream>
@@ -370,23 +435,23 @@ int main(){
 		const double Player::Speed = 5.0;
 
 		Player::Player() :
-		pos(320.0, 240.0)
+		x(320), y(240)
 		{
 		}
 
 		void Player::update() {
 			// 上下左右キーで移動
 			if (Input::KeyLeft.pressed) {
-				pos.x -= Speed;
+				x -= Speed;
 			}
 			if (Input::KeyRight.pressed) {
-				pos.x += Speed;
+				x += Speed;
 			}
 			if (Input::KeyUp.pressed) {
-				pos.y -= Speed;
+				y -= Speed;
 			}
 			if (Input::KeyDown.pressed) {
-				pos.y += Speed;
+				y += Speed;
 			}
 		}
 
@@ -404,7 +469,7 @@ int main(){
 		public:
 			double x, y;
 			double vx, vy;
-			Enemy(const Vec2& _pos);
+			Enemy(double _x, double _y);
 			void update();
 			void draw();
 		};
@@ -413,14 +478,16 @@ int main(){
 
 		# include "Enemy.h"
 
-		Enemy::Enemy(const Vec2& _pos):
-			pos(_pos),
-			velocity(0.0, 0.0)
+		Enemy::Enemy(double _x, double _y):
+			x(_x),
+			y(_y),
+			vx(0.0),
+			vy(0.0)
 		{
 		}
 
 		void Enemy::update() {
-			pos += velocity;
+			x += vx; y += vy;
 		}
 
 		void Enemy::draw() {
@@ -431,13 +498,13 @@ int main(){
 1. EnemyがPlayerの方向に移動するようにしたい。Enemyクラスが「Playerクラスへのポインタ」をメンバに持つようにして、PlayerクラスとEnemyクラスのインスタンスを生成した後にEnemyのインスタンスににPlayerのインスタンスのポインタを渡し、そのポインタからPlayerクラスのx,yにアクセスすることでEnemyがPlayerの位置を取得し、その方向に移動できるようにせよ。  
 （今回は、敵の追尾は大まかでも良い。例：PlayerのxがEnemyのxより大きければEnemyは右に、そうでなければ左に動く…など）
 
->ヒント
+> ヒント
 
 プログラムは、上から順にコンパイラに解釈されていく。Enemyクラス内でPlayerクラスにアクセスするには、アクセスする前にPlayerクラスの中身をコンパイラが知らなければならない。よって、Enemy.hからPlayer.hをincludeしている。
 Enemy.hとmain.cppの二箇所からPlayer.hを読み込むときは、多重インクルードを防ぐため、Player.hの上部に #pragma once をつける必要がある。
 
 
->Enemy側に以下を追加
+> Enemy側に以下を追加
 
 ```cpp
 	Player* pPlayer; 
@@ -448,7 +515,7 @@ Enemy.hとmain.cppの二箇所からPlayer.hを読み込むときは、多重イ
 	}
 ```
 
->初期化処理側
+> 初期化処理側
 
 ```cpp
 Player player;//Playerのインスタンスを生成

@@ -77,7 +77,7 @@ int main(){
 iter->x
 ```
 
->Vector2クラスのvectorへのイテレータを使ってVector2クラスのx, yを出力
+> Vector2クラスのvectorへのイテレータを使ってVector2クラスのx, yを出力
 
 ```cpp
 #include <iostream>
@@ -241,7 +241,7 @@ int main(){
 		public:
 			double x, y;
 			double vx, vy;
-			Enemy(const Vec2& _pos);
+			Enemy(double _x, double _y);
 			void update();
 			void draw();
 		};
@@ -250,16 +250,19 @@ int main(){
 
 		# include "Enemy.h"
 
-		Enemy::Enemy(const Vec2& _pos):
-			pos(_pos),
-			velocity(RandomVec2(5.0))
+		Enemy::Enemy(double _x, double _y):
+			x(_x),
+			y(_y),
+			vx(0.0),
+			vy(0.0),
 		{
-			// RandomVec2(double length)
-			// 半径length(今回は5.0)の2次元ベクトルを返す
+			// 適当な速度を設定
+			vx = (double)(rand() % 10 - 5);
+			vy = (double)(rand() % 10 - 5);
 		}
 
 		void Enemy::update() {
-			pos += velocity;
+			x += vx; y += vy;
 		}
 
 		void Enemy::draw() {

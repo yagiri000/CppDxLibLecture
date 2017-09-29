@@ -160,7 +160,7 @@ std::shared_ptr<MyClass> sptr = std::make_shared<MyClass>(100);
 と書いたほうが良い。  
 
 
->書き方
+> 書き方
 
 ```cpp
 std::shared_ptr<クラス名> 変数名 = std::make_shared<クラス名>(引数1, 引数2, ...);

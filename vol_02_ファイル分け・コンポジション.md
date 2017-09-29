@@ -1,4 +1,4 @@
-#C++DxLib講座資料
+# C++DxLib講座資料
 
 実際にゲームを作る時、ファイル分けをすることが必要になる。  
 今回はクラスの内容を.hと.cppに分ける。
@@ -7,7 +7,7 @@
 
 以下のように、.hと.cppにクラスの定義を分けて書くことが出来る。今後は基本的に.hと.cppにクラスの定義を分けて書くこと。（ただし、解答例ではファイル数が多くなるのを避けるためすべてMain.cppに書いている場合がある）  
 .cppには、名前空間を指定するため、クラス名::関数名と書く必要がある。以下は、コンソールでのプレイヤー例。  
->Player.h
+> Player.h
 
 ```cpp
 #include <iostream>
@@ -22,7 +22,7 @@ public:
 };
 ```
 
->Player.cpp
+> Player.cpp
 
 ```cpp
 #include "Player.h"
@@ -45,7 +45,7 @@ void Player::showXY(){
 }
 ```
 
->main.cpp
+> main.cpp
 
 ```cpp
 #include <iostream>
@@ -206,7 +206,7 @@ int main(){
 \#pragma onceを使うと一度読み込まれたヘッダーは読み込まれないようになる。複数のファイルから読み込まれるヘッダーの一番上につけることで、多重定義を防ぐことが出来る。  
 以下の例では、PlayerクラスとEnemyクラスで共通で使うVector2クラスを作り、それをどちらのファイルからも読み込むコンソールプログラムの例である。よって、Vector2クラスのpragma onceを外すと、コンパイルエラーが起きる。  
 
->Vector2.h
+> Vector2.h
 
 ```cpp
 #pragma once
@@ -223,7 +223,7 @@ public:
 };
 ```
 
->Enemy.h
+> Enemy.h
 
 ```cpp
 #include <iostream>
@@ -240,7 +240,7 @@ public:
 };
 ```
 
->Player.h
+> Player.h
 
 ```cpp
 #include <iostream>
@@ -257,7 +257,7 @@ public:
 };
 ```
 
->main関数内
+> main関数内
 
 ```cpp
 #include <iostream>

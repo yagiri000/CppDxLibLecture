@@ -9,7 +9,7 @@ PlayerがEnemyの情報に、EnemyがPlayerの情報に相互にアクセス出�
 以下の例では、PlayerはshowEnemyX関数でEnemyのxにアクセスし、EnemyはshowPlayerX関数でPlayerのxにアクセスしている。  
 
 
->Player.h
+> Player.h
 
 ```cpp
 #pragma once
@@ -25,7 +25,7 @@ public:
 };
 ```
 
->Player.cpp
+> Player.cpp
 
 ```cpp
 #include "Manager.h"
@@ -45,7 +45,7 @@ void Player::showEnemyX() {
 }
 ```
 
->Enemy.h
+> Enemy.h
 
 ```cpp
 #pragma once
@@ -61,7 +61,7 @@ public:
 };
 ```
 
->Enemy.cpp
+> Enemy.cpp
 
 ```cpp
 #include "Manager.h"
@@ -82,7 +82,7 @@ void Enemy::showPlayerX() {
 ```
 
 
->Manager.h
+> Manager.h
 
 ```cpp
 #pragma once
@@ -114,7 +114,7 @@ Manager::Manager() :
 Manager manager;
 ```
 
->main.cpp
+> main.cpp
 
 ```cpp
 #include <iostream>
@@ -219,7 +219,7 @@ int main() {
 ## 演習問題(DxLib)
 
 1. GameManagerクラスを作れ。  
-GameManagerクラスは、PlayerやEnemyManager(Enemyのvectorを管理するクラス)をメンバに持ち、それらを管理するクラスである。    
+GameManagerクラスは、PlayerやEnemyManager(Enemyのvectorを管理するクラス)をメンバに持ち、それらを管理するクラスである。  
 GameManagerのインスタンスをグローバル変数にすることで、GameManagerを介してPlayerやEnemyの情報にアクセスできるようにせよ。  
 GameManagerクラスのupdateを呼べば、PlayerとすべてのEnemyのupdateが呼ばれるようにせよ。  
 EnemyクラスがPlayerクラスへのポインタを持っていた場合、それを消して、Playerクラスへのアクセスはグローバル空間に存在するGameManagerクラスのインスタンスを介して行うようにせよ。  
@@ -229,12 +229,12 @@ EnemyクラスがPlayerクラスへのポインタを持っていた場合、そ
 1. Enemyクラス内にint型のkind変数を作り、kind変数によって敵が多様な動きをするようにせよ。  
 (kind==1なら自機に直進、kind==2ならsin軌道、kind==3なら出た位置で円運動…など)  
 
-1. kindによって敵の色が変わるようにせよ。
+1. kindによって敵の色が変わるようにせよ。  
 
-1. kindをenum型にせよ。クラス内で定義されたenumは、クラス外部からは(クラス名)::(要素の名前)で	enumを指定できる。
+1. kindをenum型にせよ。クラス内で定義されたenumは、クラス外部からは(クラス名)::(要素の名前)でenumを指定できる。  
 
 
-## ヒント：enum型    
+## ヒント：enum型  
 
 クラス内でenumを定義しコンストラクタで指定する例。  
   
@@ -283,4 +283,4 @@ GameManagerクラス(他のクラスを所持し、管理する）
   |- EnemyManagerクラス(Enemyクラスのvectorを所持)  
   |- EnemyBulletManagerクラス(EnemyBulletクラスのvectorを所持)  
   |- EffectManagerクラス(Effectクラスのvectorを所持)  
-  |- ScoreManagerクラス(スコアを管理するクラス)   
+  |- ScoreManagerクラス(スコアを管理するクラス)  
