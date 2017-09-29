@@ -279,7 +279,7 @@ x\*y\*zの値を表示するメンバ関数showMultipleを作り、動作を確�
 			}
 			//自機（円）を描画
 			void draw(){
-				Circle(x, y, 30.0).draw(Color(0, 0, 255));
+				DrawCircle(x, y, 30.0, 0x0000FF, 1);
 			}
 		};
 
@@ -300,7 +300,7 @@ x\*y\*zの値を表示するメンバ関数showMultipleを作り、動作を確�
 			}
 			//敵（円）を描画
 			void draw(){
-				Circle(x, y, 30.0).draw(Color(255, 0, 0));
+				DrawCircle(x, y, 30.0, 0xFF0000, 1);
 			}
 		};
 

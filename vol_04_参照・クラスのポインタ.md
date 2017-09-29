@@ -357,7 +357,7 @@ int main(){
 		class Player {
 		public:
 			static const double Speed;
-			Vec2 pos;
+			double x, y;
 			Player();
 			void update();
 			void draw();
@@ -391,7 +391,7 @@ int main(){
 		}
 
 		void Player::draw() {
-			Circle(pos, 30.0).draw(Color(0, 0, 255));
+			DrawCircle(x, y, 30.0, 0x0000FF, 1);
 		}
 
 	>Enemy.h
@@ -402,8 +402,8 @@ int main(){
 
 		class Enemy {
 		public:
-			Vec2 pos;
-			Vec2 velocity;
+			double x, y;
+			double vx, vy;
 			Enemy(const Vec2& _pos);
 			void update();
 			void draw();
@@ -424,7 +424,7 @@ int main(){
 		}
 
 		void Enemy::draw() {
-			Circle(pos, 30.0).draw(Color(255, 0, 0));
+			DrawCircle(x, y, 30.0, 0xFF0000, 1);
 		}
 
 

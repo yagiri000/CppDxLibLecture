@@ -100,7 +100,7 @@ int main(){
 1. int型のvectorを用意し、ランダムに0~9の数を10個入れて、すべて表示せよ。  
 上記のvectorの中で5以下の要素を表示せよ。
 >ヒント：ランダムな0~9の数を生成するにはrand()%10とすればよい。
-（今回はsrandとかは呼ばなくていいです。より性能の高い乱数生成器が入っているrandomヘッダーに関して詳しく知りたければはこちら→[ああああ]）
+（今回はsrandとかは呼ばなくていいです。より性能の高い乱数生成器が入っているrandomヘッダーに関して詳しく知りたければはこちら→[XXX]）
 
 1. 以下の様なクラスMyClassを用意した。MyClassのvectorを用意し、vectorにMyClassを10個追加し、すべての要素のshow()関数を呼び出せ。xの値はランダムな数でよい。
 
@@ -166,7 +166,7 @@ Vector2クラスのvectorを用意し、rand()などを使って適当な座標�
 
 		//エネミー（円）を描画
 		void Enemy::draw() {
-			Circle(pos, 30.0).draw(Color(255, 0, 0));
+			DrawCircle(x, y, 30.0, 0xFF0000, 1);
 		}
 
 
@@ -216,8 +216,8 @@ EnemyManagerクラスを作り、敵を管理せよ。
 
 
 
-1. Enemy.h, Enemy.cppとは別にEnemyManager.h, EnemyManager.cppを作り、適切にファイル分けをせよ。
+1. Enemy.h, Enemy.cppとは別にEnemyManager.h, EnemyManager.cppを作り、適切にファイル分けをせよ。  
 
-1. 現在の敵の数を画面左上に表示せよ。ヒント：vectorのsize関数
+1. 現在の敵の数を画面左上に表示せよ。ヒント：vectorのsize関数  
 
 

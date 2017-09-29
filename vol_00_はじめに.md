@@ -3,7 +3,7 @@
 ## はじめに
 
 本資料は、やぎりが作成した、C++初学者向け資料です。  
-C++とDxLibで実際にシューティングゲームを作り、「C++の機能(クラス, vector, ポリモーフィズム)をゲームを製作に実際にどう使うか何となく理解」することが目的になっています。  
+C++とDxLibで実際にシューティングゲームを作り、「C++の機能(クラス, vector, 継承)をゲームを製作に実際にどう使うか」を理解することが目的になっています。  
 
 ## 開発環境
 
@@ -89,7 +89,7 @@ int main(void){
 int WINAPI WinMain( HINSTANCE hInstance , HINSTANCE hPrevInstance , LPSTR lpCmdLine , int nCmdShow )
 {
     ChangeWindowMode( TRUE );//非全画面にセット
-    SetGraphMode( 800 , 600 , 32 );//画面サイズ指定
+    SetGraphMode( 640 , 480 , 32 );//画面サイズ指定
     SetOutApplicationLogValidFlag( FALSE ) ;//Log.txtを生成しないように設定
     if(DxLib_Init() == 1){return -1;}//初期化に失敗時にエラーを吐かせて終了
 
@@ -106,7 +106,7 @@ int WINAPI WinMain( HINSTANCE hInstance , HINSTANCE hPrevInstance , LPSTR lpCmdL
         //　ここに敵やプレイヤーを更新、描画するコードを書く
         //
 
-        DrawCircle(400, 300, 100, GetColor(255, 255, 255), 1);
+        DrawCircle(400, 320, 100, GetColor(255, 255, 255), 1);
 
         ScreenFlip();//裏画面を表画面にコピー
     }
@@ -180,7 +180,7 @@ void keyUpdate()
 int WINAPI WinMain( HINSTANCE hInstance , HINSTANCE hPrevInstance , LPSTR lpCmdLine , int nCmdShow )
 {
     ChangeWindowMode( TRUE );//非全画面にセット
-    SetGraphMode( 800 , 600 , 32 );//画面サイズ指定
+    SetGraphMode( 640 , 480 , 32 );//画面サイズ指定
     SetOutApplicationLogValidFlag( FALSE ) ;//Log.txtを生成しないように設定
     if(DxLib_Init() == 1){return -1;}//初期化に失敗時にエラーを吐かせて終了
     
@@ -200,7 +200,7 @@ int WINAPI WinMain( HINSTANCE hInstance , HINSTANCE hPrevInstance , LPSTR lpCmdL
         keyUpdate();//(自作関数)キー更新
         
         //説明用・文字を描画：keyState配列（自作）には、各キーが何フレーム押され続けているかが入っている
-        DrawFormatStringToHandle(300, 300, GetColor(255, 255, 255), fontHandle , "Z KEY %d", keyState[KEY_INPUT_Z]) ;
+        DrawFormatStringToHandle(320, 320, GetColor(255, 255, 255), fontHandle , "Z KEY %d", keyState[KEY_INPUT_Z]) ;
 
         //
         //　ここに敵やプレイヤーのupdate,drawを書く

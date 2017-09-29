@@ -1,7 +1,7 @@
 #C++DxLib講座資料
 
 今回はvectorの要素を削除する方法を学ぶ。DxLibを用いた演習では、画面外に出た敵を削除する。
-C++にはSTLという便利なライブラリが標準でついている。STLにはコンテナがあり、コンテナには便利な配列やリスト構造などがはじめから用意されている。vectorはコンテナの一種である。
+C++にはSTLという便利なライブラリが標準でついている。STLにはコンテナがあり、コンテナには便利な配列やリスト構造などが用意されている。vectorはコンテナの一種である。
 
 ## イテレータ
 
@@ -24,7 +24,7 @@ int main(){
 	}
  
 	//イテレータを用いて出力
-	for(std::vector<int>::iterator iter =vec.begin(); iter !=vec.end(); ++iter){
+	for(std::vector<int>::iterator iter = vec.begin(); iter != vec.end(); iter++){
 		std::cout << *iter << " ";
 	}
 	std::cout << std::endl;
@@ -60,7 +60,7 @@ int main(){
 	}
  
 	//イテレータを用いて出力
-	for(auto iter =vec.begin(); iter !=vec.end(); ++iter){
+	for(auto iter = vec.begin(); iter != vec.end(); iter++){
 		std::cout << *iter << " ";
 	}
 	std::cout << std::endl;
@@ -105,7 +105,7 @@ int main(){
 	}
 	
 	//出力
-	for (auto iter = vec.begin(); iter != vec.end(); ++iter){
+	for (auto iter = vec.begin(); iter != vec.end(); iter++){
 		std::cout << iter->x << " " << iter->y << std::endl;
 	}
 
@@ -131,7 +131,7 @@ int main(){
 	}
  
 	//イテレータを用いて出力
-	for(auto iter = vec.begin(); iter != vec.end(); ++iter){
+	for(auto iter = vec.begin(); iter != vec.end(); iter++){
 		std::cout << *iter << " ";
 	}
 	std::cout << std::endl;
@@ -143,7 +143,7 @@ int main(){
 	vec.erase(vec.begin() + 3);
 
 	//イテレータを用いて出力
-	for(auto iter =vec.begin(); iter !=vec.end(); ++iter){
+	for(auto iter =vec.begin(); iter !=vec.end(); iter++){
 		std::cout << *iter << " ";
 	}
 	std::cout << std::endl;
@@ -174,7 +174,7 @@ int main(){
 	}
  
 	//出力
-	for(auto iter =vec.begin(); iter !=vec.end(); ++iter){
+	for(auto iter =vec.begin(); iter !=vec.end(); iter++){
 		std::cout << *iter << " ";
 	}
 	std::cout << std::endl;
@@ -195,7 +195,7 @@ int main(){
 	std::cout << std::endl;
 
 	//出力
-	for(auto iter =vec.begin(); iter !=vec.end(); ++iter){
+	for(auto iter =vec.begin(); iter !=vec.end(); iter++){
 		std::cout << *iter << " ";
 	}
 	std::cout << std::endl;
@@ -239,8 +239,8 @@ int main(){
 
 		class Enemy {
 		public:
-			Vec2 pos;
-			Vec2 velocity;
+			double x, y;
+			double vx, vy;
 			Enemy(const Vec2& _pos);
 			void update();
 			void draw();
@@ -263,7 +263,7 @@ int main(){
 		}
 
 		void Enemy::draw() {
-			Circle(pos, 30.0).draw(Color(255, 0, 0));
+			DrawCircle(x, y, 30.0, 0xFF0000, 1);
 		}
 
 1. 前回の課題で、y座標が480を超えた敵(下の方の画面外に出た敵)を削除するようにせよ。  

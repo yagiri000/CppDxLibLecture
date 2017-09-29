@@ -1,6 +1,6 @@
-#C++DxLib講座資料
+# C++DxLib講座資料
 
-##newとdelete
+## newとdelete
 
 newを使うと、プログラムの実行中にメモリを確保し、オブジェクトを生成できる。
 newすると生成したオブジェクトへのポインタが返ってくる。生成したオブジェクトを見失わないように、ポインタを格納する変数を用意する必要がある。
@@ -68,7 +68,7 @@ int main(){
 }
 ```
 
-##演習問題(コンソール)
+## 演習問題(コンソール)
 
 1. 以下のようなクラスを定義した。MyClassへのポインタのvectorを用意し、適当な値のa(0~10ぐらい)を持ったデータ10個をnewで生成・格納し、表示した後にaが5以下の要素を削除せよ。  
 >ヒント：vectorの要素のMyClassへのポインタを削除しただけでは動的に確保した領域は解放されていない。  
@@ -102,7 +102,7 @@ public:
 	}
 
 
-##基底クラスと派生クラス
+## 基底クラスと派生クラス
 
 クラスを継承することで、新しいクラスを定義することが出来る。  
 継承元のクラスを基底クラス、継承先のクラスを派生クラスという。  
@@ -162,7 +162,7 @@ public:
 基底クラス名(引数1,引数2, ...)　には基底クラスに渡す引数を書く。
 アクセスがpublicだと基本クラスのpublicメンバが派生クラスのpublicメンバに、privateだと基本クラスのpublicメンバが派生クラスのprivateメンバになる。
 
-##演習問題(DxLib)
+## 演習問題(DxLib)
 今回はEnemyを複数出すだけなので、前半課題とは別に、サンプルプロジェクトを元にを作った方が楽かもしれない。  
 以下のようなEnenyクラスを用意した。
 
@@ -177,8 +177,8 @@ class Enemy {
 public:
 	static const double Radius;
 
-	Vec2 pos;
-	Vec2 velocity;
+	double x, y;
+	double vx, vy;
 	Enemy(const Vec2& _pos);
 	void update();
 	void draw();
@@ -203,7 +203,7 @@ void Enemy::update() {
 }
 
 void Enemy::draw() {
-	Circle(pos, Radius).draw(Color(255, 0, 0));
+	DrawCircle(x, y, 30.0, 0xFF0000, 1);
 }
 
 ```

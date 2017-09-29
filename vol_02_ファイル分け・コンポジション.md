@@ -267,7 +267,7 @@ public:
 int main(){
 
 	Player player(100, 200);
-	Enemy enemy(300, 400);
+	Enemy enemy(320, 400);
 
 	std::cout << player.pos.x << ", " << player.pos.y << std::endl;
 	std::cout << enemy.pos.x << ", " << enemy.pos.y << std::endl;
@@ -280,7 +280,7 @@ int main(){
 
 ## まとめ
 
-* クラスが他のクラスを実体としてメンバとして持つ、または他のクラスのメンバにアクセスするときは、他のクラスの定義がクラスの前方になければならない。　　
+* クラスが他のクラスを実体としてメンバとして持つ、または他のクラスのメンバにアクセスするときは、他のクラスの定義がクラスの前方になければならない。  
 * 実際にゲームを作るときは、とりあえず#pragma onceをつけよう。#pragma onceは特に害はない。  
 
 
