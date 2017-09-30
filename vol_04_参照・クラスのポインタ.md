@@ -1,117 +1,6 @@
 # C++DxLib講座資料
 
 
-## string型
-
-C++標準ライブラリ(STL)のstring型を使うと、Cのchar型に比べ、より簡単に文字列を扱うことが出来る。  
-+演算子で文字列の結合、==演算子で文字列の比較が出来る。  
-string型を使用するときは、stringヘッダーをインクルードする。（string.hではないことに注意！）  
-
-```cpp
-#include <iostream>
-#include <string>
-
-int main(){
-    std::string str1 = "いかろちゃん";
-    std::string str2 = "かわいい";
-    
-    std::cout << str1 << std::endl;
-    std::cout << str2 << std::endl;
-    
-    std::string str3;
-    // +で文字列の結合ができる
-    str3 = str1 + str2;
-    
-    std::cout << str3 << std::endl;
-    
-    // ==で文字列の比較ができる trueなので1が出力される
-    std::cout << (str3 == (str1+str2)) << std::endl;
-    
-    return 0;
-}
-```
-
-
-> std::to_string関数を使うと、int型、double型等の変数をstring型に変換できる。
-
-```cpp
-#include <iostream>
-#include <string>
-
-int main(){
-    std::string str = "いかろちゃんかわいい";
-	int ix = 23;
-	double dx = 3.14;
-	
-	str += " ";
-	str += std::to_string(ix);
-	str += " ";
-	str += std::to_string(dx);
-    
-    std::cout << str << std::endl;
-    
-    return 0;
-}
-```
-
-TODO : DxLibでstring型を使う例
-TODO : DxLibの関数例
-
-> DxLibでの使用例．```DrawFormatStringToHandle関数```の```FormatString ```引数は```char*```型で，string型ではないので，string型のメンバ関数```XXX```関数を用いて```const char*```型を取得する．
-
-```cpp
-
-
-
-```
-
-## bool型
-
-C++には真偽を表すためだけの型、bool型が存在する。  
-
-
-```cpp
-#include <iostream>
-
-int main(){
-
-	bool b = true;
-
-	if (b){
-		std::cout << "条件文は真" << std::endl;
-	}
-	else{
-		std::cout << "条件文は偽" << std::endl;
-	}
-
-	return 0;
-}
-```
-
-以下のように、条件を満たすかどうかの真・偽を返す関数の返り値の型としてbool型を使うことが多い。
-
-```cpp
-#include <iostream>
-
-// 偶数だったらtrue,そうでなければfalseを返す関数
-bool isEven(int num){
-	return (num % 2) == 0;
-}
-
-int main(){
-
-	if (isEven(10)){
-		std::cout << "条件文は真" << std::endl;
-	}
-	else{
-		std::cout << "条件文は偽" << std::endl;
-	}
-
-	return 0;
-}	
-```
-
-
 ## スコープ
 
 { } で囲まれた部分を抜けると、その{}内部で宣言された変数は破棄されるので、アクセスできなくなる。
@@ -121,7 +10,7 @@ int main(){
 ```cpp
 #include <iostream>
 
-void func()){
+void func(){
 	int a = 10;
 	std::cout << "aの値は " << a << std::endl;
 }
