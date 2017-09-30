@@ -29,7 +29,7 @@ const Color EnemyRotation::Color(255, 0, 128);
 
 
 //“G‚ÌŠî’êƒNƒ‰ƒX
-IEnemy::IEnemy(double _x, double _y, const Vec2 & _velocity, double _radius, double _hp, int _score, const Color& _color) :
+IEnemy::IEnemy(double _x, double _y, double _vx, double _vy, double _radius, double _hp, int _score, const Color& _color) :
 	x(_x), y(_y),
 	vx(_vx), vy(_vy),
 	radius(_radius),

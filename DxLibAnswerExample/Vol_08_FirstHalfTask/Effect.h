@@ -8,7 +8,7 @@ class WhiteCircle{
 public:
 	static const int LifeTime;
 	static const double Radius;
-	static const unsigned int
+	static const unsigned int Color;
 
 	double x, y;
 	int elapsedFrame; // ¶¬‚³‚ê‚Ä‚©‚ç‚ÌŒo‰ßƒtƒŒ[ƒ€

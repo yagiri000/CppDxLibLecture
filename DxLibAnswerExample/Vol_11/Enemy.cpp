@@ -61,7 +61,7 @@ EnemyStraight::EnemyStraight(double _x, double _y) :
 	IEnemy(_x, _y)
 {
 	// ƒ‰ƒ“ƒ_ƒ€‚È‘¬“x‚ğİ’è
-	randomVector2(Speed, &vx, &vy);
+	randomInCircle(Speed, &vx, &vy);
 }
 
 void EnemyStraight::update() {

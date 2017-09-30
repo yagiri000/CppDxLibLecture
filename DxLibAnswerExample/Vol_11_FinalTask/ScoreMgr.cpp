@@ -27,6 +27,6 @@ void ScoreManager::update() {
 }
 
 void ScoreManager::draw() const {
-	gameManager.font(L"SCORE:", score).draw(Vec2(10.0, 30.0 * 0.0));
-	gameManager.font(L"îÌíeêî:", damagedNum).draw(Vec2(10.0, 30.0 * 1.0));
+	DrawFormatStringToHandle(10, 30 * 3, GetColor(255, 255, 255), fontHandle, "SCORE:%d", score);
+	DrawFormatStringToHandle(10, 30 * 4, GetColor(255, 255, 255), fontHandle, "???:%d", damagedNum);
 }

@@ -1,14 +1,14 @@
 #pragma once
-#include "Enemy.h"
 #include <vector>
+#include "Enemy.h"
 
 class EnemyManager {
 private:
-	std::vector<Enemy> enemies;
 	void checkDelete(); // ‰æ–ÊŠO‚Ì“Gíœ
 public:
+	std::vector<Enemy> enemies;
 	void update();
-	void draw();
-	void add(const Vec2 & pos, Enemy::Kind kind);
+	void draw() const;
+	void add(const Enemy& ins);
 	size_t getEnemyNum();
 };

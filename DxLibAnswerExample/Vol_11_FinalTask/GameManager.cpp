@@ -32,12 +32,12 @@ void GameManager::draw() const {
 	effectManager.draw();
 	scoreManager.draw();
 
-	font(L"ASDで敵を生成").draw(Vec2(10.0, 30.0 * 3.0));
-	font(L"Zでショット").draw(Vec2(10.0, 30.0 * 4.0));
+	DrawFormatStringToHandle(10, 30 * 3, GetColor(255, 255, 255), fontHandle, "A, S, Dで敵を生成");
+	DrawFormatStringToHandle(10, 30 * 4, GetColor(255, 255, 255), fontHandle, "Zでショット");
 }
 
 void GameManager::load() {
-	font = Font(15);
+	fontHandle = CreateFontToHandle("Segoe UI", 20, 5, DX_FONTTYPE_ANTIALIASING_4X4);//フォントを読み込み
 }
 
 GameManager gameManager;

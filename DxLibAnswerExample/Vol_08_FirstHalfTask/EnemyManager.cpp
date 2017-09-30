@@ -1,4 +1,5 @@
 #include "EnemyManager.h"
+#include "MyGlobal.h"
 #include <algorithm>
 
 void EnemyManager::update() {
@@ -8,14 +9,15 @@ void EnemyManager::update() {
 	checkDelete();
 }
 
-void EnemyManager::draw() {
-	for (auto&& enemy : enemies) {
+void EnemyManager::draw() const{
+	for (const auto& enemy : enemies) {
 		enemy.draw();
 	}
 }
 
-void EnemyManager::add(const Vec2& pos, Enemy::Kind kind) {
-	enemies.emplace_back(Enemy(pos, kind));
+void EnemyManager::add(const Enemy& ins)
+{
+	enemies.emplace_back(ins);
 }
 
 size_t EnemyManager::getEnemyNum(){
@@ -25,11 +27,8 @@ size_t EnemyManager::getEnemyNum(){
 void EnemyManager::checkDelete() {
 	auto it = enemies.begin();
 
-	// ‰æ–ÊŠO‚Ì“G‚ğíœ
 	auto rmvIter = std::remove_if(enemies.begin(), enemies.end(), [](const Enemy& enemy) {
-
-		// “G‚Ì‰~ó‚Ì“–‚½‚è”»’è‚Æ‰æ–ÊƒTƒCƒY‚ÌlŠp‚Ì“–‚½‚è”»’è‚ğæ‚èA“–‚½‚Á‚Ä‚¢‚È‚©‚Á‚½‚ç‰æ–ÊŠO‚É‚¢‚é‚Æ”»’è
-		return !Circle(enemy.pos, enemy.Radius).intersects(Rect(Window::Size()));
+		return enemy.isDead;
 	});
 
 	enemies.erase(rmvIter, enemies.end());

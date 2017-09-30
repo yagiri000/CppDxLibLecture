@@ -5,7 +5,7 @@
 class EnemyBullet{
 public:
 	static const double Radius;
-	static const unsigned int
+	static const unsigned int Color;
 	static const int LifeTime;
 
 	double x, y;

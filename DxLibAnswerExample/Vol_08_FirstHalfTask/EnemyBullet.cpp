@@ -3,10 +3,10 @@
 #include "EnemyBullet.h"
 
 const double EnemyBullet::Radius = 8.0;
-const Color EnemyBullet::Color(255, 255, 255);
+const unsigned int EnemyBullet::Color = 0xFFFFFF;
 const int EnemyBullet::LifeTime = 900;
 
-EnemyBullet::EnemyBullet(double _x, double _y, const Vec2 & _velocity) :
+EnemyBullet::EnemyBullet(double _x, double _y, double _vx, double _vy) :
 	x(_x), y(_y),
 	vx(_vx), vy(_vy),
 	elapsedFrame(0),

@@ -25,7 +25,7 @@ class WhiteCircle : public IParticleEffect{
 public:
 	static const int LifeTime;
 	static const double Radius;
-	static const unsigned int
+	static const unsigned int Color;
 
 	WhiteCircle(double _x, double _y);
 	~WhiteCircle() = default;

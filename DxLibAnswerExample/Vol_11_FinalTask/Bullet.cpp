@@ -14,7 +14,7 @@ const Color EnemyBullet::Color(255, 255, 255);
 const int EnemyBullet::LifeTime = 900;
 
 
-IBullet::IBullet(double _x, double _y, const Vec2 & _velocity, double _radius, double _attack, const Color & _color, int _lifeTime) :
+IBullet::IBullet(double _x, double _y, double _vx, double _vy, double _radius, double _attack, const Color & _color, int _lifeTime) :
 	x(_x), y(_y),
 	vx(_vx), vy(_vy),
 	radius(_radius),

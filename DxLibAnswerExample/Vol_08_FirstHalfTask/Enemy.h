@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-#include "DxLib.h"
 
 
 //各敵の基底クラス
@@ -46,17 +45,5 @@ public:
 
 	// 画面外に出ていないか、HPはゼロになっていないかをチェックし、死んでいるかどうかのフラグを更新する。
 	void checkDead();
-};
-
-
-
-//敵全体を管理するクラス
-class EnemyManager{
-public:
-	std::vector<Enemy> enemies;
-	EnemyManager();
-	void add(const Enemy& ins);
-	void update();
-	void draw() const;
 };
 

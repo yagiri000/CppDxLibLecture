@@ -4,7 +4,7 @@
 
 const int WhiteCircle::LifeTime = 5;
 const double WhiteCircle::Radius = 50.0;
-const Color WhiteCircle::Color(255, 255, 255, 80);
+const unsigned int WhiteCircle::Color = 0xFFFFFF;
 
 
 WhiteCircle::WhiteCircle(double _x, double _y) :
@@ -27,7 +27,9 @@ void WhiteCircle::checkDead() {
 }
 
 void WhiteCircle::draw()const {
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 50);
 	DrawCircle(x, y, Radius, Color);
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255);
 }
 
 

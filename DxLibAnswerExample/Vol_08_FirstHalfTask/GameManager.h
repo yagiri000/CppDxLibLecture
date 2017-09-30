@@ -1,8 +1,9 @@
 #pragma once
+#include "DxLib.h"
 #include "Player.h"
 #include "Player.h"
 #include "PlayerBullet.h"
-#include "Enemy.h"
+#include "EnemyManager.h"
 #include "EnemyBullet.h"
 #include "Effect.h"
 #include "ScoreMgr.h"
@@ -15,7 +16,7 @@ public:
 	EnemyBulletManager eBulletManager;
 	EffectManager effectManager;
 	ScoreManager scoreManager;
-	Font font;
+	int fontHandle;
 
 	GameManager();
 	void update();

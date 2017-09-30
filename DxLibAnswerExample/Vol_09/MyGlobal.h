@@ -4,7 +4,7 @@
 extern int fontHandle;
 extern int mouseX, mouseY; // マウス座標
 
- // キー取得マウス付き
+ // キー取得用配列
 extern char buf[256];
 extern int keyState[256];
 
@@ -14,7 +14,7 @@ extern const double PI2;
 void keyUpdate();
 
 // 長さradiusでランダムな方向のベクトル(x, y)を計算し，ポインタを介して値を入れる
-void randomVector2(double radius, double *x, double *y);
+void randomInCircle(double radius, double *x, double *y);
 
 // 点(x, y)が四角形(左上:(leftTopX, leftTopY), 右下(rightBottomX, rightBottomY))の中にあるか返す
 bool checkHitPointRect(double x, double y, double leftTopX, double leftTopY, double rightBottomX, double rightBottomY);

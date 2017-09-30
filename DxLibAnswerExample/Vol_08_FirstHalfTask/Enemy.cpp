@@ -1,7 +1,7 @@
 #include <iostream>
 #include <algorithm>
-#include "GameManager.h"
 #include "MyGlobal.h"
+#include "GameManager.h"
 
 const double Enemy::Radius = 24.0;
 const int Enemy::Score = 100;
@@ -90,8 +90,10 @@ void Enemy::shot() {
 		// 4方向にショットを撃つ
 		if (elapsedFrame % RotationEnemyshotRate == 0) {
 			for (size_t i = 0; i < RotationEnemyshotNum; i++) {
-				Vec2 firstVel = Vec2(RotationEnemyBulletSpeed, 0).rotated( * (double)i / (double)RotationEnemyshotNum);
-				gameManager.eBulletManager.add(EnemyBullet(pos, firstVel));
+				double rate = (double)i / (double)RotationEnemyshotNum;
+				double fx = RotationEnemyBulletSpeed *cos(PI2 * rate);
+				double fy = RotationEnemyBulletSpeed * sin(PI2 * rate);
+				gameManager.eBulletManager.add(EnemyBullet(x, y, fx, fy));
 			}
 		}
 	}
@@ -102,9 +104,9 @@ void Enemy::checkHit() {
 	auto &vec = gameManager.pBulletManager.playerBullets;
 	for (auto i = vec.begin(); i < vec.end(); i++) {
 		// それぞれのプレイヤーの弾との当たり判定を取る
-		if (Circle(pos, Radius).intersects(Circle(i->pos, i->Radius)) && i->isDead == false) {
+		if (checkHitCircles(x, y, Radius, i->x, i->y, i->Radius) && i->isDead == false) {
 			hp -= i->Attack;
-			gameManager.effectManager.add(WhiteCircle(i->pos));
+			gameManager.effectManager.add(WhiteCircle(i->x, i->y));
 			i->isDead = true;
 		}
 	}
@@ -112,8 +114,8 @@ void Enemy::checkHit() {
 
 void Enemy::checkDead() {
 	// 画面外に行ったかを確認
-	// 敵の円状の当たり判定と、画面サイズ分の四角の当たり判定から画面内にいるか判定している
-	if (!Circle(pos, Radius).intersects(Rect(Window::Size()))){
+	// 敵の中心点と画面サイズ分の四角の当たり判定から画面内にいるか判定している
+	if (!checkHitPointRect(x, y, 0.0, 0.0, 640.0, 480.0)){
 		isDead = true;
 	}
 	//HPがゼロかを確認
@@ -122,36 +124,13 @@ void Enemy::checkDead() {
 		gameManager.scoreManager.addScore(Score);
 		// エフェクト生成
 		for (size_t j = 0; j < EffectNum; j++) {
-			gameManager.effectManager.add(WhiteCircle(pos + Random(0.0, EffectGenerateRange) * RandomVec2()));
+			double ix, iy;
+			randomInCircle(EffectGenerateRange, &ix, &iy);
+			gameManager.effectManager.add(WhiteCircle(x + ix, y + iy));
 		}
 		isDead = true;
 	}
 }
 
 
-
-EnemyManager::EnemyManager() {
-}
-
-void EnemyManager::add(const Enemy& ins) {
-	enemies.emplace_back(ins);
-}
-
-void EnemyManager::update() {
-	for (auto&& enemy : enemies) {
-		enemy.update();
-	}
-
-	//要素の消去
-	auto iter = std::remove_if(enemies.begin(), enemies.end(), [](const Enemy& ins) {
-		return ins.isDead;
-	});
-	enemies.erase(iter, enemies.end());
-}
-
-void EnemyManager::draw() const {
-	for (auto&& enemy : enemies) {
-		enemy.draw();
-	}
-}
 

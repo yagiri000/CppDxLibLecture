@@ -47,7 +47,8 @@ public:
 	static const double Radius;
 	static const double Hp;
 	static const int Score;
-	static const unsigned int
+	static const unsigned int Color;
+	
 
 	EnemyStalker(double _x, double _y);
 	~EnemyStalker() = default;
@@ -62,7 +63,7 @@ public:
 	static const double Radius;
 	static const double Hp;
 	static const int Score;
-	static const unsigned int
+	static const unsigned int Color;
 
 	EnemyStop(double _x, double _y);
 	~EnemyStop() = default;
@@ -79,7 +80,8 @@ public:
 	static const double Radius;
 	static const double Hp;
 	static const int Score;
-	static const unsigned int
+	static const unsigned int Color;
+	
 
 	EnemyRotation(double _x, double _y);
 	~EnemyRotation() = default;

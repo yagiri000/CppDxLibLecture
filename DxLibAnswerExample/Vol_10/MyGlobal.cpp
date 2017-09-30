@@ -25,10 +25,13 @@ void keyUpdate()
 }
 
 // 長さradiusでランダムな方向のベクトルを(x, y)計算し，ポインタを介して値を入れる
-void randomVector2(double radius, double * x, double * y)
+void randomInCircle(double radius, double * x, double * y)
 {
 	const int RANDOM_MAX = 65535;
 	double angle = PI2 * (double)GetRand(RANDOM_MAX) / (double)RANDOM_MAX;
+	double rate = (double)GetRand(RANDOM_MAX) / (double)RANDOM_MAX;
+	*x = radius * rate * cos(angle);
+	*y = radius * rate  * sin(angle);
 }
 
 // 点(x, y)が四角形(左上:(leftTopX, leftTopY), 右下(rightBottomX, rightBottomY))の中にあるか返す

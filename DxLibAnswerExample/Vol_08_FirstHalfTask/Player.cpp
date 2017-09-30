@@ -46,9 +46,9 @@ void Player::move() {
 
 void Player::shot() {
 	fireCool++;
-	if (Input::KeyZ.pressed) {
+	if (keyState[KEY_INPUT_Z] > 0) {
 		if (fireCool >= FireRate) {
-			gameManager.pBulletManager.add(PlayerBullet(pos + BulletFirstDelta, BulletFirstVelocity));
+			gameManager.pBulletManager.add(PlayerBullet(x + BulletFirstDeltaX, y + BulletFirstDeltaY, BulletFirstVelocityX, BulletFirstVelocityY));
 			fireCool = 0;
 		}
 	}
@@ -57,10 +57,12 @@ void Player::shot() {
 void Player::checkHit() {
 	//敵弾から自機への当たり判定
 	for (auto i = gameManager.eBulletManager.enemyBullets.begin(); i < gameManager.eBulletManager.enemyBullets.end(); i++) {
-		if (Circle(pos, Radius).intersects(Circle(i->pos, i->Radius)) && i->isDead == false) {
+		if (checkHitCircles(x, y, Radius, i->x, i->y, i->Radius) && i->isDead == false) {
 			// エフェクト生成
 			for (size_t j = 0; j < EffectNum; j++) {
-				gameManager.effectManager.add(WhiteCircle(pos + Random(0.0, EffectRange) * RandomVec2()));
+				double ix, iy;
+				randomInCircle(EffectRange, &ix, &iy);
+				gameManager.effectManager.add(WhiteCircle(x + ix, y + iy));
 			}
 			// スコア加算
 			gameManager.scoreManager.addDamagedNum();
@@ -70,10 +72,12 @@ void Player::checkHit() {
 
 	//敵自身から自機への当たり判定
 	for (auto i = gameManager.enemyManager.enemies.begin(); i < gameManager.enemyManager.enemies.end(); i++) {
-		if (Circle(pos, Radius).intersects(Circle(i->pos, i->Radius)) && i->isDead == false) {
+		if (checkHitCircles(x, y, Radius, i->x, i->y, i->Radius) && i->isDead == false) {
 			// エフェクト生成
 			for (size_t j = 0; j < EffectNum; j++) {
-				gameManager.effectManager.add(WhiteCircle(pos + Random(0.0, EffectRange) * RandomVec2()));
+				double ix, iy;
+				randomInCircle(EffectRange, &ix, &iy);
+				gameManager.effectManager.add(WhiteCircle(x + ix, y + iy));
 			}
 			// スコア加算
 			gameManager.scoreManager.addDamagedNum();
