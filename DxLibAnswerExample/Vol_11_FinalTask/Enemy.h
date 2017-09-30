@@ -16,10 +16,10 @@ public:
 	double hp;
 	int score;
 	Color color;
-	int eFrame; // 生成されてからの経過フレーム
+	int elapsedFrame; // 生成されてからの経過フレーム
 	bool isDead; // 死んでいるかどうかのフラグ
 
-	IEnemy(double _x, double _y, const Vec2& _velocity, double _radius, double _hp, int _score, const Color& _Color);
+	IEnemy(double _x, double _y, double _vx, double _vy, double _radius, double _hp, int _score, const Color& _Color);
 
 	virtual ~IEnemy() = default;
 
@@ -47,7 +47,7 @@ public:
 	static const double Radius;
 	static const double Hp;
 	static const int Score;
-	static const Color Color_;
+	static const unsigned int
 
 	EnemyStalker(double _x, double _y);
 	~EnemyStalker() = default;
@@ -62,9 +62,9 @@ public:
 	static const double Radius;
 	static const double Hp;
 	static const int Score;
-	static const Color Color_;
+	static const unsigned int
 
-	EnemyStop(const Vec2 & _pos);
+	EnemyStop(double _x, double _y);
 	~EnemyStop() = default;
 	void move() override;
 	void shot() override;
@@ -79,9 +79,9 @@ public:
 	static const double Radius;
 	static const double Hp;
 	static const int Score;
-	static const Color Color_;
+	static const unsigned int
 
-	EnemyRotation(const Vec2 & _pos);
+	EnemyRotation(double _x, double _y);
 	~EnemyRotation() = default;
 	void move() override;
 	void shot() override;

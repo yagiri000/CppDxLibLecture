@@ -3,13 +3,13 @@
 #include "EnemyBullet.h"
 
 const double EnemyBullet::Radius = 8.0;
-const Color EnemyBullet::Color_(255, 255, 255);
+const Color EnemyBullet::Color(255, 255, 255);
 const int EnemyBullet::LifeTime = 900;
 
-EnemyBullet::EnemyBullet(const Vec2 & _pos, const Vec2 & _velocity) :
+EnemyBullet::EnemyBullet(double _x, double _y, const Vec2 & _velocity) :
 	x(_x), y(_y),
-	velocity(_velocity),
-	eFrame(0),
+	vx(_vx), vy(_vy),
+	elapsedFrame(0),
 	isDead(false)
 {
 }
@@ -17,7 +17,7 @@ EnemyBullet::EnemyBullet(const Vec2 & _pos, const Vec2 & _velocity) :
 void EnemyBullet::update() {
 	checkDead();
 	move();
-	eFrame++;
+	elapsedFrame++;
 }
 
 void EnemyBullet::move() {
@@ -25,13 +25,13 @@ void EnemyBullet::move() {
 }
 
 void EnemyBullet::checkDead() {
-	if (eFrame > LifeTime) {
+	if (elapsedFrame > LifeTime) {
 		isDead = true;
 	}
 }
 
 void EnemyBullet::draw() const {
-	Circle(pos, Radius).draw(Color_);
+	DrawCircle(x, y, Radius, Color);
 }
 
 

@@ -1,13 +1,28 @@
-﻿#include "DxLib.h"
+﻿#include <vector>
+#include "DxLib.h"
+#include "MyGlobal.h"
 #include "Enemy.h"
 
-void Main()
-{
-	std::vector<IEnemy*> vec;
-	const Font font(18);
 
-	while (System::Update())
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+{
+	ChangeWindowMode(TRUE);//非全画面にセット
+	SetGraphMode(640, 480, 32);//画面サイズ指定
+	SetOutApplicationLogValidFlag(FALSE);//Log.txtを生成しないように設定
+	if (DxLib_Init() == 1) { return -1; }//初期化に失敗時にエラーを吐かせて終了
+
+	fontHandle = CreateFontToHandle("Segoe UI", 20, 5, DX_FONTTYPE_ANTIALIASING_4X4);//フォントを読み込み
+
+	std::vector<IEnemy*> vec;
+
+	while (ProcessMessage() == 0)
 	{
+		ClearDrawScreen();//裏画面消す
+		SetDrawScreen(DX_SCREEN_BACK);//描画先を裏画面に
+
+		GetMousePoint(&mouseX, &mouseY); //マウス座標更新
+		keyUpdate();//(自作関数)キー更新
+
 		// Z, X, Cキーが押されたらランダムな座標に敵を生成
 		if (keyState[KEY_INPUT_Z] == 1) {
 			vec.emplace_back(new EnemySinMove(GetRand(640), GetRand(480)));
@@ -23,8 +38,8 @@ void Main()
 		auto it = vec.begin();
 		while (it != vec.end()) {
 			// 画面外に出ているか確認 
-			// 敵の円と画面の長方形との当たり判定を取り、その否定を条件にすることで画面外に出ているか確認している
-			if (!Circle((*it)->pos, (*it)->Radius).intersects(Rect(Window::Size()))) { 
+			// 敵の座標点と画面の長方形との当たり判定を取り、その否定を条件にすることで画面外に出ているか確認している
+			if (!checkHitPointRect((*it)->x, (*it)->y, 0.0, 0.0, 640.0, 480.0)) {
 				// メモリ解放
 				delete (*it);
 				it = vec.erase(it);
@@ -41,7 +56,11 @@ void Main()
 			enemy->draw();
 		}
 
-		// 敵の数を描画
-		font(L"敵の数:", vec.size()).draw();
+		DrawFormatStringToHandle(20, 40, 0xFFFFFF, fontHandle, "Z, X, Cで敵生成 敵の数:%3d", vec.size());
+
+		ScreenFlip();//裏画面を表画面にコピー
 	}
+
+	DxLib_End();
+	return 0;
 }

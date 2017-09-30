@@ -1,42 +1,50 @@
 #include "DxLib.h"
+#include "MyGlobal.h"
 #include "Enemy.h"
 #include "GameManager.h"
 
 const double Enemy::Radius = 24.0;
 
-Enemy::Enemy(const Vec2 & _pos, Kind _kind) :
+Enemy::Enemy(double _x, double _y, Kind _kind) :
 	x(_x), y(_y),
-	velocity(),
+	vx(0.0), vy(0.0),
 	kind(_kind),
-	eFrame(0)
+	elapsedFrame(0)
 {
-	if (kind == Straight) {
-		velocity = RandomVec2(1.0);
-	}
 }
 
 void Enemy::update() {
 	if (kind == Stalker) {
-		velocity = 1.5 * (gameManager.player.pos - pos).normalized();
+		Player& player = gameManager.player;
+		const double Speed = 1.5;
+		normalize(x, y, player.x, player.y, &vx, &vy);
+		vx *= Speed;
+		vy *= Speed;
+		x += vx;
+		y += vy;
 	}
 	else if (kind == Rotation) {
-		velocity = Vec2(1.0, 0.0).rotate(eFrame * 0.02);
+		double angle = elapsedFrame * 0.02;
+		vx = 1.0 * cos(angle);
+		vy = 1.0 * sin(angle);
 	}
 	else if (kind == Straight) {
-
+		vx = 0.0;
+		vy = 1.0;
 	}
-	x += vx; y+= vy;
-	eFrame++;
+	x += vx;
+	y += vy;
+	elapsedFrame++;
 }
 
 void Enemy::draw() {
 	if (kind == Stalker) {
-		Circle(pos, Radius).draw(Color(255, 0, 0));
+		DrawCircle(x, y, static_cast<int>(Radius), GetColor(255, 0, 0));
 	}
 	else if (kind == Rotation) {
-		Circle(pos, Radius).draw(Color(255, 128, 0));
+		DrawCircle(x, y, static_cast<int>(Radius), GetColor(255, 128, 0));
 	}
 	else if (kind == Straight) {
-		Circle(pos, Radius).draw(Color(255, 0, 128));
+		DrawCircle(x, y, static_cast<int>(Radius), GetColor(255, 0, 128));
 	}
 }

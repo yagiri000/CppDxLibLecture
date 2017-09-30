@@ -24,15 +24,15 @@ public:
 	static const double EffectGenerateRange;
 	static const double StalkerEnemySpeed;
 	static const double RotationEnemyOmega;
-	static const Color EnemyStalkerColor;
-	static const Color EnemyStopColor;
-	static const Color EnemyRotationColor;
+	static const unsigned int EnemyStalkerColor;
+	static const unsigned int EnemyStopColor;
+	static const unsigned int EnemyRotationColor;
 
 	double x, y; 
 	Kind kind; // 敵の種類
 	double vx, vy;
 	double hp;
-	int eFrame; // 生成されてからの経過フレーム
+	int elapsedFrame; // 生成されてからの経過フレーム
 	bool isDead; // 死んでいるかどうかのフラグ
 
 	Enemy(double _x, double _y, Kind _kind);

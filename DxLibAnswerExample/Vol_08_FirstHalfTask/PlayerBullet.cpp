@@ -4,13 +4,13 @@
 
 const double PlayerBullet::Radius = 4.0;
 const double PlayerBullet::Attack = 1.0;
-const Color PlayerBullet::Color_(0, 0, 200);
+const unsigned int PlayerBullet::Color = 0x0000AA;
 const int PlayerBullet::LifeTime = 60;
 
-PlayerBullet::PlayerBullet(const Vec2 & _pos, const Vec2 & _velocity):
+PlayerBullet::PlayerBullet(double _x, double _y, double _vx, double _vy):
 	x(_x), y(_y),
-	velocity(_velocity),
-	eFrame(0),
+	vx(_vx), vy(_vy),
+	elapsedFrame(0),
 	isDead(false)
 {
 }
@@ -18,7 +18,7 @@ PlayerBullet::PlayerBullet(const Vec2 & _pos, const Vec2 & _velocity):
 void PlayerBullet::update() {
 	checkDead();
 	move();
-	eFrame++;
+	elapsedFrame++;
 }
 
 void PlayerBullet::move() {
@@ -26,13 +26,13 @@ void PlayerBullet::move() {
 }
 
 void PlayerBullet::checkDead() {
-	if (eFrame > LifeTime) {
+	if (elapsedFrame > LifeTime) {
 		isDead = true;
 	}
 }
 
 void PlayerBullet::draw() const {
-	Circle(pos, Radius).draw(Color_);
+	DrawCircle(x, y, Radius, Color);
 }
 
 

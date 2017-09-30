@@ -13,10 +13,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	fontHandle = CreateFontToHandle("Segoe UI", 20, 5, DX_FONTTYPE_ANTIALIASING_4X4);//フォントを読み込み
 
-	double x = 320.0;
-	double y = 240.0;
-	const double SPEED = 5.0;
-
 	while (ProcessMessage() == 0)
 	{
 		ClearDrawScreen();//裏画面消す
@@ -39,7 +35,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		gameManager.update();
 		gameManager.draw();
 
-		DrawFormatStringToHandle(20, 20, GetColor(255, 255, 255), fontHandle, "敵の数:%d", gameManager.enemyManager.getEnemyNum());
+		DrawFormatStringToHandle(20, 20, GetColor(255, 255, 255), fontHandle, "Z, X Cで敵生成 敵の数:%d", gameManager.enemyManager.getEnemyNum());
 
 		ScreenFlip();//裏画面を表画面にコピー
 	}

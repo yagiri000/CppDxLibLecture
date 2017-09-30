@@ -1,18 +1,20 @@
 #include "Enemy.h"
+#include "MyGlobal.h"
+#include <iostream>
 
 const double IEnemy::Radius = 30.0;
 
 const double EnemySinMove::SinOmega = 0.02;
 const double EnemySinMove::SpeedX = 2.0;
 const double EnemySinMove::SpeedY = 1.0;
-const Color EnemySinMove::Color_(255, 0, 0);
+const unsigned int EnemySinMove::Color = 0xFF0000;
 
 const double EnemyRotation::Speed = 2.0;
 const double EnemyRotation::RotationOmega = 0.04;
-const Color EnemyRotation::Color_(255, 128, 0);
+const unsigned int EnemyRotation::Color = 0xFF8800;
 
 const double EnemyStraight::Speed = 2.0;
-const Color EnemyStraight::Color_(255, 0, 128);
+const unsigned int EnemyStraight::Color = 0xFF0088;
 
 
 IEnemy::IEnemy(double _x, double _y):
@@ -21,43 +23,45 @@ IEnemy::IEnemy(double _x, double _y):
 {
 }
 
-EnemySinMove::EnemySinMove(const Vec2 & _pos):
-IEnemy(_pos)
+EnemySinMove::EnemySinMove(double _x, double _y):
+IEnemy(_x, _y)
 {
 }
 
 void EnemySinMove::update() {
 	// SinãOìπÇ≈ìÆÇ≠
-	velocity = Vec2(sin((double)eFrame * SinOmega) * SpeedX, SpeedY);
+	vx = sin((double)elapsedFrame * SinOmega) * SpeedX;
+	vy = SpeedY;
 	x += vx; y+= vy;
-	eFrame++;
+	elapsedFrame++;
 }
 
 void EnemySinMove::draw() const {
-	Circle(pos, Radius).draw(Color_);
+	DrawCircle(x, y, Radius, Color);
 }
 
-EnemyRotation::EnemyRotation(const Vec2 & _pos) :
-	IEnemy(_pos) 
+EnemyRotation::EnemyRotation(double _x, double _y) :
+	IEnemy(_x, _y) 
 {
 }
 
 void EnemyRotation::update() {
-	// ë¨ìxÇâÒì]Ç≥ÇπÇÈ
-	velocity = Vec2(Speed, 0.0).rotated((double)eFrame * RotationOmega);
+	double angle = (double)elapsedFrame * RotationOmega;
+	vx = Speed * cos(angle);
+	vy = Speed * sin(angle);
 	x += vx; y+= vy;
-	eFrame++;
+	elapsedFrame++;
 }
 
 void EnemyRotation::draw() const {
-	Circle(pos, Radius).draw(Color_);
+	DrawCircle(x, y, Radius, Color);
 }
 
-EnemyStraight::EnemyStraight(const Vec2 & _pos) :
-	IEnemy(_pos) 
+EnemyStraight::EnemyStraight(double _x, double _y) :
+	IEnemy(_x, _y) 
 {
 	// ÉâÉìÉ_ÉÄÇ»ë¨ìxÇê›íË
-	velocity = RandomVec2(Speed);
+	randomVector2(Speed, &vx, &vy);
 }
 
 void EnemyStraight::update() {
@@ -66,5 +70,5 @@ void EnemyStraight::update() {
 }
 
 void EnemyStraight::draw() const {
-	Circle(pos, Radius).draw(Color_);
+	DrawCircle(x, y, Radius, Color);
 }

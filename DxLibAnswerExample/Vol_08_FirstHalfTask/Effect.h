@@ -8,10 +8,10 @@ class WhiteCircle{
 public:
 	static const int LifeTime;
 	static const double Radius;
-	static const Color Color_;
+	static const unsigned int
 
 	double x, y;
-	int eFrame; // 生成されてからの経過フレーム
+	int elapsedFrame; // 生成されてからの経過フレーム
 	bool isDead; // 死んでいるかどうかのフラグ
 
 	WhiteCircle(double _x, double _y);

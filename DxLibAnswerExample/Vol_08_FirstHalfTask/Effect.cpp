@@ -4,30 +4,30 @@
 
 const int WhiteCircle::LifeTime = 5;
 const double WhiteCircle::Radius = 50.0;
-const Color WhiteCircle::Color_(255, 255, 255, 80);
+const Color WhiteCircle::Color(255, 255, 255, 80);
 
 
-WhiteCircle::WhiteCircle(const Vec2 & _pos) :
+WhiteCircle::WhiteCircle(double _x, double _y) :
 	x(_x), y(_y),
 	isDead(false),
-	eFrame(0)
+	elapsedFrame(0)
 {
 }
 
 void WhiteCircle::update() {
 	checkDead();
-	eFrame++;
+	elapsedFrame++;
 }
 
 
 void WhiteCircle::checkDead() {
-	if (eFrame > LifeTime) {
+	if (elapsedFrame > LifeTime) {
 		isDead = true;
 	}
 }
 
 void WhiteCircle::draw()const {
-	Circle(pos, Radius).draw(Color_);
+	DrawCircle(x, y, Radius, Color);
 }
 
 

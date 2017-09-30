@@ -15,7 +15,7 @@ public:
 	Kind kind;
 	double x, y;
 	double vx, vy;
-	int eFrame;
+	int elapsedFrame;
 	Enemy(double _x, double _y, Kind _kind);
 	void update();
 	void draw();

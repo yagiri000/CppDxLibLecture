@@ -4,19 +4,19 @@
 
 const int WhiteCircle::LifeTime = 5;
 const double WhiteCircle::Radius = 50.0;
-const Color WhiteCircle::Color_(255, 255, 255, 80);
+const Color WhiteCircle::Color(255, 255, 255, 80);
 
 
 
 void IParticleEffect::checkDead() {
-	if (eFrame > lifeTime) {
+	if (elapsedFrame > lifeTime) {
 		isDead = true;
 	}
 }
 
 void IParticleEffect::update() {
 	checkDead();
-	eFrame++;
+	elapsedFrame++;
 }
 
 WhiteCircle::WhiteCircle(double _x, double _y) :
@@ -25,7 +25,7 @@ WhiteCircle::WhiteCircle(double _x, double _y) :
 }
 
 void WhiteCircle::draw()const {
-	Circle(pos, Radius).draw(Color_);
+	DrawCircle(x, y, Radius, Color);
 }
 
 
@@ -54,10 +54,10 @@ void EffectManager::draw() const {
 	}
 }
 
-IParticleEffect::IParticleEffect(const Vec2 & _pos, int _lifeTime) :
+IParticleEffect::IParticleEffect(double _x, double _y, int _lifeTime) :
 	x(_x), y(_y),
 	lifeTime(_lifeTime),
-	eFrame(0),
+	elapsedFrame(0),
 	isDead(false)
 {
 }

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include "GameManager.h"
+#include "MyGlobal.h"
 
 const double Enemy::Radius = 24.0;
 const int Enemy::Score = 100;
@@ -11,20 +12,20 @@ const size_t Enemy::RotationEnemyshotNum = 4;
 const double Enemy::RotationEnemyBulletSpeed = 8.0;
 const size_t Enemy::EffectNum = 25;
 const double Enemy::EffectGenerateRange = 64.0;
-const double Enemy::StalkerEnemySpeed = 1.5;
+const double Enemy::StalkerEnemySpeed = 0.8;
 const double Enemy::RotationEnemyOmega = 0.02;
-const Color Enemy::EnemyStalkerColor(255, 0, 0);
-const Color Enemy::EnemyStopColor(255, 128, 0);
-const Color Enemy::EnemyRotationColor(255, 0, 128);
+const unsigned int Enemy::EnemyStalkerColor = 0xFF0000;
+const unsigned int Enemy::EnemyStopColor = 0xFF8800;
+const unsigned int Enemy::EnemyRotationColor = 0xFF0088;
 
 
 //敵の基底クラス
-Enemy::Enemy(const Vec2 & _pos, Kind _kind) :
+Enemy::Enemy(double _x, double _y, Kind _kind) :
 	x(_x), y(_y),
-	velocity(),
+	vx(0.0), vy(0.0),
 	kind(_kind),
 	hp(5.0),
-	eFrame(0),
+	elapsedFrame(0),
 	isDead(false)
 {
 }
@@ -34,30 +35,38 @@ void Enemy::update() {
 	shot();
 	checkHit();
 	checkDead();
-	eFrame++;
+	elapsedFrame++;
 }
 
 void Enemy::draw() const {
 	if (kind == Stalker) {
-		Circle(pos, Radius).draw(EnemyStalkerColor);
+		DrawCircle(x, y, Radius, EnemyStalkerColor);
 	}
 	else if (kind == Stop) {
-		Circle(pos, Radius).draw(EnemyStopColor);
+		DrawCircle(x, y, Radius, EnemyStopColor);
 	}
 	else if (kind == Rotation) {
-		Circle(pos, Radius).draw(EnemyRotationColor);
+		DrawCircle(x, y, Radius, EnemyRotationColor);
 	}
 }
 
 void Enemy::move() {
 	if (kind == Stalker) {
-		velocity = StalkerEnemySpeed * (gameManager.player.pos - pos).normalized();
+		Player& player = gameManager.player;
+		normalize(x, y, player.x, player.y, &vx, &vy);
+		vx *= StalkerEnemySpeed;
+		vy *= StalkerEnemySpeed;
+		x += vx;
+		y += vy;
 	}
 	else if (kind == Stop) {
-		velocity = Vec2(0.0, 0.0);
+		vx = 0.0;
+		vy = 0.0;
 	}
 	else if (kind == Rotation) {
-		velocity = Vec2(1.0, 0.0).rotate(eFrame * RotationEnemyOmega);
+		double angle = elapsedFrame * 0.02;
+		vx = 1.0 * cos(angle);
+		vy = 1.0 * sin(angle);
 	}
 	x += vx; y+= vy;
 }
@@ -68,16 +77,20 @@ void Enemy::shot() {
 	}
 	else if (kind == Stop) {
 		// プレイヤーに向けてショットを撃つ
-		if (eFrame % StopEnemyshotRate == 0) {
-			Vec2 firstVel = StopEnemyBulletSpeed * (gameManager.player.pos - pos).normalized();
-			gameManager.eBulletManager.add(EnemyBullet(pos, firstVel));
+		if (elapsedFrame % StopEnemyshotRate == 0) {
+			double bx, by;
+			Player& p = gameManager.player;
+			normalize(x, y, p.x, p.y, &bx, &by);
+			bx *= StopEnemyBulletSpeed;
+			by *= StopEnemyBulletSpeed;
+			gameManager.eBulletManager.add(EnemyBullet(x, y, bx, by));
 		}
 	}
 	else if (kind == Rotation) {
 		// 4方向にショットを撃つ
-		if (eFrame % RotationEnemyshotRate == 0) {
+		if (elapsedFrame % RotationEnemyshotRate == 0) {
 			for (size_t i = 0; i < RotationEnemyshotNum; i++) {
-				Vec2 firstVel = Vec2(RotationEnemyBulletSpeed, 0).rotated(TwoPi * (double)i / (double)RotationEnemyshotNum);
+				Vec2 firstVel = Vec2(RotationEnemyBulletSpeed, 0).rotated( * (double)i / (double)RotationEnemyshotNum);
 				gameManager.eBulletManager.add(EnemyBullet(pos, firstVel));
 			}
 		}

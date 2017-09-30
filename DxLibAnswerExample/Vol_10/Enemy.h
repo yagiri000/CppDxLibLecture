@@ -18,9 +18,9 @@ public:
 	static const double SinOmega;
 	static const double SpeedX;
 	static const double SpeedY;
-	static const Color Color_;
+	static const unsigned int Color;
 	
-	int eFrame;
+	int elapsedFrame;
 
 	EnemySinMove(double _x, double _y);
 	void update() override;
@@ -33,9 +33,9 @@ class EnemyRotation : public IEnemy {
 public:
 	static const double Speed;
 	static const double RotationOmega;
-	static const Color Color_;
+	static const unsigned int Color;
 
-	int eFrame;
+	int elapsedFrame;
 
 	EnemyRotation(double _x, double _y);
 	void update() override;
@@ -47,7 +47,7 @@ public:
 class EnemyStraight : public IEnemy {
 public:
 	static const double Speed;
-	static const Color Color_;
+	static const unsigned int Color;
 
 	EnemyStraight(double _x, double _y);
 	void update() override;

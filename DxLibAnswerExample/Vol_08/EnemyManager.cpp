@@ -1,5 +1,6 @@
-#include "EnemyManager.h"
 #include <algorithm>
+#include "EnemyManager.h"
+#include "MyGlobal.h"
 
 void EnemyManager::update() {
 	for (auto&& enemy : enemies) {
@@ -28,8 +29,8 @@ void EnemyManager::checkDelete() {
 	// 画面外の敵を削除
 	auto rmvIter = std::remove_if(enemies.begin(), enemies.end(), [](const Enemy& enemy) {
 
-		// 敵の円状の当たり判定と画面サイズの四角の当たり判定を取り、当たっていなかったら画面外にいると判定
-		return !Circle(enemy.pos, enemy.Radius).intersects(Rect(Window::Size()));
+		// 敵の座標点と画面サイズの四角の当たり判定を取り、当たっていなかったら画面外にいると判定
+		return !checkHitPointRect(enemy.x, enemy.y, 0.0, 0.0, 640.0, 480.0);
 	});
 
 	enemies.erase(rmvIter, enemies.end());

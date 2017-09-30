@@ -8,7 +8,7 @@ const Vec2 Player::BulletFirstVelocity(0.0, -15.0);
 const Vec2 Player::BulletFirstDelta(0.0, -20.0);
 const size_t Player::EffectNum = 25;
 const double Player::EffectRange = 64.0;
-const Color Player::Color_(0, 0, 255);
+const Color Player::Color(0, 0, 255);
 const Vec2 Player::FirstPos(320.0, 400.0);
 
 Player::Player() :
@@ -78,5 +78,5 @@ void Player::checkHit() {
 }
 
 void Player::draw() const {
-	Circle(pos, Radius).draw(Color_);
+	DrawCircle(x, y, Radius, Color);
 }

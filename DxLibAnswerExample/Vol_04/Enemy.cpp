@@ -9,7 +9,7 @@ Enemy::Enemy(double _x, double _y):
 
 void Enemy::update() {
 	// プレイヤーから敵のベクトルを引き、正規化したものにSpeedを掛けて常に一定の速度で動くようにする
-	// （ベクトルがよくわからない方へ：プレイヤー方向への速度を出してるだけです）
+	// プレイヤー方向に一定速度で移動
 	const double Speed = 1.5;
 	normalize(x, y, playerPtr->x, playerPtr->y, &vx, &vy);
 	vx *= Speed;

@@ -9,14 +9,14 @@ const double EnemyStalker::StalkerEnemySpeed = 1.5;
 const double EnemyStalker::Radius = 24.0;
 const double EnemyStalker::Hp = 5.0;
 const int EnemyStalker::Score = 100;
-const Color EnemyStalker::Color_(255, 0, 0);
+const Color EnemyStalker::Color(255, 0, 0);
 
 const size_t EnemyStop::EnemyshotRate = 60;
 const double EnemyStop::BulletSpeed = 1.0;
 const double EnemyStop::Radius = 24.0;
 const double EnemyStop::Hp = 5.0;
 const int EnemyStop::Score = 100;
-const Color EnemyStop::Color_(255, 128, 0);
+const Color EnemyStop::Color(255, 128, 0);
 
 const size_t EnemyRotation::EnemyshotRate = 120;
 const size_t EnemyRotation::EnemyshotNum = 4;
@@ -25,18 +25,18 @@ const double EnemyRotation::EnemyOmega = 0.02;
 const double EnemyRotation::Radius = 24.0;
 const double EnemyRotation::Hp = 5.0;
 const int EnemyRotation::Score = 100;
-const Color EnemyRotation::Color_(255, 0, 128);
+const Color EnemyRotation::Color(255, 0, 128);
 
 
 //敵の基底クラス
-IEnemy::IEnemy(const Vec2 & _pos, const Vec2 & _velocity, double _radius, double _hp, int _score, const Color& _color) :
+IEnemy::IEnemy(double _x, double _y, const Vec2 & _velocity, double _radius, double _hp, int _score, const Color& _color) :
 	x(_x), y(_y),
-	velocity(_velocity),
+	vx(_vx), vy(_vy),
 	radius(_radius),
 	hp(_hp),
 	score(_score),
 	color(_color),
-	eFrame(0),
+	elapsedFrame(0),
 	isDead(false)
 {
 }
@@ -46,7 +46,7 @@ void IEnemy::update() {
 	shot();
 	checkHit();
 	checkDead();
-	eFrame++;
+	elapsedFrame++;
 }
 
 void IEnemy::draw() const {
@@ -85,8 +85,8 @@ void IEnemy::checkDead() {
 
 
 
-EnemyStalker::EnemyStalker(const Vec2 & _pos) :
-	IEnemy(_pos, Vec2(), Radius, Hp, Score, Color_)
+EnemyStalker::EnemyStalker(double _x, double _y) :
+	IEnemy(_pos, Vec2(), Radius, Hp, Score, Color)
 {
 }
 
@@ -100,8 +100,8 @@ void EnemyStalker::shot() {
 
 
 
-EnemyStop::EnemyStop(const Vec2 & _pos) :
-	IEnemy(_pos, Vec2(), Radius, Hp, Score, Color_)
+EnemyStop::EnemyStop(double _x, double _y) :
+	IEnemy(_pos, Vec2(), Radius, Hp, Score, Color)
 {
 }
 
@@ -112,7 +112,7 @@ void EnemyStop::move() {
 
 void EnemyStop::shot() {
 	// プレイヤーに向けてショットを撃つ
-	if (eFrame % EnemyshotRate == 0) {
+	if (elapsedFrame % EnemyshotRate == 0) {
 		Vec2 firstVel = BulletSpeed * (gameManager.player.pos - pos).normalized();
 		gameManager.enemyBulletManager.add(std::make_shared<EnemyBullet>(pos, firstVel));
 	}
@@ -120,19 +120,19 @@ void EnemyStop::shot() {
 
 
 
-EnemyRotation::EnemyRotation(const Vec2 & _pos) :
-	IEnemy(_pos, Vec2(), Radius, Hp, Score, Color_)
+EnemyRotation::EnemyRotation(double _x, double _y) :
+	IEnemy(_pos, Vec2(), Radius, Hp, Score, Color)
 {
 }
 
 void EnemyRotation::move() {
-	velocity = Vec2(1.0, 0.0).rotate(eFrame * EnemyOmega);
+	velocity = Vec2(1.0, 0.0).rotate(elapsedFrame * EnemyOmega);
 	x += vx; y+= vy;
 }
 
 void EnemyRotation::shot() {
 	// 4方向にショットを撃つ
-	if (eFrame % EnemyshotRate == 0) {
+	if (elapsedFrame % EnemyshotRate == 0) {
 		for (size_t i = 0; i < EnemyshotNum; i++) {
 			Vec2 firstVel = Vec2(EnemyBulletSpeed, 0).rotated(TwoPi * i / EnemyshotNum);
 			gameManager.enemyBulletManager.add(std::make_shared<EnemyBullet>(pos, firstVel));

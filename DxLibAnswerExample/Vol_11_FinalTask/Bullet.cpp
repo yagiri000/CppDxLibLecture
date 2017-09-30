@@ -5,23 +5,23 @@
 
 const double PlayerBullet::Radius = 4.0;
 const double PlayerBullet::Attack = 1.0;
-const Color PlayerBullet::Color_(0, 0, 200);
+const Color PlayerBullet::Color(0, 0, 200);
 const int PlayerBullet::LifeTime = 60;
 
 const double EnemyBullet::Radius = 8.0;
 const double EnemyBullet::Attack = 1.0;
-const Color EnemyBullet::Color_(255, 255, 255);
+const Color EnemyBullet::Color(255, 255, 255);
 const int EnemyBullet::LifeTime = 900;
 
 
-IBullet::IBullet(const Vec2 & _pos, const Vec2 & _velocity, double _radius, double _attack, const Color & _color, int _lifeTime) :
+IBullet::IBullet(double _x, double _y, const Vec2 & _velocity, double _radius, double _attack, const Color & _color, int _lifeTime) :
 	x(_x), y(_y),
-	velocity(_velocity),
+	vx(_vx), vy(_vy),
 	radius(_radius),
 	attack(_attack),
 	color(_color),
 	lifeTime(_lifeTime),
-	eFrame(0),
+	elapsedFrame(0),
 	isDead(false)
 {
 }
@@ -29,7 +29,7 @@ IBullet::IBullet(const Vec2 & _pos, const Vec2 & _velocity, double _radius, doub
 void IBullet::update() {
 	checkDead();
 	move();
-	eFrame++;
+	elapsedFrame++;
 }
 
 void IBullet::move() {
@@ -37,7 +37,7 @@ void IBullet::move() {
 }
 
 void IBullet::checkDead() {
-	if (eFrame > lifeTime) {
+	if (elapsedFrame > lifeTime) {
 		isDead = true;
 	}
 }
@@ -47,13 +47,13 @@ void IBullet::draw() const {
 }
 
 
-PlayerBullet::PlayerBullet(double _x, double _y, const Vec2& _velocity) :
-	IBullet(_pos, _velocity, Radius, Attack, Color_, LifeTime)
+PlayerBullet::PlayerBullet(double _x, double _y, double _vx, double _vy) :
+	IBullet(_pos, _velocity, Radius, Attack, Color, LifeTime)
 {
 }
 
-EnemyBullet::EnemyBullet(double _x, double _y, const Vec2& _velocity) :
-	IBullet(_pos, _velocity, Radius, Attack, Color_, LifeTime)
+EnemyBullet::EnemyBullet(double _x, double _y, double _vx, double _vy) :
+	IBullet(_pos, _velocity, Radius, Attack, Color, LifeTime)
 {
 }
 

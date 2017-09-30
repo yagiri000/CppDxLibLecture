@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include<Siv3D.hpp>
+#include "DxLib.h"
 
 
 class Player {
@@ -12,7 +12,7 @@ public:
 	static const Vec2 BulletFirstDelta;
 	static const size_t EffectNum;
 	static const double EffectRange;
-	static const Color Color_;
+	static const unsigned int
 	static const Vec2 FirstPos;
 
 	double x, y;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "myglobal.h"
+#include "MyGlobal.h"
 #include <iostream>
 
 

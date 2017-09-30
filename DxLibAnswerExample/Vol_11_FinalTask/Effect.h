@@ -8,7 +8,7 @@ class IParticleEffect {
 public:
 	double x, y;
 	int lifeTime;
-	int eFrame;
+	int elapsedFrame;
 	bool isDead;
 
 	IParticleEffect(double _x, double _y, int _lifeTime);
@@ -25,7 +25,7 @@ class WhiteCircle : public IParticleEffect{
 public:
 	static const int LifeTime;
 	static const double Radius;
-	static const Color Color_;
+	static const unsigned int
 
 	WhiteCircle(double _x, double _y);
 	~WhiteCircle() = default;
