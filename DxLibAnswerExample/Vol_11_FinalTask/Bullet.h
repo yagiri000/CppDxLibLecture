@@ -16,7 +16,7 @@ public:
 	int eFrame; // 生成されてからの経過フレーム
 	bool isDead; // 死んでいるかどうかのフラグ
 
-	IBullet(const Vec2& _pos, const Vec2& _velocity, double _radius, double attack, const Color& _color, int _lifeTime);
+	IBullet(double _x, double _y, const Vec2& _velocity, double _radius, double attack, const Color& _color, int _lifeTime);
 	void update();
 	void move();
 	void checkDead();
@@ -32,7 +32,7 @@ public:
 	static const Color Color_;
 	static const int LifeTime;
 	
-	PlayerBullet(const Vec2& _pos, const Vec2& _velocity);
+	PlayerBullet(double _x, double _y, const Vec2& _velocity);
 	~PlayerBullet() = default;
 };
 
@@ -44,7 +44,7 @@ public:
 	static const Color Color_;
 	static const int LifeTime;
 
-	EnemyBullet(const Vec2& _pos, const Vec2& _velocity);
+	EnemyBullet(double _x, double _y, const Vec2& _velocity);
 	~EnemyBullet() = default;
 };
 

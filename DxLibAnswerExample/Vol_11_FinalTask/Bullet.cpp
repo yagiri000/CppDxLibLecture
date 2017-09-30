@@ -47,12 +47,12 @@ void IBullet::draw() const {
 }
 
 
-PlayerBullet::PlayerBullet(const Vec2& _pos, const Vec2& _velocity) :
+PlayerBullet::PlayerBullet(double _x, double _y, const Vec2& _velocity) :
 	IBullet(_pos, _velocity, Radius, Attack, Color_, LifeTime)
 {
 }
 
-EnemyBullet::EnemyBullet(const Vec2& _pos, const Vec2& _velocity) :
+EnemyBullet::EnemyBullet(double _x, double _y, const Vec2& _velocity) :
 	IBullet(_pos, _velocity, Radius, Attack, Color_, LifeTime)
 {
 }

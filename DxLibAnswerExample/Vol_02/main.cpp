@@ -2,6 +2,8 @@
 #include "DxLib.h"
 
 #include "MyGlobal.h"
+#include "Player.h"
+#include "Enemy.h"
 
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -14,9 +16,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	fontHandle = CreateFontToHandle("Segoe UI", 20, 5, DX_FONTTYPE_ANTIALIASING_4X4);//フォントを読み込み
 
-																					 //
-																					 //ここで敵やプレイヤーのオブジェクトの実体を作る
-																					 //
+	Player player;
+	Enemy enemy(320.0, 120.0);
 
 	while (ProcessMessage() == 0)
 	{
@@ -26,15 +27,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		GetMousePoint(&mouseX, &mouseY); //マウス座標更新
 		keyUpdate();//(自作関数)キー更新
 
-					//説明用・文字を描画：keyState配列（自作）には、各キーが何フレーム押され続けているかが入っている
-		DrawFormatStringToHandle(320, 320, GetColor(255, 255, 255), fontHandle, "Z KEY %d", keyState[KEY_INPUT_Z]);
+		player.update();
+		enemy.update();
 
-		//
-		//　ここに敵やプレイヤーのupdate,drawを書く
-		//
-
-		//左上に文字（マウスの座標）を描画
-		DrawFormatStringToHandle(20, 20, GetColor(255, 255, 255), fontHandle, "MX:%3d MY:%3d", mouseX, mouseY);
+		player.draw();
+		enemy.draw();
 
 		ScreenFlip();//裏画面を表画面にコピー
 	}

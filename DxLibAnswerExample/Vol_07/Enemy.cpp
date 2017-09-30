@@ -1,6 +1,6 @@
 #include "Enemy.h"
 
-Enemy::Enemy(const Vec2& _pos):
+Enemy::Enemy(double _x, double _y):
 	x(_x), y(_y),
 	velocity(RandomVec2(5.0))
 {

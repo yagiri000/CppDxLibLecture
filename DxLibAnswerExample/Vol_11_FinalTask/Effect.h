@@ -11,7 +11,7 @@ public:
 	int eFrame;
 	bool isDead;
 
-	IParticleEffect(const Vec2& _pos, int _lifeTime);
+	IParticleEffect(double _x, double _y, int _lifeTime);
 	virtual ~IParticleEffect() = default;
 	virtual void update();
 	virtual void draw() const = 0;
@@ -27,7 +27,7 @@ public:
 	static const double Radius;
 	static const Color Color_;
 
-	WhiteCircle(const Vec2& _pos);
+	WhiteCircle(double _x, double _y);
 	~WhiteCircle() = default;
 	void draw() const override;
 };

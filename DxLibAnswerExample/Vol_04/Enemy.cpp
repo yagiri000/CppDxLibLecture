@@ -1,8 +1,9 @@
 #include "Enemy.h"
+#include "MyGlobal.h"
 
-Enemy::Enemy(const Vec2& _pos):
+Enemy::Enemy(double _x, double _y):
 	x(_x), y(_y),
-	velocity(0.0, 0.0)
+	vx(0.0), vy(0.0)
 {
 }
 
@@ -10,9 +11,11 @@ void Enemy::update() {
 	// プレイヤーから敵のベクトルを引き、正規化したものにSpeedを掛けて常に一定の速度で動くようにする
 	// （ベクトルがよくわからない方へ：プレイヤー方向への速度を出してるだけです）
 	const double Speed = 1.5;
-	velocity = playerPtr->pos - pos;
-	velocity = Speed * velocity.normalized();
-	x += vx; y+= vy;
+	normalize(x, y, playerPtr->x, playerPtr->y, &vx, &vy);
+	vx *= Speed;
+	vy *= Speed;
+	x += vx;
+	y+= vy;
 }
 
 void Enemy::draw() {

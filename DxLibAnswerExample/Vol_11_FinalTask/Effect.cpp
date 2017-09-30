@@ -19,7 +19,7 @@ void IParticleEffect::update() {
 	eFrame++;
 }
 
-WhiteCircle::WhiteCircle(const Vec2& _pos) :
+WhiteCircle::WhiteCircle(double _x, double _y) :
 	IParticleEffect(_pos, LifeTime)
 {
 }

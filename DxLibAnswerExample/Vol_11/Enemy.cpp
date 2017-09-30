@@ -15,9 +15,9 @@ const double EnemyStraight::Speed = 2.0;
 const Color EnemyStraight::Color_(255, 0, 128);
 
 
-IEnemy::IEnemy(const Vec2& _pos):
+IEnemy::IEnemy(double _x, double _y):
 	x(_x), y(_y),
-	velocity(0.0, 0.0)
+	vx(0.0), vy(0.0)
 {
 }
 

@@ -35,7 +35,7 @@ public:
 	int eFrame; // 生成されてからの経過フレーム
 	bool isDead; // 死んでいるかどうかのフラグ
 
-	Enemy(const Vec2& _pos, Kind _kind);
+	Enemy(double _x, double _y, Kind _kind);
 	void update();
 	void draw() const;
 	void move();

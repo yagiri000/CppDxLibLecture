@@ -6,7 +6,7 @@ public:
 	static const double Radius;
 	double x, y;
 	double vx, vy;
-	IEnemy(const Vec2& _pos);
+	IEnemy(double _x, double _y);
 	virtual void update() = 0;
 	virtual void draw() const = 0;
 	virtual ~IEnemy() = default;
@@ -22,7 +22,7 @@ public:
 	
 	int eFrame;
 
-	EnemySinMove(const Vec2& _pos);
+	EnemySinMove(double _x, double _y);
 	void update() override;
 	void draw() const override;
 	~EnemySinMove() = default;
@@ -37,7 +37,7 @@ public:
 
 	int eFrame;
 
-	EnemyRotation(const Vec2& _pos);
+	EnemyRotation(double _x, double _y);
 	void update() override;
 	void draw() const override;
 	~EnemyRotation() = default;
@@ -49,7 +49,7 @@ public:
 	static const double Speed;
 	static const Color Color_;
 
-	EnemyStraight(const Vec2& _pos);
+	EnemyStraight(double _x, double _y);
 	void update() override;
 	void draw() const override;
 	~EnemyStraight() = default;

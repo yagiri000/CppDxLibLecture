@@ -62,9 +62,9 @@ int main(){
 
 TODO : DxLibでstring型を使う例
 
-> DxLibでの使用例．```DrawFormatStringToHandle関数```の```FormatString ```引数は```char*```型で，string型ではないので，string型のメンバ関数```XXX```関数を用いて```const char*```型を取得する．
+> DxLibでの使用例．```DrawFormatStringToHandle```関数の```FormatString ```引数は```char*```型で，string型ではないので，string型のメンバ関数```c_str```関数を用いて```const char*```型で文字列を取得し，```DrawFormatStringToHandle```関数に値を渡す．  
 
-(DxLibテンプレートプロジェクトのmain.cppを書き換え)
+(DxLibテンプレートプロジェクトのmain.cppを書き換え)  
 
 ```cpp
 

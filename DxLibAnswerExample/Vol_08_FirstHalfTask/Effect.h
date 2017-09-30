@@ -14,7 +14,7 @@ public:
 	int eFrame; // 生成されてからの経過フレーム
 	bool isDead; // 死んでいるかどうかのフラグ
 
-	WhiteCircle(const Vec2& _pos);
+	WhiteCircle(double _x, double _y);
 	void update();
 	
 	// 死んでいるかどうかのフラグを更新

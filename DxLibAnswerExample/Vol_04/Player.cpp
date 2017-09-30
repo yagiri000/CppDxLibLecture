@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "MyGlobal.h"
 
 Player::Player() :
 x(320.0), y(240.0),

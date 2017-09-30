@@ -14,7 +14,7 @@ public:
 	int eFrame; // 生成されてからの経過フレーム
 	bool isDead; // 死んでいるかどうかのフラグ
 
-	PlayerBullet(const Vec2& _pos, const Vec2& _velocity);
+	PlayerBullet(double _x, double _y, const Vec2& _velocity);
 	void update();
 	void move();
 	void checkDead();

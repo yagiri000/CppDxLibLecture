@@ -19,7 +19,7 @@ public:
 	int eFrame; // 生成されてからの経過フレーム
 	bool isDead; // 死んでいるかどうかのフラグ
 
-	IEnemy(const Vec2& _pos, const Vec2& _velocity, double _radius, double _hp, int _score, const Color& _Color);
+	IEnemy(double _x, double _y, const Vec2& _velocity, double _radius, double _hp, int _score, const Color& _Color);
 
 	virtual ~IEnemy() = default;
 
@@ -49,7 +49,7 @@ public:
 	static const int Score;
 	static const Color Color_;
 
-	EnemyStalker(const Vec2& _pos);
+	EnemyStalker(double _x, double _y);
 	~EnemyStalker() = default;
 	void move() override;
 	void shot() override;

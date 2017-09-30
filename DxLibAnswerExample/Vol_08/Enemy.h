@@ -16,7 +16,7 @@ public:
 	double x, y;
 	double vx, vy;
 	int eFrame;
-	Enemy(const Vec2& _pos, Kind _kind);
+	Enemy(double _x, double _y, Kind _kind);
 	void update();
 	void draw();
 };
