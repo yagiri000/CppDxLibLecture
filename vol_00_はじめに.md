@@ -3,11 +3,11 @@
 ## はじめに
 
 本資料は、やぎりが作成した、C++初学者向け資料です。  
-C++とDxLibで実際にシューティングゲームを作り、「C++の機能(クラス, vector, 継承)をゲームを製作に実際にどう使うか」を理解することが目的になっています。  
+C++とDXライブラリで実際にシューティングゲームを作り、「C++の機能(クラス, vector, 継承)をゲームを製作に実際にどう使うか」を理解することが目的になっています。  
 
 ## 開発環境
 
-開発環境はWindows, Visual Studio 2017、DxLibのバージョンはDxLib 3.18eを想定しています。  
+開発環境はWindows, Visual Studio 2017、DXライブラリのバージョンはDxLib 3.18eを想定しています。  
  
 ## 謝辞
 
@@ -15,23 +15,24 @@ C++とDxLibで実際にシューティングゲームを作り、「C++の機能
 
 ## 演習問題について
 
-DxLib.hをインクルードしているプログラムはDxLibを使ったアプリケーションを、そうでないプログラムはコンソールアプリケーション(文字だけ出てくる黒画面のやつ)で解くことを想定しています。  
-演習問題（コンソール)の解答は、vol_12_演習問題(コンソール)の解答の解答に書いてあります。  
-演習問題(DxLib)の解答例は[添付資料](XXXXX)内に入っています。  
+DxLib.hをインクルードしているプログラムはDXライブラリを使ったアプリケーションを、そうでないプログラムはコンソールアプリケーション(文字だけ出てくる黒画面のやつ)で解くことを想定しています。  
+演習問題（コンソール)の解答は、「vol_12_演習問題(コンソール)」の解答の解答に書いてあります。  
+演習問題(DxLib)の解答例はAnsweExampleフォルダ内に入っています。  
 
-## 添付資料内のファイルについて
+## ファイルについて
 
-[添付資料](XXXXX)
+* AnsweExampleフォルダ 
+各回の演習問題(DxLib)の解答例です。
 
-* 演習問題(DxLib)解答例コード  
-演習問題(DxLib)の解答例です。
+* SampleGame.exe  
+前半課題、最終課題ではこれを作ります。
 
-* サンプルゲーム.exe  
-前半課題、最終課題ではこれに似たゲームを作ります。
+* DxLibTemplate2017.zip
+DxLibの初期設定済みのVisual Studio2017プロジェクトです．これを改造して演習問題を解くことをおすすめします．
 
 ## 今回やること
 
-今回はコンソールも問題を解く際の豆知識や，本資料でよく使うDxLibの関数，機能についての解説を行います。
+今回はコンソールの問題を解く際の豆知識や，本資料でよく使うDxLibの関数，機能についての解説を行います。
 
 ## \#if~\#endif
 
@@ -123,7 +124,7 @@ int WINAPI WinMain( HINSTANCE hInstance , HINSTANCE hPrevInstance , LPSTR lpCmdL
 下の例では、キーの状態を記録する配列とそれを更新する関数を用意して、フォントを指定して文字を描画（DrawFormatStringToHandle）している。  
 変数にexternをつけて宣言することで複数のcppやヘッダーからその変数にアクセスできるようになる。
 
-> myglobal.h
+> MyGlobal.h
 
 ```cpp
 #pragma once
@@ -141,12 +142,12 @@ void keyUpdate();
 ```
 
 
-> myglobal.cpp
+> MyGlobal.cpp
 
 ```cpp
 #pragma once
 
-#include "myglobal.h"
+#include "MyGlobal.h"
 
 int fontHandle;//フォント読み込み用変数
 int mouseX=0 , mouseY=0;//マウス座標
@@ -174,7 +175,7 @@ void keyUpdate()
 #include <DxLib.h>
 #include <iostream>
 
-#include "myglobal.h"
+#include "MyGlobal.h"
 
 
 int WINAPI WinMain( HINSTANCE hInstance , HINSTANCE hPrevInstance , LPSTR lpCmdLine , int nCmdShow )
