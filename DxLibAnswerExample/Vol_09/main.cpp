@@ -6,9 +6,9 @@
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
+	SetOutApplicationLogValidFlag(FALSE);//Log.txtを生成しないように設定
 	ChangeWindowMode(TRUE);//非全画面にセット
 	SetGraphMode(640, 480, 32);//画面サイズ指定
-	SetOutApplicationLogValidFlag(FALSE);//Log.txtを生成しないように設定
 	if (DxLib_Init() == 1) { return -1; }//初期化に失敗時にエラーを吐かせて終了
 
 	fontHandle = CreateFontToHandle("Segoe UI", 20, 5, DX_FONTTYPE_ANTIALIASING_4X4);//フォントを読み込み
