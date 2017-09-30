@@ -1,11 +1,11 @@
 #pragma once
-#include <Siv3D.hpp>
+#include "DxLib.h"
 #include "Player.h"
 
 class Enemy {
 public:
-	Vec2 pos;
-	Vec2 velocity;
+	double x, y;
+	double vx, vy;
 	Player *playerPtr;
 	Enemy(const Vec2& _pos);
 	void update();

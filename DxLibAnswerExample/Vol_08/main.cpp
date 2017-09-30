@@ -1,5 +1,5 @@
-# include <Siv3D.hpp>
-# include "GameManager.h"
+#include "DxLib.h"
+#include "GameManager.h"
 
 void Main()
 {
@@ -8,7 +8,7 @@ void Main()
 	while (System::Update())
 	{
 		// Z, X, Cキーを押すと、自機を追う敵、その場で回転する敵、まっすぐ進む敵を生成
-		if (Input::KeyZ.clicked) {
+		if (keyState[KEY_INPUT_Z] == 1) {
 			gameManager.enemyManager.add(RandomVec2(Window::Width(), Window::Height() / 2.0), Enemy::Stalker);
 		}
 		if (Input::KeyX.clicked) {

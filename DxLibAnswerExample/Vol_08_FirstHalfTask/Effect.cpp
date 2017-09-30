@@ -8,7 +8,7 @@ const Color WhiteCircle::Color_(255, 255, 255, 80);
 
 
 WhiteCircle::WhiteCircle(const Vec2 & _pos) :
-	pos(_pos),
+	x(_x), y(_y),
 	isDead(false),
 	eFrame(0)
 {

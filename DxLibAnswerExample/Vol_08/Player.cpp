@@ -1,4 +1,4 @@
-#include <Siv3D.hpp>
+#include "DxLib.h"
 #include "Player.h"
 
 
@@ -12,17 +12,17 @@ pos(Vec2(320.0, 240.0))
 
 void Player::update() {
 	// ã‰º¶‰EƒL[‚ÅˆÚ“®
-	if (Input::KeyLeft.pressed) {
-		pos.x -= Speed;
+	if (keyState[KEY_INPUT_LEFT] > 0) {
+		x -= Speed;
 	}
-	if (Input::KeyRight.pressed) {
-		pos.x += Speed;
+	if (keyState[KEY_INPUT_RIGHT] > 0) {
+		x += Speed;
 	}
-	if (Input::KeyUp.pressed) {
-		pos.y -= Speed;
+	if (keyState[KEY_INPUT_UP] > 0) {
+		y -= Speed;
 	}
-	if (Input::KeyDown.pressed) {
-		pos.y += Speed;
+	if (keyState[KEY_INPUT_DOWN] > 0) {
+		y += Speed;
 	}
 }
 

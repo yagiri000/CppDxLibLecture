@@ -1,11 +1,11 @@
-#include <Siv3D.hpp>
+#include "DxLib.h"
 #include "Enemy.h"
 #include "GameManager.h"
 
 const double Enemy::Radius = 24.0;
 
 Enemy::Enemy(const Vec2 & _pos, Kind _kind) :
-	pos(_pos),
+	x(_x), y(_y),
 	velocity(),
 	kind(_kind),
 	eFrame(0)
@@ -25,7 +25,7 @@ void Enemy::update() {
 	else if (kind == Straight) {
 
 	}
-	pos += velocity;
+	x += vx; y+= vy;
 	eFrame++;
 }
 

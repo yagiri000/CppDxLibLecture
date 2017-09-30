@@ -1,7 +1,7 @@
-﻿# include <Siv3D.hpp>
-# include <memory>
-# include <algorithm>
-# include "Enemy.h"
+﻿#include "DxLib.h"
+#include <memory>
+#include <algorithm>
+#include "Enemy.h"
 
 void Main()
 {
@@ -11,7 +11,7 @@ void Main()
 	while (System::Update())
 	{
 		// Z, X, Cキーが押されたらランダムな座標に敵を生成
-		if (Input::KeyZ.clicked) {
+		if (keyState[KEY_INPUT_Z] == 1) {
 			vec.emplace_back(std::make_shared<EnemySinMove>(RandomVec2(Window::Width(), Window::Height() / 2.0)));
 		}
 		if (Input::KeyX.clicked) {

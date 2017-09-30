@@ -1,27 +1,27 @@
 #include "Player.h"
 
 Player::Player() :
-pos(320.0, 240.0),
+x(320.0), y(240.0),
 speed(5.0)
 {
 }
 
 void Player::update() {
 	// ã‰º¶‰EƒL[‚ÅˆÚ“®
-	if (Input::KeyLeft.pressed) {
-		pos.x -= speed;
+	if (keyState[KEY_INPUT_LEFT] > 0) {
+		x -= speed;
 	}
-	if (Input::KeyRight.pressed) {
-		pos.x += speed;
+	if (keyState[KEY_INPUT_RIGHT] > 0) {
+		x += speed;
 	}
-	if (Input::KeyUp.pressed) {
-		pos.y -= speed;
+	if (keyState[KEY_INPUT_UP] > 0) {
+		y -= speed;
 	}
-	if (Input::KeyDown.pressed) {
-		pos.y += speed;
+	if (keyState[KEY_INPUT_DOWN] > 0) {
+		y += speed;
 	}
 }
 
 void Player::draw() {
-	Circle(pos, 30.0).draw(Color(0, 0, 255));
+	DrawCircle(x, y, 30, GetColor(0, 0, 255));
 }

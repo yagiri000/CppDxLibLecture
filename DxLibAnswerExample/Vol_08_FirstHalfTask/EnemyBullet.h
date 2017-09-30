@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include <Siv3D.hpp>
+#include "DxLib.h"
 
 class EnemyBullet{
 public:
@@ -8,8 +8,8 @@ public:
 	static const Color Color_;
 	static const int LifeTime;
 
-	Vec2 pos;
-	Vec2 velocity;
+	double x, y;
+	double vx, vy;
 	int eFrame; // 生成されてからの経過フレーム
 	bool isDead; // 死んでいるかどうかのフラグ
 

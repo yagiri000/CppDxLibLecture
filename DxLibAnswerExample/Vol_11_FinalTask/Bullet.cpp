@@ -15,7 +15,7 @@ const int EnemyBullet::LifeTime = 900;
 
 
 IBullet::IBullet(const Vec2 & _pos, const Vec2 & _velocity, double _radius, double _attack, const Color & _color, int _lifeTime) :
-	pos(_pos),
+	x(_x), y(_y),
 	velocity(_velocity),
 	radius(_radius),
 	attack(_attack),
@@ -33,7 +33,7 @@ void IBullet::update() {
 }
 
 void IBullet::move() {
-	pos += velocity;
+	x += vx; y+= vy;
 }
 
 void IBullet::checkDead() {

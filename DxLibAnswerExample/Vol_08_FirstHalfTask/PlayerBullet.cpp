@@ -8,7 +8,7 @@ const Color PlayerBullet::Color_(0, 0, 200);
 const int PlayerBullet::LifeTime = 60;
 
 PlayerBullet::PlayerBullet(const Vec2 & _pos, const Vec2 & _velocity):
-	pos(_pos),
+	x(_x), y(_y),
 	velocity(_velocity),
 	eFrame(0),
 	isDead(false)
@@ -22,7 +22,7 @@ void PlayerBullet::update() {
 }
 
 void PlayerBullet::move() {
-	pos += velocity;
+	x += vx; y+= vy;
 }
 
 void PlayerBullet::checkDead() {

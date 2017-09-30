@@ -1,4 +1,4 @@
-#include <Siv3D.hpp>
+#include "DxLib.h"
 #include "GameManager.h"
 
 const double Player::Radius = 16;
@@ -25,17 +25,17 @@ void Player::update() {
 
 void Player::move() {
 	// ã‰º¶‰EƒL[‚ÅˆÚ“®
-	if (Input::KeyLeft.pressed) {
-		pos.x -= MoveSpeed;
+	if (keyState[KEY_INPUT_LEFT] > 0) {
+		x -= MoveSpeed;
 	}
-	if (Input::KeyRight.pressed) {
-		pos.x += MoveSpeed;
+	if (keyState[KEY_INPUT_RIGHT] > 0) {
+		x += MoveSpeed;
 	}
-	if (Input::KeyUp.pressed) {
-		pos.y -= MoveSpeed;
+	if (keyState[KEY_INPUT_UP] > 0) {
+		y -= MoveSpeed;
 	}
-	if (Input::KeyDown.pressed) {
-		pos.y += MoveSpeed;
+	if (keyState[KEY_INPUT_DOWN] > 0) {
+		y += MoveSpeed;
 	}
 }
 

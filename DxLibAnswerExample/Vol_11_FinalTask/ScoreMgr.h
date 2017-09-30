@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include <Siv3D.hpp>
+#include "DxLib.h"
 
 class ScoreManager {
 private:

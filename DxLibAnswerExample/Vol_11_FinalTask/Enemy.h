@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <memory>
-#include <Siv3D.hpp>
+#include "DxLib.h"
 
 
 //Še“G‚ÌŠî’êƒNƒ‰ƒX
@@ -10,8 +10,8 @@ public:
 	static const size_t EffectNum;
 	static const double EffectGenerateRange;
 
-	Vec2 pos;
-	Vec2 velocity;
+	double x, y;
+	double vx, vy;
 	double radius;
 	double hp;
 	int score;

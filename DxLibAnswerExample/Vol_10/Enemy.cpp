@@ -1,4 +1,4 @@
-# include "Enemy.h"
+#include "Enemy.h"
 
 const double IEnemy::Radius = 30.0;
 
@@ -16,7 +16,7 @@ const Color EnemyStraight::Color_(255, 0, 128);
 
 
 IEnemy::IEnemy(const Vec2& _pos):
-	pos(_pos),
+	x(_x), y(_y),
 	velocity(0.0, 0.0)
 {
 }
@@ -29,7 +29,7 @@ IEnemy(_pos)
 void EnemySinMove::update() {
 	// Sin‹O“¹‚Å“®‚­
 	velocity = Vec2(sin((double)eFrame * SinOmega) * SpeedX, SpeedY);
-	pos += velocity;
+	x += vx; y+= vy;
 	eFrame++;
 }
 
@@ -45,7 +45,7 @@ EnemyRotation::EnemyRotation(const Vec2 & _pos) :
 void EnemyRotation::update() {
 	// ‘¬“x‚ð‰ñ“]‚³‚¹‚é
 	velocity = Vec2(Speed, 0.0).rotated((double)eFrame * RotationOmega);
-	pos += velocity;
+	x += vx; y+= vy;
 	eFrame++;
 }
 
@@ -62,7 +62,7 @@ EnemyStraight::EnemyStraight(const Vec2 & _pos) :
 
 void EnemyStraight::update() {
 	// ‚Ü‚Á‚·‚®“®‚­
-	pos += velocity;
+	x += vx; y+= vy;
 }
 
 void EnemyStraight::draw() const {

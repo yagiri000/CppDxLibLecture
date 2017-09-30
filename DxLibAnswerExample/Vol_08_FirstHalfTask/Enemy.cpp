@@ -20,7 +20,7 @@ const Color Enemy::EnemyRotationColor(255, 0, 128);
 
 //“G‚ÌŠî’êƒNƒ‰ƒX
 Enemy::Enemy(const Vec2 & _pos, Kind _kind) :
-	pos(_pos),
+	x(_x), y(_y),
 	velocity(),
 	kind(_kind),
 	hp(5.0),
@@ -59,7 +59,7 @@ void Enemy::move() {
 	else if (kind == Rotation) {
 		velocity = Vec2(1.0, 0.0).rotate(eFrame * RotationEnemyOmega);
 	}
-	pos += velocity;
+	x += vx; y+= vy;
 }
 
 void Enemy::shot() {

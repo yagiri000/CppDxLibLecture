@@ -1,12 +1,12 @@
 #pragma once
 #include <vector>
 #include <memory>
-#include <Siv3D.hpp>
+#include "DxLib.h"
 
 // エフェクトの基底クラス
 class IParticleEffect {
 public:
-	Vec2 pos;
+	double x, y;
 	int lifeTime;
 	int eFrame;
 	bool isDead;

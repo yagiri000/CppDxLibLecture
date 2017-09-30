@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include <Siv3D.hpp>
+#include "DxLib.h"
 
 
 //白い円を一瞬描画するエフェクト
@@ -10,7 +10,7 @@ public:
 	static const double Radius;
 	static const Color Color_;
 
-	Vec2 pos;
+	double x, y;
 	int eFrame; // 生成されてからの経過フレーム
 	bool isDead; // 死んでいるかどうかのフラグ
 

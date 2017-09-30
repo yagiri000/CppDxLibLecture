@@ -30,7 +30,7 @@ const Color EnemyRotation::Color_(255, 0, 128);
 
 //“G‚ÌŠî’êƒNƒ‰ƒX
 IEnemy::IEnemy(const Vec2 & _pos, const Vec2 & _velocity, double _radius, double _hp, int _score, const Color& _color) :
-	pos(_pos),
+	x(_x), y(_y),
 	velocity(_velocity),
 	radius(_radius),
 	hp(_hp),
@@ -92,7 +92,7 @@ EnemyStalker::EnemyStalker(const Vec2 & _pos) :
 
 void EnemyStalker::move() {
 	velocity = StalkerEnemySpeed * (gameManager.player.pos - pos).normalized();
-	pos += velocity;
+	x += vx; y+= vy;
 }
 
 void EnemyStalker::shot() {
@@ -107,7 +107,7 @@ EnemyStop::EnemyStop(const Vec2 & _pos) :
 
 void EnemyStop::move() {
 	velocity = Vec2(0.0, 0.0);
-	pos += velocity;
+	x += vx; y+= vy;
 }
 
 void EnemyStop::shot() {
@@ -127,7 +127,7 @@ EnemyRotation::EnemyRotation(const Vec2 & _pos) :
 
 void EnemyRotation::move() {
 	velocity = Vec2(1.0, 0.0).rotate(eFrame * EnemyOmega);
-	pos += velocity;
+	x += vx; y+= vy;
 }
 
 void EnemyRotation::shot() {

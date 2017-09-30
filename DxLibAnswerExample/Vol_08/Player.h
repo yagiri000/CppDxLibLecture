@@ -1,10 +1,10 @@
 #pragma once
-#include <Siv3D.hpp>
+#include "DxLib.h"
 
 class Player {
 public:
 	static const double Speed;
-	Vec2 pos;
+	double x, y;
 	Player();
 	void update();
 	void draw();

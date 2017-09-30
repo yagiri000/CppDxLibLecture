@@ -1,11 +1,11 @@
 #pragma once
-#include <Siv3D.hpp>
+#include "DxLib.h"
 
 class Enemy {
 public:
-	Vec2 pos;
+	double x, y;
 
-	Enemy(Vec2 _pos);
+	Enemy(double _x, double _y);
 	void update();
 	void draw();
 };

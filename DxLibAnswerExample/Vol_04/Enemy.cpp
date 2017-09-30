@@ -1,7 +1,7 @@
-# include "Enemy.h"
+#include "Enemy.h"
 
 Enemy::Enemy(const Vec2& _pos):
-	pos(_pos),
+	x(_x), y(_y),
 	velocity(0.0, 0.0)
 {
 }
@@ -12,11 +12,11 @@ void Enemy::update() {
 	const double Speed = 1.5;
 	velocity = playerPtr->pos - pos;
 	velocity = Speed * velocity.normalized();
-	pos += velocity;
+	x += vx; y+= vy;
 }
 
 void Enemy::draw() {
-	Circle(pos, 30.0).draw(Color(255, 0, 0));
+	DrawCircle(x, y, 30, GetColor(255, 0, 0));
 }
 
 // プレイヤーへのポインタを取得する関数

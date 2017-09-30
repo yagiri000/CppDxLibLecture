@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include <Siv3D.hpp>
+#include "DxLib.h"
 
 
 //各敵の基底クラス
@@ -28,9 +28,9 @@ public:
 	static const Color EnemyStopColor;
 	static const Color EnemyRotationColor;
 
-	Vec2 pos; 
+	double x, y; 
 	Kind kind; // 敵の種類
-	Vec2 velocity;
+	double vx, vy;
 	double hp;
 	int eFrame; // 生成されてからの経過フレーム
 	bool isDead; // 死んでいるかどうかのフラグ

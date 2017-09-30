@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include <Siv3D.hpp>
+#include "DxLib.h"
 #include "Enemy.h"
 
 class EnemyManager {

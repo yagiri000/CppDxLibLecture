@@ -1,11 +1,11 @@
 #pragma once
-#include <Siv3D.hpp>
+#include "DxLib.h"
 
 class IEnemy {
 public:
 	static const double Radius;
-	Vec2 pos;
-	Vec2 velocity;
+	double x, y;
+	double vx, vy;
 	IEnemy(const Vec2& _pos);
 	virtual void update() = 0;
 	virtual void draw() const = 0;

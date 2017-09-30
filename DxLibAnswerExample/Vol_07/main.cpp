@@ -1,6 +1,6 @@
-﻿# include <Siv3D.hpp>
-# include <algorithm>
-# include "Enemy.h"
+﻿#include "DxLib.h"
+#include <algorithm>
+#include "Enemy.h"
 
 void Main()
 {
@@ -19,7 +19,7 @@ void Main()
 		}
 
 		auto rmvIter = std::remove_if(vec.begin(), vec.end(), [](const Enemy& i) {
-			return i.pos.x < 0 || i.pos.x > Window::Height() || i.pos.y < 0 || i.pos.y > Window::Height();
+			return i.x < 0 || i.x > Window::Height() || i.y < 0 || i.y > Window::Height();
 		});
 
 		vec.erase(rmvIter, vec.end());

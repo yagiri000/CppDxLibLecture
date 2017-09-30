@@ -1,6 +1,6 @@
-﻿# include <Siv3D.hpp>
-# include "Player.h"
-# include "Enemy.h"
+﻿#include "DxLib.h"
+#include "Player.h"
+#include "Enemy.h"
 
 void Main()
 {

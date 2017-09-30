@@ -15,7 +15,7 @@ public:
 	static const Color Color_;
 	static const Vec2 FirstPos;
 
-	Vec2 pos;
+	double x, y;
 	int fireCool;
 
 	Player();

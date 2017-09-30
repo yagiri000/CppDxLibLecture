@@ -1,5 +1,5 @@
-﻿# include <Siv3D.hpp>
-# include "Enemy.h"
+﻿#include "DxLib.h"
+#include "Enemy.h"
 
 void Main()
 {
@@ -20,7 +20,7 @@ void Main()
 		// 画面外の敵を削除
 		auto iter = vec.begin();
 		while (iter != vec.end()) {
-			if (iter->pos.x < 0 || iter->pos.x > Window::Height() || iter->pos.y < 0 || iter->pos.y > Window::Height()) { //画面外に出ているか確認
+			if (iter->x < 0 || iter->x > Window::Height() || iter->y < 0 || iter->y > Window::Height()) { //画面外に出ているか確認
 				iter = vec.erase(iter);
 			}
 			else {

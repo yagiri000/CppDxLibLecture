@@ -1,14 +1,14 @@
 #pragma once
 #include <vector>
 #include <memory>
-#include <Siv3D.hpp>
+#include "DxLib.h"
 
 
 // ’e‚ÌŠî’êƒNƒ‰ƒX
 class IBullet {
 public:
-	Vec2 pos;
-	Vec2 velocity;
+	double x, y;
+	double vx, vy;
 	double radius;
 	double attack;
 	Color color;

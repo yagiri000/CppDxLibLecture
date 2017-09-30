@@ -1,9 +1,9 @@
 #pragma once
-#include <Siv3D.hpp>
+#include "DxLib.h"
 
 class Player {
 public:
-	Vec2 pos;
+	double x, y;
 	double speed;
 
 	Player();

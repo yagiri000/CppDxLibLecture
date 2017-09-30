@@ -1,7 +1,7 @@
-# include "Enemy.h"
+#include "Enemy.h"
 
 Enemy::Enemy(const Vec2& _pos):
-	pos(_pos),
+	x(_x), y(_y),
 	velocity(RandomVec2(5.0))
 {
 	// RandomVec2(double length)
@@ -9,9 +9,9 @@ Enemy::Enemy(const Vec2& _pos):
 }
 
 void Enemy::update() {
-	pos += velocity;
+	x += vx; y+= vy;
 }
 
 void Enemy::draw() {
-	Circle(pos, 30.0).draw(Color(255, 0, 0));
+	DrawCircle(x, y, 30, GetColor(255, 0, 0));
 }

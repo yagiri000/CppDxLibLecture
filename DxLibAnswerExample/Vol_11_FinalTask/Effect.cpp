@@ -55,7 +55,7 @@ void EffectManager::draw() const {
 }
 
 IParticleEffect::IParticleEffect(const Vec2 & _pos, int _lifeTime) :
-	pos(_pos),
+	x(_x), y(_y),
 	lifeTime(_lifeTime),
 	eFrame(0),
 	isDead(false)

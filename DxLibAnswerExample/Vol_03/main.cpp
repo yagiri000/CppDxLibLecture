@@ -1,6 +1,6 @@
-﻿# include <Siv3D.hpp>
-# include "Enemy.h"
-# include "EnemyManager.h"
+﻿#include "DxLib.h"
+#include "Enemy.h"
+#include "EnemyManager.h"
 
 void Main()
 {
@@ -9,7 +9,7 @@ void Main()
 	while (System::Update())
 	{
 		// Zキーが押されたら敵を生成
-		if (Input::KeyZ.clicked) {
+		if (keyState[KEY_INPUT_Z] == 1) {
 			enemyManager.add(Enemy(Vec2(Random(0.0, 640.0), Random(0.0, 240.0))));
 		}
 
