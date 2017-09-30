@@ -1,6 +1,7 @@
 #include <iostream>
 #include "MyGlobal.h"
 #include "ScoreMgr.h"
+#include "GameManager.h"
 
 ScoreManager::ScoreManager() :
 score(0)
@@ -28,6 +29,6 @@ void ScoreManager::update(){
 }
 
 void ScoreManager::draw() const {
-	DrawFormatStringToHandle(10, 30 * 3, GetColor(255, 255, 255), fontHandle, "SCORE:%d", score);
-	DrawFormatStringToHandle(10, 30 * 4, GetColor(255, 255, 255), fontHandle, "îÌíeêî:%d", damagedNum);
+	DrawFormatStringToHandle(10, 30 * 3, GetColor(255, 255, 255), gameManager.fontHandle, "SCORE:%d", score);
+	DrawFormatStringToHandle(10, 30 * 4, GetColor(255, 255, 255), gameManager.fontHandle, "îÌíeêî:%d", damagedNum);
 }

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include "GameManager.h"
+#include "MyGlobal.h"
 
 const size_t IEnemy::EffectNum = 25;
 const double IEnemy::EffectGenerateRange = 64.0;
@@ -9,14 +10,14 @@ const double EnemyStalker::StalkerEnemySpeed = 1.5;
 const double EnemyStalker::Radius = 24.0;
 const double EnemyStalker::Hp = 5.0;
 const int EnemyStalker::Score = 100;
-const Color EnemyStalker::Color(255, 0, 0);
+const unsigned int EnemyStalker::Color = 0xFF0000;
 
 const size_t EnemyStop::EnemyshotRate = 60;
 const double EnemyStop::BulletSpeed = 1.0;
 const double EnemyStop::Radius = 24.0;
 const double EnemyStop::Hp = 5.0;
 const int EnemyStop::Score = 100;
-const Color EnemyStop::Color(255, 128, 0);
+const unsigned int EnemyStop::Color = 0xFF8800;
 
 const size_t EnemyRotation::EnemyshotRate = 120;
 const size_t EnemyRotation::EnemyshotNum = 4;
@@ -25,11 +26,11 @@ const double EnemyRotation::EnemyOmega = 0.02;
 const double EnemyRotation::Radius = 24.0;
 const double EnemyRotation::Hp = 5.0;
 const int EnemyRotation::Score = 100;
-const Color EnemyRotation::Color(255, 0, 128);
+const unsigned int EnemyRotation::Color = 0xFF0088;
 
 
 //敵の基底クラス
-IEnemy::IEnemy(double _x, double _y, double _vx, double _vy, double _radius, double _hp, int _score, const Color& _color) :
+IEnemy::IEnemy(double _x, double _y, double _vx, double _vy, double _radius, double _hp, int _score, unsigned int _color) :
 	x(_x), y(_y),
 	vx(_vx), vy(_vy),
 	radius(_radius),
@@ -50,16 +51,16 @@ void IEnemy::update() {
 }
 
 void IEnemy::draw() const {
-	Circle(pos, radius).draw(color);
+	DrawCircle(x, y, radius, color);
 }
 
 
 void IEnemy::checkHit() {
 	for (const auto& bullet : gameManager.playerBulletManager.playerBullets) {
 		// それぞれのプレイヤーの弾との当たり判定を取る
-		if (Circle(pos, radius).intersects(Circle(bullet->pos, bullet->Radius)) && bullet->isDead == false) {
+		if (checkHitCircles(x, y, radius, bullet->x, bullet->y, bullet->radius) && bullet->isDead == false) {
 			hp -= bullet->Attack;
-			gameManager.effectManager.add(std::make_shared<WhiteCircle>(bullet->pos));
+			gameManager.effectManager.add(std::make_shared<WhiteCircle>(bullet->x, bullet->y));
 			bullet->isDead = true;
 		}
 	}
@@ -68,7 +69,8 @@ void IEnemy::checkHit() {
 void IEnemy::checkDead() {
 	// 画面外に行ったかを確認
 	// 敵の円状の当たり判定と、画面サイズ分の四角の当たり判定から画面内にいるか判定している
-	if (!Circle(pos, radius).intersects(Rect(Window::Size()))) {
+	//if (!Circle(pos, radius).intersects(Rect(Window::Size()))) {
+	if (!checkHitPointRect(x, y, 0.0, 0.0, 640.0, 480.0)) {
 		isDead = true;
 	}
 	//HPがゼロかを確認
@@ -77,7 +79,9 @@ void IEnemy::checkDead() {
 		gameManager.scoreManager.addScore(score);
 		// エフェクト生成
 		for (size_t j = 0; j < EffectNum; j++) {
-			gameManager.effectManager.add(std::make_shared<WhiteCircle>(pos + Random(0.0, EffectGenerateRange) * RandomVec2()));
+			double ix, iy;
+			randomInCircle(EffectGenerateRange, &ix, &iy);
+			gameManager.effectManager.add(std::make_shared<WhiteCircle>(x + ix, y + iy));
 		}
 		isDead = true;
 	}
@@ -86,13 +90,17 @@ void IEnemy::checkDead() {
 
 
 EnemyStalker::EnemyStalker(double _x, double _y) :
-	IEnemy(_pos, Vec2(), Radius, Hp, Score, Color)
+	IEnemy(_x, _y, 0.0, 0.0, Radius, Hp, Score, Color)
 {
 }
 
 void EnemyStalker::move() {
-	velocity = StalkerEnemySpeed * (gameManager.player.pos - pos).normalized();
-	x += vx; y+= vy;
+	Player& player = gameManager.player;
+	normalize(x, y, player.x, player.y, &vx, &vy);
+	vx *= StalkerEnemySpeed;
+	vy *= StalkerEnemySpeed;
+	x += vx;
+	y += vy;
 }
 
 void EnemyStalker::shot() {
@@ -101,41 +109,52 @@ void EnemyStalker::shot() {
 
 
 EnemyStop::EnemyStop(double _x, double _y) :
-	IEnemy(_pos, Vec2(), Radius, Hp, Score, Color)
+	IEnemy(_x, _y, 0.0, 0.0, Radius, Hp, Score, Color)
 {
 }
 
 void EnemyStop::move() {
-	velocity = Vec2(0.0, 0.0);
-	x += vx; y+= vy;
+	vx = 0.0;
+	vy = 0.0;
+	x += vx;
+	y += vy;
 }
 
 void EnemyStop::shot() {
 	// プレイヤーに向けてショットを撃つ
 	if (elapsedFrame % EnemyshotRate == 0) {
-		Vec2 firstVel = BulletSpeed * (gameManager.player.pos - pos).normalized();
-		gameManager.enemyBulletManager.add(std::make_shared<EnemyBullet>(pos, firstVel));
+		double bx, by;
+		Player& p = gameManager.player;
+		normalize(x, y, p.x, p.y, &bx, &by);
+		bx *= BulletSpeed;
+		by *= BulletSpeed;
+		gameManager.enemyBulletManager.add(std::make_shared<EnemyBullet>(x, y, bx, by));
 	}
 }
 
 
 
 EnemyRotation::EnemyRotation(double _x, double _y) :
-	IEnemy(_pos, Vec2(), Radius, Hp, Score, Color)
+	IEnemy(_x, _y, 0.0, 0.0, Radius, Hp, Score, Color)
 {
 }
 
 void EnemyRotation::move() {
-	velocity = Vec2(1.0, 0.0).rotate(elapsedFrame * EnemyOmega);
-	x += vx; y+= vy;
+	double angle = elapsedFrame * 0.02;
+	vx = 1.0 * cos(angle);
+	vy = 1.0 * sin(angle);
+	x += vx;
+	y += vy;
 }
 
 void EnemyRotation::shot() {
 	// 4方向にショットを撃つ
 	if (elapsedFrame % EnemyshotRate == 0) {
 		for (size_t i = 0; i < EnemyshotNum; i++) {
-			Vec2 firstVel = Vec2(EnemyBulletSpeed, 0).rotated(TwoPi * i / EnemyshotNum);
-			gameManager.enemyBulletManager.add(std::make_shared<EnemyBullet>(pos, firstVel));
+			double rate = (double)i / (double)EnemyshotNum;
+			double fx = EnemyBulletSpeed *cos(PI2 * rate);
+			double fy = EnemyBulletSpeed * sin(PI2 * rate);
+			gameManager.enemyBulletManager.add(std::make_shared<EnemyBullet>(x, y, fx, fy));
 		}
 	}
 }

@@ -5,7 +5,7 @@ class Player{
 public:
 	static const double Radius;
 	static const size_t FireRate;
-	static const double moveSpeed;
+	static const double MoveSpeed;
 	static const double BulletFirstVelocityX;
 	static const double BulletFirstVelocityY;
 	static const double BulletFirstDeltaX;

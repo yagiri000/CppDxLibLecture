@@ -1,7 +1,6 @@
 #pragma once
 #include "DxLib.h"
 
-extern int fontHandle;
 extern int mouseX, mouseY;//マウス座標
 
 //キー取得用配列

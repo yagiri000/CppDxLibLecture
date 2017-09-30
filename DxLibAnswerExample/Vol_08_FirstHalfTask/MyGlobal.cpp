@@ -3,7 +3,6 @@
 #include "MyGlobal.h"
 #include <iostream>
 
-int fontHandle;//フォント読み込み用変数
 int mouseX = 0, mouseY = 0;//マウス座標
 
 //キー取得用の配列

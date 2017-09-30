@@ -11,12 +11,12 @@ public:
 	double vx, vy;
 	double radius;
 	double attack;
-	Color color;
+	unsigned int color;
 	int lifeTime;
 	int elapsedFrame; // 生成されてからの経過フレーム
 	bool isDead; // 死んでいるかどうかのフラグ
 
-	IBullet(double _x, double _y, double _vx, double _vy, double _radius, double attack, const Color& _color, int _lifeTime);
+	IBullet(double _x, double _y, double _vx, double _vy, double _radius, double attack, unsigned int _color, int _lifeTime);
 	void update();
 	void move();
 	void checkDead();

@@ -4,7 +4,7 @@
 
 const double Player::Radius = 16;
 const size_t Player::FireRate = 5;
-const double Player::moveSpeed = 5.0;
+const double Player::MoveSpeed = 5.0;
 const double Player::BulletFirstVelocityX = 0.0;
 const double Player::BulletFirstVelocityY = -15.0;
 const double Player::BulletFirstDeltaX = 0.0;
@@ -31,16 +31,16 @@ void Player::update() {
 void Player::move() {
 	// ã‰º¶‰EƒL[‚ÅˆÚ“®
 	if (keyState[KEY_INPUT_LEFT] > 0) {
-		x -= moveSpeed;
+		x -= MoveSpeed;
 	}
 	if (keyState[KEY_INPUT_RIGHT] > 0) {
-		x += moveSpeed;
+		x += MoveSpeed;
 	}
 	if (keyState[KEY_INPUT_UP] > 0) {
-		y -= moveSpeed;
+		y -= MoveSpeed;
 	}
 	if (keyState[KEY_INPUT_DOWN] > 0) {
-		y += moveSpeed;
+		y += MoveSpeed;
 	}
 }
 

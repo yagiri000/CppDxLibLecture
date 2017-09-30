@@ -14,7 +14,7 @@ public:
 	EnemyBulletManager enemyBulletManager;
 	EffectManager effectManager;
 	ScoreManager scoreManager;
-	Font font;
+	int fontHandle;
 
 	GameManager();
 	void update();

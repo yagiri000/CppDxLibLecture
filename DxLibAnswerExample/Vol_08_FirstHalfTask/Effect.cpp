@@ -27,6 +27,7 @@ void WhiteCircle::checkDead() {
 }
 
 void WhiteCircle::draw()const {
+	// “§–¾‚È‰~‚ð•`‰æ
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 50);
 	DrawCircle(x, y, Radius, Color);
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255);

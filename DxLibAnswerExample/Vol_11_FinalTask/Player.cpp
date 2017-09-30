@@ -1,18 +1,24 @@
 #include "DxLib.h"
+#include "MyGlobal.h"
+#include "Player.h"
 #include "GameManager.h"
 
 const double Player::Radius = 16;
 const size_t Player::FireRate = 5;
 const double Player::MoveSpeed = 5.0;
-const Vec2 Player::BulletFirstVelocity(0.0, -15.0);
-const Vec2 Player::BulletFirstDelta(0.0, -20.0);
+const double Player::BulletFirstVelocityX = 0.0;
+const double Player::BulletFirstVelocityY = -15.0;
+const double Player::BulletFirstDeltaX = 0.0;
+const double Player::BulletFirstDeltaY = -20.0;
 const size_t Player::EffectNum = 25;
 const double Player::EffectRange = 64.0;
-const Color Player::Color(0, 0, 255);
-const Vec2 Player::FirstPos(320.0, 400.0);
+const unsigned int Player::Color = 0x0000FF;
+const double Player::FirstPosX = 320.0;
+const double Player::FirstPosY = 400.0;
 
 Player::Player() :
-	pos(FirstPos),
+	x(FirstPosX),
+	y(FirstPosY),
 	fireCool(0)
 {
 }
@@ -41,9 +47,9 @@ void Player::move() {
 
 void Player::shot() {
 	fireCool++;
-	if (Input::KeyZ.pressed) {
+	if (keyState[KEY_INPUT_Z] > 0) {
 		if (fireCool >= FireRate) {
-			gameManager.playerBulletManager.add(std::make_shared<PlayerBullet>(pos + BulletFirstDelta, BulletFirstVelocity));
+			gameManager.playerBulletManager.add(std::make_shared<PlayerBullet>(x + BulletFirstDeltaX, y + BulletFirstDeltaY, BulletFirstVelocityX, BulletFirstVelocityY));
 			fireCool = 0;
 		}
 	}
@@ -52,10 +58,12 @@ void Player::shot() {
 void Player::checkHit() {
 	//敵弾から自機への当たり判定
 	for (const auto& bullet : gameManager.enemyBulletManager.enemyBullets) {
-		if (Circle(pos, Radius).intersects(Circle(bullet->pos, bullet->Radius)) && bullet->isDead == false) {
+		if (checkHitCircles(x, y, Radius, bullet->x, bullet->y, bullet->radius) && bullet->isDead == false) {
 			// エフェクト生成
 			for (size_t j = 0; j < EffectNum; j++) {
-				gameManager.effectManager.add(std::make_shared<WhiteCircle>(pos + Random(0.0, EffectRange) * RandomVec2()));
+				double ix, iy;
+				randomInCircle(EffectRange, &ix, &iy);
+				gameManager.effectManager.add(std::make_shared<WhiteCircle>(x + ix, y + iy));
 			}
 			// スコア加算
 			gameManager.scoreManager.addDamagedNum();
@@ -64,15 +72,17 @@ void Player::checkHit() {
 	}
 
 	//敵自身から自機への当たり判定
-	for (const auto& bullet : gameManager.enemyManager.enemies) {
-		if (Circle(pos, Radius).intersects(Circle(bullet->pos, bullet->radius)) && bullet->isDead == false) {
+	for (const auto& enemy : gameManager.enemyManager.enemies) {
+		if (checkHitCircles(x, y, Radius, enemy->x, enemy->y, enemy->radius) && enemy->isDead == false) {
 			// エフェクト生成
 			for (size_t j = 0; j < EffectNum; j++) {
-				gameManager.effectManager.add(std::make_shared<WhiteCircle>(pos + Random(0.0, EffectRange) * RandomVec2()));
+				double ix, iy;
+				randomInCircle(EffectRange, &ix, &iy);
+				gameManager.effectManager.add(std::make_shared<WhiteCircle>(x + ix, y + iy));
 			}
 			// スコア加算
 			gameManager.scoreManager.addDamagedNum();
-			bullet->isDead = true;
+			enemy->isDead = true;
 		}
 	}
 }

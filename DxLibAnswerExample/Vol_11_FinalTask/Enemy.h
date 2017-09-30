@@ -15,11 +15,11 @@ public:
 	double radius;
 	double hp;
 	int score;
-	Color color;
+	unsigned int color;
 	int elapsedFrame; // 生成されてからの経過フレーム
 	bool isDead; // 死んでいるかどうかのフラグ
 
-	IEnemy(double _x, double _y, double _vx, double _vy, double _radius, double _hp, int _score, const Color& _Color);
+	IEnemy(double _x, double _y, double _vx, double _vy, double _radius, double _hp, int _score, unsigned int _Color);
 
 	virtual ~IEnemy() = default;
 

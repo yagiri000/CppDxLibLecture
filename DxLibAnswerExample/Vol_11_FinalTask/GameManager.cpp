@@ -1,4 +1,5 @@
 #include "GameManager.h"
+#include "MyGlobal.h"
 
 GameManager::GameManager()
 {
@@ -6,13 +7,13 @@ GameManager::GameManager()
 
 void GameManager::update() {
 	// A, S, Dキーを押すと、自機を追う敵、その場で回転する敵、まっすぐ進む敵を生成
-	if (Input::KeyA.clicked) {
+	if (keyState[KEY_INPUT_A] == 1) {
 		gameManager.enemyManager.add(std::make_shared<EnemyStalker>(GetRand(640), GetRand(480)));
 	}
-	if (Input::KeyS.clicked) {
+	if (keyState[KEY_INPUT_S] == 1) {
 		gameManager.enemyManager.add(std::make_shared<EnemyStop>(GetRand(640), GetRand(480)));
 	}
-	if (Input::KeyD.clicked) {
+	if (keyState[KEY_INPUT_D] == 1) {
 		gameManager.enemyManager.add(std::make_shared<EnemyRotation>(GetRand(640), GetRand(480)));
 	}
 
@@ -32,8 +33,8 @@ void GameManager::draw() const {
 	effectManager.draw();
 	scoreManager.draw();
 
-	DrawFormatStringToHandle(10, 30 * 3, GetColor(255, 255, 255), fontHandle, "A, S, Dで敵を生成");
-	DrawFormatStringToHandle(10, 30 * 4, GetColor(255, 255, 255), fontHandle, "Zでショット");
+	DrawFormatStringToHandle(10, 30 * 1, GetColor(255, 255, 255), fontHandle, "A, S, Dで敵を生成");
+	DrawFormatStringToHandle(10, 30 * 2, GetColor(255, 255, 255), fontHandle, "Zでショット");
 }
 
 void GameManager::load() {

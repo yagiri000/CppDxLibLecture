@@ -5,16 +5,16 @@
 
 const double PlayerBullet::Radius = 4.0;
 const double PlayerBullet::Attack = 1.0;
-const Color PlayerBullet::Color(0, 0, 200);
+const unsigned int PlayerBullet::Color = 0x0000AA;
 const int PlayerBullet::LifeTime = 60;
 
 const double EnemyBullet::Radius = 8.0;
 const double EnemyBullet::Attack = 1.0;
-const Color EnemyBullet::Color(255, 255, 255);
+const unsigned int EnemyBullet::Color = 0xFFFFFF;
 const int EnemyBullet::LifeTime = 900;
 
 
-IBullet::IBullet(double _x, double _y, double _vx, double _vy, double _radius, double _attack, const Color & _color, int _lifeTime) :
+IBullet::IBullet(double _x, double _y, double _vx, double _vy, double _radius, double _attack, unsigned int _color, int _lifeTime) :
 	x(_x), y(_y),
 	vx(_vx), vy(_vy),
 	radius(_radius),
@@ -43,17 +43,17 @@ void IBullet::checkDead() {
 }
 
 void IBullet::draw() const {
-	Circle(pos, radius).draw(color);
+	DrawCircle(x, y, radius, color);
 }
 
 
 PlayerBullet::PlayerBullet(double _x, double _y, double _vx, double _vy) :
-	IBullet(_pos, _velocity, Radius, Attack, Color, LifeTime)
+	IBullet(_x, _y, _vx, _vy, Radius, Attack, Color, LifeTime)
 {
 }
 
 EnemyBullet::EnemyBullet(double _x, double _y, double _vx, double _vy) :
-	IBullet(_pos, _velocity, Radius, Attack, Color, LifeTime)
+	IBullet(_x, _y, _vx, _vy, Radius, Attack, Color, LifeTime)
 {
 }
 
