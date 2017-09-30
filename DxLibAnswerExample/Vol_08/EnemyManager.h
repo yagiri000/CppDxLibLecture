@@ -9,6 +9,6 @@ private:
 public:
 	void update();
 	void draw();
-	void add(const Vec2 & pos, Enemy::Kind kind);
+	void add(const Enemy& enemy);
 	size_t getEnemyNum();
 };

@@ -10,13 +10,13 @@ void Main()
 	{
 		// Z, X, Cキーが押されたらランダムな座標に敵を生成
 		if (keyState[KEY_INPUT_Z] == 1) {
-			vec.emplace_back(new EnemySinMove(RandomVec2(Window::Width(), Window::Height() / 2.0)));
+			vec.emplace_back(new EnemySinMove(GetRand(640), GetRand(480)));
 		}
-		if (Input::KeyX.clicked) {
-			vec.emplace_back(new EnemyRotation(RandomVec2(Window::Width(), Window::Height() / 2.0)));
+		if (keyState[KEY_INPUT_X] == 1) {
+			vec.emplace_back(new EnemyRotation(GetRand(640), GetRand(480)));
 		}
-		if (Input::KeyC.clicked) {
-			vec.emplace_back(new EnemyStraight(RandomVec2(Window::Width(), Window::Height() / 2.0)));
+		if (keyState[KEY_INPUT_C] == 1) {
+			vec.emplace_back(new EnemyStraight(GetRand(640), GetRand(480)));
 		}
 
 		// 画面外の敵を削除

@@ -14,8 +14,8 @@ void EnemyManager::draw() {
 	}
 }
 
-void EnemyManager::add(const Vec2& pos, Enemy::Kind kind) {
-	enemies.emplace_back(Enemy(pos, kind));
+void EnemyManager::add(const Enemy& enemy) {
+	enemies.emplace_back(enemy);
 }
 
 size_t EnemyManager::getEnemyNum(){

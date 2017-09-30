@@ -1,26 +1,49 @@
 #include "DxLib.h"
 #include "GameManager.h"
+#include "MyGlobal.h"
 
-void Main()
+
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	const Font font(18);
+	ChangeWindowMode(TRUE);//非全画面にセット
+	SetGraphMode(640, 480, 32);//画面サイズ指定
+	SetOutApplicationLogValidFlag(FALSE);//Log.txtを生成しないように設定
+	if (DxLib_Init() == 1) { return -1; }//初期化に失敗時にエラーを吐かせて終了
 
-	while (System::Update())
+
+	fontHandle = CreateFontToHandle("Segoe UI", 20, 5, DX_FONTTYPE_ANTIALIASING_4X4);//フォントを読み込み
+
+	double x = 320.0;
+	double y = 240.0;
+	const double SPEED = 5.0;
+
+	while (ProcessMessage() == 0)
 	{
+		ClearDrawScreen();//裏画面消す
+		SetDrawScreen(DX_SCREEN_BACK);//描画先を裏画面に
+
+		GetMousePoint(&mouseX, &mouseY); //マウス座標更新
+		keyUpdate();//(自作関数)キー更新
+
 		// Z, X, Cキーを押すと、自機を追う敵、その場で回転する敵、まっすぐ進む敵を生成
 		if (keyState[KEY_INPUT_Z] == 1) {
-			gameManager.enemyManager.add(RandomVec2(Window::Width(), Window::Height() / 2.0), Enemy::Stalker);
+			gameManager.enemyManager.add(Enemy(GetRand(640), GetRand(480), Enemy::Stalker));
 		}
-		if (Input::KeyX.clicked) {
-			gameManager.enemyManager.add(RandomVec2(Window::Width(), Window::Height() / 2.0), Enemy::Rotation);
+		if (keyState[KEY_INPUT_X] == 1) {
+			gameManager.enemyManager.add(Enemy(GetRand(640), GetRand(480), Enemy::Rotation));
 		}
-		if (Input::KeyC.clicked) {
-			gameManager.enemyManager.add(RandomVec2(Window::Width(), Window::Height() / 2.0), Enemy::Straight);
+		if (keyState[KEY_INPUT_C] == 1) {
+			gameManager.enemyManager.add(Enemy(GetRand(640), GetRand(480), Enemy::Straight));
 		}
 
 		gameManager.update();
 		gameManager.draw();
 
-		font( L"敵の数:", gameManager.enemyManager.getEnemyNum()).draw();
+		DrawFormatStringToHandle(20, 20, GetColor(255, 255, 255), fontHandle, "敵の数:%d", gameManager.enemyManager.getEnemyNum());
+
+		ScreenFlip();//裏画面を表画面にコピー
 	}
+
+	DxLib_End();
+	return 0;
 }

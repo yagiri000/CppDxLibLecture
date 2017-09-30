@@ -7,13 +7,13 @@ GameManager::GameManager()
 void GameManager::update() {
 	// A, S, DƒL[‚ğ‰Ÿ‚·‚ÆA©‹@‚ğ’Ç‚¤“GA‚»‚Ìê‚Å‰ñ“]‚·‚é“GA‚Ü‚Á‚·‚®i‚Ş“G‚ğ¶¬
 	if (Input::KeyA.clicked) {
-		gameManager.enemyManager.add(std::make_shared<EnemyStalker>(RandomVec2(Window::Width(), Window::Height() / 2.0)));
+		gameManager.enemyManager.add(std::make_shared<EnemyStalker>(GetRand(640), GetRand(480)));
 	}
 	if (Input::KeyS.clicked) {
-		gameManager.enemyManager.add(std::make_shared<EnemyStop>(RandomVec2(Window::Width(), Window::Height() / 2.0)));
+		gameManager.enemyManager.add(std::make_shared<EnemyStop>(GetRand(640), GetRand(480)));
 	}
 	if (Input::KeyD.clicked) {
-		gameManager.enemyManager.add(std::make_shared<EnemyRotation>(RandomVec2(Window::Width(), Window::Height() / 2.0)));
+		gameManager.enemyManager.add(std::make_shared<EnemyRotation>(GetRand(640), GetRand(480)));
 	}
 
 	player.update();

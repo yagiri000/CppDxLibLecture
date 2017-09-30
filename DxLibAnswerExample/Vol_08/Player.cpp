@@ -1,4 +1,5 @@
 #include "DxLib.h"
+#include "MyGlobal.h"
 #include "Player.h"
 
 
@@ -6,7 +7,8 @@ const double Player::Speed = 4.0;
 
 
 Player::Player() :
-pos(Vec2(320.0, 240.0))
+x(320.0),
+y(240.0)
 {
 }
 
@@ -27,5 +29,5 @@ void Player::update() {
 }
 
 void Player::draw() {
-	Circle(pos, 24.0).draw(Color(0, 0, 255));
+	DrawCircle(x, y, 24, GetColor(0, 0, 255));
 }

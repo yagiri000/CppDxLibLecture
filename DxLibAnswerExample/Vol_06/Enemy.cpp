@@ -2,10 +2,9 @@
 
 Enemy::Enemy(double _x, double _y):
 	x(_x), y(_y),
-	velocity(RandomVec2(5.0))
+	vx((double)(GetRand(5) - 2)), 
+	vy((double)(GetRand(5) - 2)) // 適当な速度を設定
 {
-	// RandomVec2(double length)
-	// 半径length(今回は5.0)の2次元ベクトルを返す
 }
 
 void Enemy::update() {
