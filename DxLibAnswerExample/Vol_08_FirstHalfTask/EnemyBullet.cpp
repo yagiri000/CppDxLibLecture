@@ -1,5 +1,5 @@
 #include <iostream>
-#include <algorithm>
+#include "DxLib.h"
 #include "EnemyBullet.h"
 
 const double EnemyBullet::Radius = 8.0;
@@ -32,30 +32,5 @@ void EnemyBullet::checkDead() {
 
 void EnemyBullet::draw() const {
 	DrawCircle(x, y, Radius, Color);
-}
-
-
-EnemyBulletManager::EnemyBulletManager() {
-}
-
-void EnemyBulletManager::add(const EnemyBullet& ins) {
-	enemyBullets.emplace_back(ins);
-}
-
-void EnemyBulletManager::update() {
-	for (auto&& enemyBullet : enemyBullets) {
-		enemyBullet.update();
-	}
-
-	auto iter = std::remove_if(enemyBullets.begin(), enemyBullets.end(), [](const EnemyBullet& ins) {
-		return ins.isDead;
-	});
-	enemyBullets.erase(iter, enemyBullets.end());
-}
-
-void EnemyBulletManager::draw() const {
-	for (auto&& enemyBullet : enemyBullets) {
-		enemyBullet.draw();
-	}
 }
 

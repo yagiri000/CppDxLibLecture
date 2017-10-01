@@ -1,6 +1,4 @@
 #pragma once
-#include <vector>
-#include "DxLib.h"
 
 class EnemyBullet{
 public:
@@ -20,14 +18,3 @@ public:
 	void draw() const;
 };
 
-
-class EnemyBulletManager{
-public:
-	std::vector<EnemyBullet> enemyBullets;
-	EnemyBulletManager();
-
-	// ê∂ê¨ÇµÇΩíeÇí«â¡
-	void add(const EnemyBullet& ins);
-	void update();
-	void draw() const;
-};

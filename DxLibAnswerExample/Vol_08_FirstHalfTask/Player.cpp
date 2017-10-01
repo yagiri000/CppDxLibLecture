@@ -62,7 +62,7 @@ void Player::checkHit() {
 			for (size_t j = 0; j < EffectNum; j++) {
 				double ix, iy;
 				randomInCircle(EffectRange, &ix, &iy);
-				gameManager.effectManager.add(WhiteCircle(x + ix, y + iy));
+				gameManager.effectManager.add(WhiteCircleEffect(x + ix, y + iy));
 			}
 			// スコア加算
 			gameManager.scoreManager.addDamagedNum();
@@ -77,7 +77,7 @@ void Player::checkHit() {
 			for (size_t j = 0; j < EffectNum; j++) {
 				double ix, iy;
 				randomInCircle(EffectRange, &ix, &iy);
-				gameManager.effectManager.add(WhiteCircle(x + ix, y + iy));
+				gameManager.effectManager.add(WhiteCircleEffect(x + ix, y + iy));
 			}
 			// スコア加算
 			gameManager.scoreManager.addDamagedNum();

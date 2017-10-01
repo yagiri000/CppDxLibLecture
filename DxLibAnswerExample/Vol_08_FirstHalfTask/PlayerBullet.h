@@ -1,6 +1,4 @@
 #pragma once
-#include <vector>
-#include "DxLib.h"
 
 class PlayerBullet{
 public:
@@ -21,12 +19,3 @@ public:
 	void draw() const;
 };
 
-
-class PlayerBulletManager{
-public:
-	std::vector<PlayerBullet> playerBullets;
-	PlayerBulletManager();
-	void add(const PlayerBullet& ins);
-	void update();
-	void draw() const;
-};

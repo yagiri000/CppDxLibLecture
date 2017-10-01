@@ -19,23 +19,43 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="Effect.cpp" />
-    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="IBullet.cpp" />
+    <ClCompile Include="IEffect.cpp" />
+    <ClCompile Include="EffectManager.cpp" />
+    <ClCompile Include="EnemyRotation.cpp" />
+    <ClCompile Include="EnemyStalker.cpp" />
+    <ClCompile Include="EnemyStop.cpp" />
+    <ClCompile Include="IEnemy.cpp" />
+    <ClCompile Include="EnemyBullet.cpp" />
+    <ClCompile Include="EnemyBulletManager.cpp" />
+    <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MyGlobal.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="ScoreMgr.cpp" />
+    <ClCompile Include="PlayerBullet.cpp" />
+    <ClCompile Include="PlayerBulletManager.cpp" />
+    <ClCompile Include="ScoreManager.cpp" />
+    <ClCompile Include="WhiteCircleEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bullet.h" />
-    <ClInclude Include="Effect.h" />
-    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="IBullet.h" />
+    <ClInclude Include="IEffect.h" />
+    <ClInclude Include="EffectManager.h" />
+    <ClInclude Include="EnemyRotation.h" />
+    <ClInclude Include="EnemyStalker.h" />
+    <ClInclude Include="EnemyStop.h" />
+    <ClInclude Include="IEnemy.h" />
+    <ClInclude Include="EnemyBullet.h" />
+    <ClInclude Include="EnemyBulletManager.h" />
+    <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="MyGlobal.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="ScoreMgr.h" />
+    <ClInclude Include="PlayerBullet.h" />
+    <ClInclude Include="PlayerBulletManager.h" />
+    <ClInclude Include="ScoreManager.h" />
+    <ClInclude Include="WhiteCircleEffect.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

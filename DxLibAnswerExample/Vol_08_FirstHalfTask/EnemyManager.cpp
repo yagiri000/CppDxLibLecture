@@ -1,6 +1,6 @@
+#include <algorithm>
 #include "EnemyManager.h"
 #include "MyGlobal.h"
-#include <algorithm>
 
 void EnemyManager::update() {
 	for (auto&& enemy : enemies) {

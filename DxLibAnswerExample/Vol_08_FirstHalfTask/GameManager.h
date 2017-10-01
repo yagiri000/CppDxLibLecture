@@ -2,11 +2,11 @@
 #include "DxLib.h"
 #include "Player.h"
 #include "Player.h"
-#include "PlayerBullet.h"
+#include "PlayerBulletManager.h"
 #include "EnemyManager.h"
-#include "EnemyBullet.h"
-#include "Effect.h"
-#include "ScoreMgr.h"
+#include "EnemyBulletManager.h"
+#include "EffectManager.h"
+#include "ScoreManager.h"
 
 class GameManager{
 public:

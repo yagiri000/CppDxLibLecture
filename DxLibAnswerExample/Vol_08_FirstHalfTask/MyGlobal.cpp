@@ -1,5 +1,3 @@
-#pragma once
-
 #include "MyGlobal.h"
 #include <iostream>
 

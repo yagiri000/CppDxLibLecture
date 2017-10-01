@@ -1,7 +1,7 @@
 #include <iostream>
 #include "MyGlobal.h"
-#include "ScoreMgr.h"
 #include "GameManager.h"
+#include "ScoreManager.h"
 
 ScoreManager::ScoreManager() :
 score(0)

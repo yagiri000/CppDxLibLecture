@@ -1,6 +1,6 @@
 #include <iostream>
-#include <algorithm>
 #include "MyGlobal.h"
+#include "Enemy.h"
 #include "GameManager.h"
 
 const double Enemy::Radius = 24.0;
@@ -106,7 +106,7 @@ void Enemy::checkHit() {
 		// ‚»‚ê‚¼‚ê‚ÌƒvƒŒƒCƒ„[‚Ì’e‚Æ‚Ì“–‚½‚è”»’è‚ðŽæ‚é
 		if (checkHitCircles(x, y, Radius, i->x, i->y, i->Radius) && i->isDead == false) {
 			hp -= i->Attack;
-			gameManager.effectManager.add(WhiteCircle(i->x, i->y));
+			gameManager.effectManager.add(WhiteCircleEffect(i->x, i->y));
 			i->isDead = true;
 		}
 	}
@@ -126,7 +126,7 @@ void Enemy::checkDead() {
 		for (size_t j = 0; j < EffectNum; j++) {
 			double ix, iy;
 			randomInCircle(EffectGenerateRange, &ix, &iy);
-			gameManager.effectManager.add(WhiteCircle(x + ix, y + iy));
+			gameManager.effectManager.add(WhiteCircleEffect(x + ix, y + iy));
 		}
 		isDead = true;
 	}

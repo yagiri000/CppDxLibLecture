@@ -1,10 +1,11 @@
 #pragma once
 #include "Player.h"
 #include "Player.h"
-#include "Bullet.h"
-#include "Enemy.h"
-#include "Effect.h"
-#include "ScoreMgr.h"
+#include "PlayerBulletManager.h"
+#include "EnemyManager.h"
+#include "EnemyBulletManager.h"
+#include "EffectManager.h"
+#include "ScoreManager.h"
 
 class GameManager {
 public:

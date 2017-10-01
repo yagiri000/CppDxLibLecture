@@ -2,6 +2,7 @@
 #include "MyGlobal.h"
 #include "Player.h"
 #include "GameManager.h"
+#include "WhiteCircleEffect.h"
 
 const double Player::Radius = 16;
 const size_t Player::FireRate = 5;
@@ -63,7 +64,7 @@ void Player::checkHit() {
 			for (size_t j = 0; j < EffectNum; j++) {
 				double ix, iy;
 				randomInCircle(EffectRange, &ix, &iy);
-				gameManager.effectManager.add(std::make_shared<WhiteCircle>(x + ix, y + iy));
+				gameManager.effectManager.add(std::make_shared<WhiteCircleEffect>(x + ix, y + iy));
 			}
 			// スコア加算
 			gameManager.scoreManager.addDamagedNum();
@@ -78,7 +79,7 @@ void Player::checkHit() {
 			for (size_t j = 0; j < EffectNum; j++) {
 				double ix, iy;
 				randomInCircle(EffectRange, &ix, &iy);
-				gameManager.effectManager.add(std::make_shared<WhiteCircle>(x + ix, y + iy));
+				gameManager.effectManager.add(std::make_shared<WhiteCircleEffect>(x + ix, y + iy));
 			}
 			// スコア加算
 			gameManager.scoreManager.addDamagedNum();

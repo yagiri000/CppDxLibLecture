@@ -1,5 +1,9 @@
 #include "GameManager.h"
 #include "MyGlobal.h"
+#include "EnemyStalker.h"
+#include "EnemyStop.h"
+#include "EnemyRotation.h"
+
 
 GameManager::GameManager()
 {

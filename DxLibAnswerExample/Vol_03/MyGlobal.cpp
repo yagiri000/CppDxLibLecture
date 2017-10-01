@@ -1,5 +1,5 @@
 #pragma once
-
+#include <iostream>
 #include "MyGlobal.h"
 
 int fontHandle;//フォント読み込み用変数
