@@ -30,7 +30,7 @@ void EnemyManager::checkDelete() {
 	auto rmvIter = std::remove_if(enemies.begin(), enemies.end(), [](const Enemy& enemy) {
 
 		// 敵の座標点と画面サイズの四角の当たり判定を取り、当たっていなかったら画面外にいると判定
-		return !checkHitPointRect(enemy.x, enemy.y, 0.0, 0.0, 640.0, 480.0);
+		return !checkHitPointRect(enemy.x, enemy.y, 0.0, 0.0, SCREEN_WIDTH, SCREEN_HEIGHT);
 	});
 
 	enemies.erase(rmvIter, enemies.end());

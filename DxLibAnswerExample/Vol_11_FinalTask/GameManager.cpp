@@ -12,13 +12,13 @@ GameManager::GameManager()
 void GameManager::update() {
 	// A, S, DƒL[‚ğ‰Ÿ‚·‚ÆA©‹@‚ğ’Ç‚¤“GA‚»‚Ìê‚Å‰ñ“]‚·‚é“GA‚Ü‚Á‚·‚®i‚Ş“G‚ğ¶¬
 	if (keyState[KEY_INPUT_A] == 1) {
-		gameManager.enemyManager.add(std::make_shared<EnemyStalker>(GetRand(640), GetRand(480)));
+		gameManager.enemyManager.add(std::make_shared<EnemyStalker>(GetRand(SCREEN_WIDTH), GetRand(SCREEN_HEIGHT)));
 	}
 	if (keyState[KEY_INPUT_S] == 1) {
-		gameManager.enemyManager.add(std::make_shared<EnemyStop>(GetRand(640), GetRand(480)));
+		gameManager.enemyManager.add(std::make_shared<EnemyStop>(GetRand(SCREEN_WIDTH), GetRand(SCREEN_HEIGHT)));
 	}
 	if (keyState[KEY_INPUT_D] == 1) {
-		gameManager.enemyManager.add(std::make_shared<EnemyRotation>(GetRand(640), GetRand(480)));
+		gameManager.enemyManager.add(std::make_shared<EnemyRotation>(GetRand(SCREEN_WIDTH), GetRand(SCREEN_HEIGHT)));
 	}
 
 	player.update();

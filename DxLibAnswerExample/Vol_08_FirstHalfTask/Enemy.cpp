@@ -115,7 +115,7 @@ void Enemy::checkHit() {
 void Enemy::checkDead() {
 	// 画面外に行ったかを確認
 	// 敵の中心点と画面サイズ分の四角の当たり判定から画面内にいるか判定している
-	if (!checkHitPointRect(x, y, 0.0, 0.0, 640.0, 480.0)){
+	if (!checkHitPointRect(x, y, 0.0, 0.0, SCREEN_WIDTH, SCREEN_HEIGHT)){
 		isDead = true;
 	}
 	//HPがゼロかを確認

@@ -7,7 +7,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 {
 	SetOutApplicationLogValidFlag(FALSE);//Log.txtを生成しないように設定
 	ChangeWindowMode(TRUE);//非全画面にセット
-	SetGraphMode(640, 480, 32);//画面サイズ指定
+	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32);//画面サイズ指定
 	if (DxLib_Init() == 1) { return -1; }//初期化に失敗時にエラーを吐かせて終了
 
 
@@ -23,13 +23,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 		// Z, X, Cキーを押すと、自機を追う敵、その場で回転する敵、まっすぐ進む敵を生成
 		if (keyState[KEY_INPUT_Z] == 1) {
-			gameManager.enemyManager.add(Enemy(GetRand(640), GetRand(480), Enemy::Stalker));
+			gameManager.enemyManager.add(Enemy(GetRand(SCREEN_WIDTH), GetRand(SCREEN_HEIGHT), Enemy::Stalker));
 		}
 		if (keyState[KEY_INPUT_X] == 1) {
-			gameManager.enemyManager.add(Enemy(GetRand(640), GetRand(480), Enemy::Rotation));
+			gameManager.enemyManager.add(Enemy(GetRand(SCREEN_WIDTH), GetRand(SCREEN_HEIGHT), Enemy::Rotation));
 		}
 		if (keyState[KEY_INPUT_C] == 1) {
-			gameManager.enemyManager.add(Enemy(GetRand(640), GetRand(480), Enemy::Straight));
+			gameManager.enemyManager.add(Enemy(GetRand(SCREEN_WIDTH), GetRand(SCREEN_HEIGHT), Enemy::Straight));
 		}
 
 		gameManager.update();

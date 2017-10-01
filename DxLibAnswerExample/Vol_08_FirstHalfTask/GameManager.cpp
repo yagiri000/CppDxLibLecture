@@ -8,13 +8,13 @@ GameManager::GameManager()
 void GameManager::update() {
 	// A, S, DƒL[‚ğ‰Ÿ‚·‚ÆA©‹@‚ğ’Ç‚¤“GA‚»‚Ìê‚Å‰ñ“]‚·‚é“GA‚Ü‚Á‚·‚®i‚Ş“G‚ğ¶¬
 	if (keyState[KEY_INPUT_A] == 1) {
-		gameManager.enemyManager.add(Enemy(GetRand(640), GetRand(480), Enemy::Stalker));
+		gameManager.enemyManager.add(Enemy(GetRand(SCREEN_WIDTH), GetRand(SCREEN_HEIGHT), Enemy::Stalker));
 	}
 	if (keyState[KEY_INPUT_S] == 1) {
-		gameManager.enemyManager.add(Enemy(GetRand(640), GetRand(480), Enemy::Stop));
+		gameManager.enemyManager.add(Enemy(GetRand(SCREEN_WIDTH), GetRand(SCREEN_HEIGHT), Enemy::Stop));
 	}
 	if (keyState[KEY_INPUT_D] == 1) {
-		gameManager.enemyManager.add(Enemy(GetRand(640), GetRand(480), Enemy::Rotation));
+		gameManager.enemyManager.add(Enemy(GetRand(SCREEN_WIDTH), GetRand(SCREEN_HEIGHT), Enemy::Rotation));
 	}
 
 	player.update();

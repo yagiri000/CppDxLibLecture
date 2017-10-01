@@ -11,7 +11,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 {
 	SetOutApplicationLogValidFlag(FALSE);//Log.txtを生成しないように設定
 	ChangeWindowMode(TRUE);//非全画面にセット
-	SetGraphMode(640, 480, 32);//画面サイズ指定
+	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32);//画面サイズ指定
 	if (DxLib_Init() == 1) { return -1; }//初期化に失敗時にエラーを吐かせて終了
 
 
@@ -29,13 +29,13 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 		// Zキーが押されたらランダムな座標に敵を生成
 		if (keyState[KEY_INPUT_Z] == 1) {
-			vec.emplace_back(Enemy(GetRand(640), GetRand(480))); // 敵をインスタンス化
+			vec.emplace_back(Enemy(GetRand(SCREEN_WIDTH), GetRand(SCREEN_HEIGHT))); // 敵をインスタンス化
 		}
 
 		// 画面外の敵を削除
 		auto iter = vec.begin();
 		while (iter != vec.end()) {
-			if (iter->x < 0 || iter->x > 640 || iter->y < 0 || iter->y > 480) { //画面外に出ているか確認
+			if (iter->x < 0 || iter->x > SCREEN_WIDTH || iter->y < 0 || iter->y > SCREEN_HEIGHT) { //画面外に出ているか確認
 				iter = vec.erase(iter);
 			}
 			else {

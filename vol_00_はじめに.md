@@ -27,7 +27,7 @@ DxLib.hをインクルードしているプログラムはDXライブラリを�
 * SampleGame.exe  
 前半課題、最終課題ではこれを作ります。
 
-* DxLibTemplate2017.zip
+* DxLibTemplate2017.zip  
 DxLibの初期設定済みのVisual Studio2017プロジェクトです．これを改造して演習問題を解くことをおすすめします．
 
 ## 今回やること
@@ -76,7 +76,7 @@ int main(){
 ```
 
 
-## DXライブラリ　コード例
+## DXライブラリコード例
 
 この講座では演習にDxLibを使う。以下ではDxLibの基本的なコードや、私が作ったDxLibのひな形のコードについて説明している。  
 画面中央に円を描画するだけの基本的なコード。  
@@ -119,7 +119,7 @@ int WINAPI WinMain( HINSTANCE hInstance , HINSTANCE hPrevInstance , LPSTR lpCmdL
 
 
 
-## DXライブラリ　コード例　その２
+## DXライブラリコード例　その２
 
 下の例では、キーの状態を記録する配列とそれを更新する関数を用意して、フォントを指定して文字を描画（DrawFormatStringToHandle）している。  
 変数にexternをつけて宣言することで複数のcppやヘッダーからその変数にアクセスできるようになる。
@@ -129,6 +129,9 @@ int WINAPI WinMain( HINSTANCE hInstance , HINSTANCE hPrevInstance , LPSTR lpCmdL
 ```cpp
 #pragma once
 #include "DxLib.h"
+
+extern const int SCREEN_WIDTH;
+extern const int SCREEN_HEIGHT;
 
 extern int fontHandle;
 extern int mouseX , mouseY;//マウス座標
@@ -148,6 +151,9 @@ void keyUpdate();
 #pragma once
 
 #include "MyGlobal.h"
+
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
 
 int fontHandle;//フォント読み込み用変数
 int mouseX=0 , mouseY=0;//マウス座標
@@ -182,7 +188,7 @@ int WINAPI WinMain( HINSTANCE hInstance , HINSTANCE hPrevInstance , LPSTR lpCmdL
 {
     SetOutApplicationLogValidFlag( FALSE ) ;//Log.txtを生成しないように設定
     ChangeWindowMode( TRUE );//非全画面にセット
-    SetGraphMode( 640 , 480 , 32 );//画面サイズ指定
+    SetGraphMode( SCREEN_WIDTH , SCREEN_HEIGHT , 32 );//画面サイズ指定
     if(DxLib_Init() == 1){return -1;}//初期化に失敗時にエラーを吐かせて終了
     
 

@@ -4,6 +4,9 @@
 #include "MyGlobal.h"
 #include "DxLib.h"
 
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
+
 int fontHandle;//フォント読み込み用変数
 int mouseX = 0, mouseY = 0;//マウス座標
 

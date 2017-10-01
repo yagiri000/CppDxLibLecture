@@ -1,6 +1,9 @@
 #pragma once
 #include "DxLib.h"
 
+extern const int SCREEN_WIDTH;
+extern const int SCREEN_HEIGHT;
+
 extern int mouseX, mouseY;//マウス座標
 
 //キー取得用配列

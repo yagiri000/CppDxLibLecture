@@ -10,7 +10,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 {
 	SetOutApplicationLogValidFlag(FALSE);//Log.txtを生成しないように設定
 	ChangeWindowMode(TRUE);//非全画面にセット
-	SetGraphMode(640, 480, 32);//画面サイズ指定
+	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32);//画面サイズ指定
 	if (DxLib_Init() == 1) { return -1; }//初期化に失敗時にエラーを吐かせて終了
 
 	fontHandle = CreateFontToHandle("Segoe UI", 20, 5, DX_FONTTYPE_ANTIALIASING_4X4);//フォントを読み込み
@@ -27,18 +27,18 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 					// Z, X, Cキーが押されたらランダムな座標に敵を生成
 		if (keyState[KEY_INPUT_Z] == 1) {
-			vec.emplace_back(std::make_shared<EnemySinMove>(GetRand(640), GetRand(480)));
+			vec.emplace_back(std::make_shared<EnemySinMove>(GetRand(SCREEN_WIDTH), GetRand(SCREEN_HEIGHT)));
 		}
 		if (keyState[KEY_INPUT_X] == 1) {
-			vec.emplace_back(std::make_shared<EnemyRotation>(GetRand(640), GetRand(480)));
+			vec.emplace_back(std::make_shared<EnemyRotation>(GetRand(SCREEN_WIDTH), GetRand(SCREEN_HEIGHT)));
 		}
 		if (keyState[KEY_INPUT_C] == 1) {
-			vec.emplace_back(std::make_shared<EnemyStraight>(GetRand(640), GetRand(480)));
+			vec.emplace_back(std::make_shared<EnemyStraight>(GetRand(SCREEN_WIDTH), GetRand(SCREEN_HEIGHT)));
 		}
 
 		// 画面外の敵を削除
 		auto rmvIter = std::remove_if(vec.begin(), vec.end(), [](const std::shared_ptr<IEnemy>& enemy) {
-			return !checkHitPointRect(enemy->x, enemy->y, 0.0, 0.0, 640.0, 480.0);
+			return !checkHitPointRect(enemy->x, enemy->y, 0.0, 0.0, SCREEN_WIDTH, SCREEN_HEIGHT);
 		});
 
 		vec.erase(rmvIter, vec.end());
