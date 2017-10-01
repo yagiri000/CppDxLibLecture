@@ -21,7 +21,7 @@ DxLib.hをインクルードしているプログラムはDXライブラリを�
 
 ## ファイルについて
 
-* AnsweExampleフォルダ 
+* AnsweExampleフォルダ  
 各回の演習問題(DxLib)の解答例です。
 
 * SampleGame.exe  
