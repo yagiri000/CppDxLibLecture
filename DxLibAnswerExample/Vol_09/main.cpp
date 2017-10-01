@@ -38,7 +38,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		auto it = vec.begin();
 		while (it != vec.end()) {
 			// 画面外に出ているか確認
-			// 敵の座標と画面の長方形との当たり判定を取り、その否定を条件にすることで画面外に出ているか確認している
+			// 敵の座標と画面の長方形との当たり判定を取り，その否定を条件にすることで画面外に出ているか確認している
 			if (!checkHitPointRect((*it)->x, (*it)->y, 0.0, 0.0, 640.0, 480.0)) {
 				// メモリ解放
 				delete (*it);
