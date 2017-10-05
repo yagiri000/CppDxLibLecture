@@ -1,6 +1,6 @@
 # C++DxLib講座資料
 
-今回は以下のC++の諸機能を学ぶ．
+今回は以下のC++の諸機能を学ぶ。
 * string
 * bool
 * 関数オーバーロード
@@ -62,7 +62,7 @@ int main(){
 
 TODO : DxLibでstring型を使う例
 
-> DxLibでの使用例．```DrawFormatStringToHandle```関数の```FormatString ```引数は```const char*```型で，string型ではないので，string型のメンバ関数```c_str```関数を用いて```const char*```型で文字列を取得し，```DrawFormatStringToHandle```関数に値を渡す．  
+> DxLibでの使用例。```DrawFormatStringToHandle```関数の```FormatString ```引数は```const char*```型で、string型ではないので、string型のメンバ関数```c_str```関数を用いて```const char*```型で文字列を取得し、```DrawFormatStringToHandle```関数に値を渡す。  
 
 (DxLibテンプレートプロジェクトのmain.cppを書き換え)  
 
@@ -428,7 +428,7 @@ int main() {
 
 ##  Tips : constメンバ関数
 
-constメンバ関数を使うと、メンバ変数を変更できないメンバ関数を作ることができる。これを用いることで、誤ってメンバを変更することを防ぐことが出来、また多人数開発の際にメンバ変数を変更していないことを明示できるので，積極的に使うべきである。  
+constメンバ関数を使うと、メンバ変数を変更できないメンバ関数を作ることができる。これを用いることで、誤ってメンバを変更することを防ぐことが出来、また多人数開発の際にメンバ変数を変更していないことを明示できるので、積極的に使うべきである。  
 
 ```cpp
 #include <iostream>

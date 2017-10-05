@@ -4,7 +4,7 @@
 
 実際ゲームを作る時、PlayerやEnemyの配列、Bulletの配列、Effectの配列等をメンバに持ち、それらを管理するManagerクラスを作ると便利である。  
 今回は、PlayerとEnemyを持つManagerクラスの実体をグローバル変数にすることで、EnemyがPlayerが相互にアクセスする例を示す。
-(前回は、EnemyクラスがPlayerへのポインタを持つことで、Playerクラスにアクセスすることができたが、今回はEnemyクラスがPlayerクラスへのポインタを持つ必要はない)  
+(Vol.04では、EnemyクラスがPlayerへのポインタを持つことで、Playerクラスにアクセスすることができたが、今回はEnemyクラスがPlayerクラスへのポインタを持つ必要はない)  
 PlayerがEnemyの情報に、EnemyがPlayerの情報に相互にアクセス出来るようにするため、上手くファイルをインクルードしなければならない。  
 以下の例では、PlayerはshowEnemyX関数でEnemyのxにアクセスし、EnemyはshowPlayerX関数でPlayerのxにアクセスしている。  
 

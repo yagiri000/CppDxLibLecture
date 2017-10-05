@@ -234,7 +234,6 @@ int main(){
 ## 演習問題(コンソール)
 
 1. 以下のプログラムをstd::coutとstd::cinを使って書き直せ。  
-
 		#include <iostream>
 
 		int main() {
@@ -247,8 +246,6 @@ int main(){
 
 			return 0;
 		}
-
-
 1. 以下の様なクラスVector3を作った。  
 適当なコンストラクタを作れ。  
 x,y,zの値を表示するメンバ関数showを作り、動作を確認せよ。  

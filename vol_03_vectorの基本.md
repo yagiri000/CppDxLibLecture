@@ -100,7 +100,7 @@ int main(){
 1. int型のvectorを用意し、ランダムに0~9の数を10個入れて、すべて表示せよ。  
 上記のvectorの中で5以下の要素を表示せよ。
 	> ヒント：ランダムな0~9の数を生成するには```rand() % 10```とすればよい。今回はsrand等を使わなくてもよい。  
-	rand()は乱数に偏りがあるので，本来は使わないことを推奨されているが，短く書けるので本講座ではrand()を使う．偏りのない乱数を生成できるrandomに関してはこちらを参照→ [cpprefjp - C++日本語リファレンス random/uniform_real_distribution](https://cpprefjp.github.io/reference/random/uniform_real_distribution.html)
+	rand()は乱数に偏りがあるので、本来は使わないことを推奨されているが、短く書けるので本講座ではrand()を使う。偏りのない乱数を生成できるrandomに関してはこちらを参照→ [cpprefjp - C++日本語リファレンス random/uniform_real_distribution](https://cpprefjp.github.io/reference/random/uniform_real_distribution.html)
 1. 以下の様なクラスMyClassを用意した。MyClassのvectorを用意し、vectorにMyClassを10個追加し、すべての要素のshow()関数を呼び出せ。xの値はランダムな数でよい。
 
 		class MyClass{

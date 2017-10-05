@@ -14,14 +14,14 @@ remove_ifを使うには、algorithmヘッダーをインクルードする。
 
 ```cpp
 //remove_ifを実行し、条件にあった要素を後ろに詰める。
-auto rmvIter = std::remove_if(vec.begin(),vec.end(), 関数ポインタ);
+auto rmvIter = std::remove_if(vec.begin(),vec.end(), 関数オブジェクト);
 
 //後ろの方に詰められた要素を削除
 vec.erase( rmvIter, vec.end() );
 ```
 
 remove\_ifの第一引数には削除するかを判定する範囲の先頭、第二引数には終端を書く。
-remove\_ifの第三引数には削除の条件を返す関数の名前を書く。（正確には関数ポインタ）
+remove\_ifの第三引数には削除の条件を返す関数の名前を書く。（正確には関数オブジェクト）
 
 > 3の倍数を削除する例
 
@@ -52,7 +52,7 @@ int main(){
 
 
 	//vecの中から3の倍数を後ろに詰める
-	//3の倍数かどうかの判定は3番目のパラメータで渡された関数ポインタで判定
+	//3の倍数かどうかの判定は3番目のパラメータで渡された関数オブジェクトで判定
 	auto rmvIter = std::remove_if(vec.begin(), vec.end(), isMultipleThree);
 
 	//実際に削除
@@ -223,9 +223,8 @@ int main(){
 
 ## 演習問題(コンソール)
 
-1. int型の変数を引数にとり、2倍にして返す関数をラムダ式を用いて作成せよ。
-
-1. int型のvectorに0から9を入れ、remove_ifとラムダ式を用いて2の倍数を削除せよ。
+1. int型の変数を引数にとり、2倍にして返す関数をラムダ式を用いて作成せよ。  
+1. int型のvectorに0から9を入れ、remove_ifとラムダ式を用いて2の倍数を削除せよ。  
 
 ## 演習問題(DxLib)
 
