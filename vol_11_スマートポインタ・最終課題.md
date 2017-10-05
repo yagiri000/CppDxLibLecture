@@ -1,4 +1,4 @@
-#　C++DxLib講座資料
+#　DXライブラリで学ぶC++
 
 ## スコープ
 
@@ -103,9 +103,7 @@ int main(){
 
 newしたポインタは必ずdeleteしなくてはいけない。これは非常に面倒だし、忘れるとメモリリークの原因になる。そんな時に便利なのがスマートポインタだ。  
 スマートポインタはほぼ通常のポインタと同じ使い方でしかも適切なタイミングで自動的にdeleteされる。  
-
 スマートポインタを使用するにはmemoryヘッダーをインクルードする。  
-
 スコープを抜ける時自動的にsptrが破棄され、newで確保したMyClassを指すスマートポインタがなくなるので、自動的にnewで確保した領域が開放される。  
 
 ```cpp
@@ -166,24 +164,25 @@ std::shared_ptr<MyClass> sptr = std::make_shared<MyClass>(100);
 std::shared_ptr<クラス名> 変数名 = std::make_shared<クラス名>(引数1, 引数2, ...);
 ```
 
+## Tips : std::shared_ptr以外のスマートポインタ
+スマートポインタは，他にも，コピー出来ないが```std::shared_ptr```に比べ高速に動作する```std::unique_ptr```や，```std::shared_ptr```が指すメモリを参照し，[循環参照問題](https://qiita.com/hmito/items/db3b14917120b285112f#%E5%BE%AA%E7%92%B0%E5%8F%82%E7%85%A7)を防ぐことができる```std::weak_ptr```などがある．```std::shared_ptr```に慣れたらこちらも使っていくとよい．
+
 ## 演習問題(コンソール)
 
 1. 以下のような2次元座標を表すVector2クラスを用意した。Vector2クラスへのスマートポインタを要素に持つvectorを用意し、適当な座標を10個ほどmake_sharedで動的確保して追加し、表示せよ。
 
-```cpp
-class Vector2{
-public:
-	int x, y;
-	Vector2(int _x, int _y)
-	:x(_x),
-	y(_y)
-	{
-	}
-	~Vector2() {
-		std::cout << "Vector2のデストラクタが呼ばれました" << std::endl;
-	}
-};
-```
+		class Vector2{
+		public:
+			int x, y;
+			Vector2(int _x, int _y)
+			:x(_x),
+			y(_y)
+			{
+			}
+			~Vector2() {
+				std::cout << "Vector2のデストラクタが呼ばれました" << std::endl;
+			}
+		};
 
 1. 上記のvectorの中でx > yとなっている要素を削除せよ。
 
@@ -193,4 +192,5 @@ public:
 1. 前回の課題を、Enemyのクラスへのスマートポインタを要素に持つvectorを使って書き直せ。  
 
 ##  最終課題
+
 前半課題をポリモーフィズムを用いて書き直せ。練習として、敵の基底クラスへのスマートポインタのvectorに派生クラスを入れ、敵の削除にはremove_ifとラムダ式を使うこと。解答例は例のごとく添付資料内にある。  

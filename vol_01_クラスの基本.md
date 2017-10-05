@@ -1,4 +1,4 @@
-# C++DxLib講座資料
+# DXライブラリで学ぶC++
 
 今回はC++でのHello World、クラスの基本的な使い方について学ぶ。  
 演習では、実際にDxLibを用いてPlayer,Enemyを生成し、動かす。  
@@ -7,7 +7,7 @@
 
 C++流のHello World!
 C++ではstd::coutが用意されており、それを使って出力ができる。  
-std::　とは、「stdという名前空間にある」という意味。
+std:: とは、「stdという名前空間にある」という意味。
 
 ```cpp
 #include <iostream>
@@ -118,9 +118,11 @@ int main(){
 
 > コンストラクタの書き方
 
+```cpp
 クラスの名前(引数){
     初期化処理...
 }
+```
 
 > Vector2クラスのコンストラクタ例
 
@@ -234,6 +236,7 @@ int main(){
 ## 演習問題(コンソール)
 
 1. 以下のプログラムをstd::coutとstd::cinを使って書き直せ。  
+
 		#include <iostream>
 
 		int main() {

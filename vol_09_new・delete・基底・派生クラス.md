@@ -1,4 +1,4 @@
-# C++DxLib講座資料
+# DXライブラリで学ぶC++
 
 ## newとdelete
 
@@ -71,9 +71,6 @@ int main(){
 ## 演習問題(コンソール)
 
 1. 以下のようなクラスを定義した。MyClassへのポインタのvectorを用意し、適当な値のa(0~10ぐらい)を持ったデータ10個をnewで生成・格納し、表示した後にaが5以下の要素を削除せよ。  
-> ヒント：vectorの要素のMyClassへのポインタを削除しただけでは動的に確保した領域は解放されていない。  
-> 現時点ではremove_ifを使うとdeleteを呼べないので、whileとeraseを使って削除をすること。  
-
 
 ```cpp
 #include <iostream>
@@ -90,7 +87,7 @@ public:
 ```
 
 
-> ヒント：remove_ifを用いた形式だと、削除する要素それぞれに対してdeleteを行えないので、Vol6で紹介したwhileループを用いた形式でvectorの要素を削除するとよい。
+> ヒント：vectorの要素のMyClassへのポインタを削除しただけでは動的に確保した領域は解放されていない。remove_ifを用いた形式だと、削除する要素それぞれに対してdeleteを行えないので、Vol6で紹介したwhileループを用いた形式でvectorの要素を削除するとよい。
 
 	auto it = vec.begin();
 	while(it != vec.end()){

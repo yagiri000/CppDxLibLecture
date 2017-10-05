@@ -1,4 +1,4 @@
-# C++DxLib講座資料
+# DXライブラリで学ぶC++
 
 今回は前回とは別の、vectorの要素を削除する方法を学ぶ。演習問題では前回と同様敵を削除する。  
 vectorはコンテナの一種である。algorithmヘッダーにコンテナに対して削除・ソートなどを行う事ができる。
@@ -14,14 +14,14 @@ remove_ifを使うには、algorithmヘッダーをインクルードする。
 
 ```cpp
 //remove_ifを実行し、条件にあった要素を後ろに詰める。
-auto rmvIter = std::remove_if(vec.begin(),vec.end(), 関数オブジェクト);
+auto rmvIter = std::remove_if(vec.begin(),vec.end(), 関数ポインタ);
 
 //後ろの方に詰められた要素を削除
 vec.erase( rmvIter, vec.end() );
 ```
 
 remove\_ifの第一引数には削除するかを判定する範囲の先頭、第二引数には終端を書く。
-remove\_ifの第三引数には削除の条件を返す関数の名前を書く。（正確には関数オブジェクト）
+remove\_ifの第三引数には削除の条件を返す関数名を書く。（正確には関数ポインタ）
 
 > 3の倍数を削除する例
 
@@ -78,7 +78,7 @@ bool Func(配列の要素の型 x){
 
 
 ## ラムダ式
-本項目ではC++の中でも特に書き方が変態的なラムダ式を扱う。
+本項目ではC++の中でも特に書き方が変態的なラムダ式を扱う。  
 remove\_ifを使う時、大きなプログラムになると削除するかを判定する関数の定義と使う部分が離れてしまう。そこでC++11からはラムダ式というものが導入された。 例えば2で割り切れるかを返す関数オブジェクトを生成する場合  
 
 ```cpp
@@ -230,45 +230,41 @@ int main(){
 
 1. 前回同様にEnemyクラスを用意した。Enemyのvectorを作り、敵を複数生成せよ。
 
-		>Enemy.h
+	> Enemy.h
 
-		```cpp
-			#pragma once
-			#include <DxLib.h>
+		#pragma once
+		#include <DxLib.h>
 
-			class Enemy {
-			public:
-				double x, y;
-				double vx, vy;
-				Enemy(double _x, double _y);
-				void update();
-				void draw();
-			};
-		```
+		class Enemy {
+		public:
+			double x, y;
+			double vx, vy;
+			Enemy(double _x, double _y);
+			void update();
+			void draw();
+		};
 
-		>Enemy.cpp
+	> Enemy.cpp
 
-		```cpp
-			# include "Enemy.h"
+		# include "Enemy.h"
 
-			Enemy::Enemy(double _x, double _y):
-				x(_x),
-				y(_y),
-				vx(0.0),
-				vy(0.0),
-			{
-				// 適当な速度を設定
-				vx = (double)(rand() % 10 - 5);
-				vy = (double)(rand() % 10 - 5);
-			}
+		Enemy::Enemy(double _x, double _y):
+			x(_x),
+			y(_y),
+			vx(0.0),
+			vy(0.0),
+		{
+			// 適当な速度を設定
+			vx = (double)(rand() % 10 - 5);
+			vy = (double)(rand() % 10 - 5);
+		}
 
-			void Enemy::update() {
-				x += vx; y += vy;
-			}
+		void Enemy::update() {
+			x += vx; y += vy;
+		}
 
-			void Enemy::draw() {
-				DrawCircle(x, y, 30.0, 0xFF0000, 1);
-			}
-		```
+		void Enemy::draw() {
+			DrawCircle(x, y, 30.0, 0xFF0000, 1);
+		}
 
 1. 画面外に出た敵を削除せよ。要素の削除にはalgorithmのremove\_ifを使い、その条件の指定にはラムダ式を使用せよ。  
