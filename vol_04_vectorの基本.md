@@ -221,7 +221,7 @@ EnemyManagerクラスを作り、敵を管理せよ。
 
 
 
-##  Tips : ```emplace_back```と```push_back```
+##  Tips : emplace\_backとpush\_back
 
 vectorに要素を追加する関数は```emplace_back```と```push_back```があり、使い方はどちらも同じである。  
 ```emplace_back```はC++11から追加された関数で、```push_back```に比べ、要素追加時にコピーが発生せず処理が効率的なので、こちらを紹介した。  

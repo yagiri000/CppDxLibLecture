@@ -1,13 +1,14 @@
+#include "DxLib.h"
 #include "Enemy.h"
 
 Enemy::Enemy(double _x, double _y):
-	x(_x), y(_y),
-	vx(0.0), vy(1.0)
+	x(_x), y(_y)
 {
 }
 
 void Enemy::update() {
-	x += vx; y+= vy;
+	//下方向に移動
+	y += 1.0;
 }
 
 //エネミー（円）を描画

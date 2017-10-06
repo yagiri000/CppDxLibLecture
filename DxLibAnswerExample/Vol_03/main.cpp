@@ -1,41 +1,39 @@
-ï»¿#include "DxLib.h"
-#include "Enemy.h"
-#include "EnemyManager.h"
-#include "MyGlobal.h"
-
 #include <iostream>
+#include "DxLib.h"
+
+#include "MyGlobal.h"
+#include "Player.h"
+#include "Enemy.h"
 
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	SetOutApplicationLogValidFlag(FALSE);//Log.txtã‚’ç”Ÿæˆã—ãªã„ã‚ˆã†ã«è¨­å®š
-	ChangeWindowMode(TRUE);//éå…¨ç”»é¢ã«ã‚»ãƒƒãƒˆ
-	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32);//ç”»é¢ã‚µã‚¤ã‚ºæŒ‡å®š
-	if (DxLib_Init() == 1) { return -1; }//åˆæœŸåŒ–ã«å¤±æ•—æ™‚ã«ã‚¨ãƒ©ãƒ¼ã‚’åã‹ã›ã¦çµ‚äº†
-	SetDrawScreen(DX_SCREEN_BACK);//æç”»å…ˆã‚’è£ç”»é¢ã«
+	SetOutApplicationLogValidFlag(FALSE);//Log.txt‚ğ¶¬‚µ‚È‚¢‚æ‚¤‚Éİ’è
+	ChangeWindowMode(TRUE);//”ñ‘S‰æ–Ê‚ÉƒZƒbƒg
+	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32);//‰æ–ÊƒTƒCƒYw’è
+	if (DxLib_Init() == 1) { return -1; }//‰Šú‰»‚É¸”s‚ÉƒGƒ‰[‚ğ“f‚©‚¹‚ÄI—¹
+	SetDrawScreen(DX_SCREEN_BACK);//•`‰ææ‚ğ— ‰æ–Ê‚É
 
-	fontHandle = CreateFontToHandle("Segoe UI", 20, 5, DX_FONTTYPE_ANTIALIASING_4X4);//ãƒ•ã‚©ãƒ³ãƒˆã‚’èª­ã¿è¾¼ã¿
 
-	EnemyManager enemyManager; // EnemyManagerã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
+	fontHandle = CreateFontToHandle("Segoe UI", 20, 5, DX_FONTTYPE_ANTIALIASING_4X4);//ƒtƒHƒ“ƒg‚ğ“Ç‚İ‚İ
+
+	Player player;
+	Enemy enemy(320.0, 120.0);
 
 	while (ProcessMessage() == 0)
 	{
-		ClearDrawScreen();//è£ç”»é¢æ¶ˆã™
+		ClearDrawScreen();//— ‰æ–ÊÁ‚·
 
-		GetMousePoint(&mouseX, &mouseY); //ãƒã‚¦ã‚¹åº§æ¨™æ›´æ–°
-		keyUpdate();//(è‡ªä½œé–¢æ•°)ã‚­ãƒ¼æ›´æ–°
+		GetMousePoint(&mouseX, &mouseY); //ƒ}ƒEƒXÀ•WXV
+		keyUpdate();//(©ìŠÖ”)ƒL[XV
 
-		// Zã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸã‚‰æ•µã‚’ç”Ÿæˆ
-		if (keyState[KEY_INPUT_Z] == 1) {
-			enemyManager.add(Enemy(GetRand(SCREEN_WIDTH), GetRand(SCREEN_HEIGHT)));
-		}
+		player.update();
+		enemy.update();
 
-		enemyManager.update();
-		enemyManager.draw();
+		player.draw();
+		enemy.draw();
 
-		DrawFormatStringToHandle(20, 40, 0xFFFFFF, fontHandle, "æ•µã®æ•°:%3d", enemyManager.enemies.size());
-
-		ScreenFlip();//è£ç”»é¢ã‚’è¡¨ç”»é¢ã«ã‚³ãƒ”ãƒ¼
+		ScreenFlip();//— ‰æ–Ê‚ğ•\‰æ–Ê‚ÉƒRƒs[
 	}
 
 	DxLib_End();

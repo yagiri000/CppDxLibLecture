@@ -14,3 +14,5 @@ extern int keyState[256];
 //キー入力状態を更新する関数
 void keyUpdate();
 
+// (startX, startY) - (endX, endY)の単位ベクトルを求め，結果をresultX, resultYに入れる
+void normalize(double startX, double startY, double endX, double endY, double* resultX, double* resultY);

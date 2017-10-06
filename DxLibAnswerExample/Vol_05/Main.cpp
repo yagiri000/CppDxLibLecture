@@ -1,9 +1,9 @@
-﻿#include "DxLib.h"
-#include "Enemy.h"
-#include "EnemyManager.h"
-#include "MyGlobal.h"
+﻿#include <iostream>
+#include "DxLib.h"
 
-#include <iostream>
+# include "Player.h"
+# include "Enemy.h"
+#include "MyGlobal.h"
 
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -14,9 +14,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	if (DxLib_Init() == 1) { return -1; }//初期化に失敗時にエラーを吐かせて終了
 	SetDrawScreen(DX_SCREEN_BACK);//描画先を裏画面に
 
+
 	fontHandle = CreateFontToHandle("Segoe UI", 20, 5, DX_FONTTYPE_ANTIALIASING_4X4);//フォントを読み込み
 
-	EnemyManager enemyManager; // EnemyManagerのインスタンスを生成
+	Player player; // プレイヤーをインスタンス化
+	Enemy enemy(320.0, 120.0); // 敵をインスタンス化
+
+	// プレイヤーへのポインタを取得
+	enemy.setPlayerPtr(&player);
 
 	while (ProcessMessage() == 0)
 	{
@@ -25,15 +30,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		GetMousePoint(&mouseX, &mouseY); //マウス座標更新
 		keyUpdate();//(自作関数)キー更新
 
-		// Zキーが押されたら敵を生成
-		if (keyState[KEY_INPUT_Z] == 1) {
-			enemyManager.add(Enemy(GetRand(SCREEN_WIDTH), GetRand(SCREEN_HEIGHT)));
-		}
+		player.update();
+		enemy.update();
 
-		enemyManager.update();
-		enemyManager.draw();
-
-		DrawFormatStringToHandle(20, 40, 0xFFFFFF, fontHandle, "敵の数:%3d", enemyManager.enemies.size());
+		player.draw();
+		enemy.draw();
 
 		ScreenFlip();//裏画面を表画面にコピー
 	}
