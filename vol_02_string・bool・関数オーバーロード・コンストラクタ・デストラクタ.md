@@ -1,6 +1,6 @@
 # DXライブラリで学ぶC++
 
-今回は以下のC++の諸機能を学ぶ。
+今回は以下のC++の諸機能を学ぶ。  
 * string
 * bool
 * 関数オーバーロード
@@ -60,9 +60,8 @@ int main(){
 }
 ```
 
-TODO : DxLibでstring型を使う例
 
-> DxLibでの使用例。```DrawFormatStringToHandle```関数の```FormatString ```引数は```const char*```型で、string型ではないので、string型のメンバ関数```c_str```関数を用いて```const char*```型で文字列を取得し、```DrawFormatStringToHandle```関数に値を渡す。  
+DxLibでの使用例。```DrawFormatStringToHandle```関数の```FormatString ```引数は```const char*```型で、string型ではないので、string型のメンバ関数```c_str```関数を用いて```const char*```型で文字列を取得し、```DrawFormatStringToHandle```関数に値を渡す。  
 
 (DxLibテンプレートプロジェクトのmain.cppを書き換え)  
 
@@ -403,28 +402,6 @@ int main() {
 ```
 
 
-##  Tips : emplace_back
-
-vectorに要素を追加する関数は```push_back```を紹介したが、コピーが発生するため非効率なケースがある。そこで、```emplace_back```を使うと、コピーが発生しなくなる。使い方は```push_back```と全く同じである。今後は```emplace_back```を用いる。  
-
-```cpp
-#include <iostream>
-#include <vector>
-
-class MyClass {
-public:
-	int a;
-	MyClass(int _a) : a(_a) {}
-};
-
-
-int main() {
-	std::vector<MyClass> vec;
-	vec.emplace_back(MyClass(5));
-
-	return 0;
-}
-```
 
 ##  Tips : constメンバ関数
 
@@ -439,7 +416,6 @@ public:
 	MyClass(int _a);
 	void func() const;
 };
-
 
 MyClass::MyClass(int _a) {
 }

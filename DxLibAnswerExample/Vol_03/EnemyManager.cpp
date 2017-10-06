@@ -16,5 +16,5 @@ void EnemyManager::draw()
 
 void EnemyManager::add(Enemy enemy)
 {
-	enemies.push_back(enemy);
+	enemies.(enemy);
 }

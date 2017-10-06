@@ -20,7 +20,7 @@ int main(){
  
     // 10個の要素を追加していく
     for(int i = 0; i < 10; i++ ){
-        vec.push_back(i);
+        vec.(i);
     }
  
     //出力
@@ -47,10 +47,10 @@ std::vector<動的配列の中に入れる型> 動的配列の変数名;
 以下の例では、Vector2(x,y)でVector2の実体をつくり、push\_backによってvectorの末尾に追加している。
 
 ```
-動的配列名.push_back(追加するデータ);
+動的配列名.(追加するデータ);
 
 例：Vector2型の動的配列aryに Vector2(x,y)を入れるとしたら
-ary.push_back(Vector2(x,y))
+ary.(Vector2(x,y))
 ```
 
 > 配列のサイズ取得(返り値はunsigned int型)
@@ -81,7 +81,7 @@ int main(){
 
 	//要素を追加
 	for(int i = 0; i < 10; i++){
-		vec.push_back(MyClass(rand()%10));
+		vec.(MyClass(rand()%10));
 	}
 
 	//要素MyClassのxを表示
@@ -220,3 +220,8 @@ EnemyManagerクラスを作り、敵を管理せよ。
 1. 現在の敵の数を画面左上に表示せよ。ヒント：vectorのsize関数  
 
 
+
+##  Tips : ```emplace_back```と```push_back```
+
+vectorに要素を追加する関数は```emplace_back```と```push_back```があり、使い方はどちらも同じである。  
+```emplace_back```はC++11から追加された関数で、```push_back```に比べ、要素追加時にコピーが発生せず処理が効率的なので、こちらを紹介した。  
