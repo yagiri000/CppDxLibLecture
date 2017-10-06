@@ -57,12 +57,6 @@ public:
 
 
 
-#include <iostream>
-#include "DxLib.h"
-
-#include "MyGlobal.h"
-
-
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	SetOutApplicationLogValidFlag(FALSE);//Log.txtÇê∂ê¨ÇµÇ»Ç¢ÇÊÇ§Ç…ê›íË

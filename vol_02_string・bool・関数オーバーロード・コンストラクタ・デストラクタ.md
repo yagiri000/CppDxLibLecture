@@ -92,10 +92,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		GetMousePoint(&mouseX, &mouseY); //マウス座標更新
 		keyUpdate();//(自作関数)キー更新
 
-
-		//左上に文字（マウスの座標）を描画
 		DrawFormatStringToHandle(20, 20, GetColor(255, 255, 255), fontHandle, "Z, Xで文字追加");
 
+		// キー入力で文字追加
 		if (keyState[KEY_INPUT_Z] == 1) {
 			text += "そば！";
 		}
@@ -103,7 +102,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			text += "うどん！";
 		}
 
-		//左上に文字（マウスの座標）を描画
+		// 文字列を表示
 		DrawFormatStringToHandle(20, 60, GetColor(255, 255, 255), fontHandle, text.c_str());
 
 		ScreenFlip();//裏画面を表画面にコピー
@@ -241,7 +240,7 @@ int main(){
 1. 引数で受け取った値の2乗を返す関数mySquare()を作成せよ。mySquare()をint,float,double型の3通りに対応できるようオーバーロードしなさい。
 
 
-## コンストラクタ
+## コンストラクタのオーバーロード
 
 C++ではクラス生成時に呼び出されるコンストラクタというものを定義できる。
 関数オーバーロードと同じ要領で、コンストラクタは複数定義できる。
@@ -325,11 +324,40 @@ int main(){
 ```
 
 
+## メンバイニシャライザ
+
+コンストラクタの数値の初期化は以下のようにも書くことができる。自分で定義したクラスをなど初期化する場合、こう書いたほうが、インスタンスのコピーが発生しなくなるため処理が早くなる。以後はこの書き方、メンバイニシャライザを使って初期化を行う。  
+
+```cpp
+#include <iostream>
+
+class Vector2{
+public:
+	int x;
+	int y;
+	
+	Vector2(int _x, int _y):
+	x(_x),
+	y(_y)	
+	{
+	}
+};
+
+int main(){
+
+    Vector2 obj(1, 2);
+    std::cout << obj.x << " " << obj.y << std::endl;
+    
+    return 0;
+}
+```
+
+
 ## 演習問題(コンソール)
 
 1. 以下の様なクラスVector2を作った。コンストラクタとデストラクタを作れ。  
 コンストラクタ・デストラクタが呼ばれたら、"～が呼ばれました"と出力するようにせよ。コンストラクタは引数有りのものと引数なし（引数なしの時はx=0,y=0)のものを作ること。  
-コンストラクタの初期化の部分は今回紹介した形式で書くこと。
+コンストラクタの初期化の部分は今回紹介したメンバイニシャライザを用いた形式で書くこと。
 
 ```cpp
 class Vector2{
@@ -342,7 +370,8 @@ class Vector2{
 
 ## 演習問題(DxLib)
 
-1. 前回のPlayer, Enemyクラスのコンストラクタを
+1. 前回のPlayer, Enemyクラスのコンストラクタをメンバイニシャライザを用いて書き直せ。  
+
 
 ##  Tips : インスタンスの作成と同時に関数を呼ぶ例
 

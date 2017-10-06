@@ -7,11 +7,13 @@ class Player {
 public:
 	double x, y, speed;
 
-	Player() {
-		x = 320.0;
-		y = 360.0;
-		speed = 5.0;
+	Player() :
+		x(320.0),
+		y(360.0),
+		speed(5.0)
+	{
 	}
+
 	void update() {
 		// ã‰º¶‰EƒL[‚ÅˆÚ“®
 		if (keyState[KEY_INPUT_LEFT] > 0) {
@@ -39,9 +41,10 @@ class Enemy {
 public:
 	double x, y;
 
-	Enemy(double _x, double _y) {
-		x = _x;
-		y = _y;
+	Enemy(double _x, double _y) :
+		x(_x),
+		y(_y)
+	{
 	}
 
 	void update() {
@@ -56,11 +59,6 @@ public:
 };
 
 
-
-#include <iostream>
-#include "DxLib.h"
-
-#include "MyGlobal.h"
 
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)

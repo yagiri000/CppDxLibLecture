@@ -14,8 +14,9 @@ int main() {
 
 	return 0;
 }
-
 ```
+
+
 ## vol_1課題2(コンソール)
 ```cpp
 #include <iostream>
@@ -51,95 +52,7 @@ int main() {
 }
 ```
 
-## vol_3課題1(コンソール)
-
-```cpp
-#include <iostream>
-#include <vector>
-
-class MyClass {
-public:
-	int x;
-
-	MyClass(int _x) {
-		x = _x;
-	}
-
-	void show() {
-		std::cout << "xは：" << x << std::endl;
-	}
-};
-
-int main() {
-	std::vector<MyClass> vec;
-	for (int i = 0; i < 10; i++) {
-		vec.emplace_back(MyClass(rand() % 100));
-	}
-
-	for (int i = 0; i < (int)vec.size(); i++) {
-		vec[i].show();
-	}
-
-	return 0;
-}
-```
-
-## vol_3課題2(コンソール)
-```cpp
-#include <iostream>
-#include <vector>
-
-class Vector2 {
-public:
-	int x;
-	int y;
-
-	Vector2(int _x, int _y) {
-		x = _x;
-		y = _y;
-	}
-};
-
-int main() {
-	std::vector<Vector2> vec;
-	for (int i = 0; i < 10; i++) {
-		vec.emplace_back(Vector2(rand() % 100, rand() % 100));
-	}
-
-	for (int i = 0; i < (int)vec.size(); i++) {
-		std::cout << vec[i].x << ", " << vec[i].y << std::endl;
-	}
-
-	return 0;
-}
-```
-
-## vol_4課題(コンソール)
-
-```cpp
-#include <iostream>
-
-void twiceRef(int &x) {
-	x *= 2;
-}
-
-
-int main() {
-
-	int num = 3;
-
-	std::cout << num << std::endl;
-
-	twiceRef(num);
-
-	std::cout << num << std::endl;
-
-	return 0;
-}
-```
-
-
-## vol_5課題1(コンソール)
+## vol_2課題1(コンソール)
 
 ```cpp
 #include <iostream>
@@ -170,7 +83,7 @@ int main() {
 }
 ```
 
-## vol_5課題2(コンソール)
+## vol_2課題2(コンソール)
 
 ```cpp
 #include <iostream>
@@ -205,6 +118,96 @@ int main() {
 	std::cout << "メイン関数を抜けました" << std::endl;
 }
 ```
+
+## vol_2課題3(コンソール)
+
+```cpp
+#include <iostream>
+#include <vector>
+
+class MyClass {
+public:
+	int x;
+
+	MyClass(int _x) :
+		x(_x)
+	{
+	}
+
+	void show() {
+		std::cout << "xは：" << x << std::endl;
+	}
+};
+
+int main() {
+	std::vector<MyClass> vec;
+	for (int i = 0; i < 10; i++) {
+		vec.emplace_back(MyClass(rand() % 100));
+	}
+
+	for (int i = 0; i < vec.size(); i++) {
+		vec[i].show();
+	}
+
+	return 0;
+}
+```
+
+## vol_4課題2(コンソール)
+```cpp
+#include <iostream>
+#include <vector>
+
+class Vector2 {
+public:
+	int x;
+	int y;
+
+	Vector2(int _x, int _y) {
+		x = _x;
+		y = _y;
+	}
+};
+
+int main() {
+	std::vector<Vector2> vec;
+	for (int i = 0; i < 10; i++) {
+		vec.emplace_back(Vector2(rand() % 100, rand() % 100));
+	}
+
+	for (int i = 0; i < vec.size(); i++) {
+		std::cout << vec[i].x << ", " << vec[i].y << std::endl;
+	}
+
+	return 0;
+}
+```
+
+## vol_5課題(コンソール)
+
+```cpp
+#include <iostream>
+
+void twiceRef(int &x) {
+	x *= 2;
+}
+
+
+int main() {
+
+	int num = 3;
+
+	std::cout << num << std::endl;
+
+	twiceRef(num);
+
+	std::cout << num << std::endl;
+
+	return 0;
+}
+```
+
+
 
 
 ## vol_6課題(コンソール)
