@@ -8,6 +8,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	ChangeWindowMode(TRUE);//非全画面にセット
 	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32);//画面サイズ指定
 	if (DxLib_Init() == 1) { return -1; }//初期化に失敗時にエラーを吐かせて終了
+	SetDrawScreen(DX_SCREEN_BACK);//描画先を裏画面に
 
 	// フォントをロード
 	gameManager.load();
@@ -15,7 +16,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	while (ProcessMessage() == 0)
 	{
 		ClearDrawScreen();//裏画面消す
-		SetDrawScreen(DX_SCREEN_BACK);//描画先を裏画面に
 
 		GetMousePoint(&mouseX, &mouseY); //マウス座標更新
 		keyUpdate();//(自作関数)キー更新
