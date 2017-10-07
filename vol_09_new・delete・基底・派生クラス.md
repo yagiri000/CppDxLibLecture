@@ -193,7 +193,7 @@ Enemy::Enemy(double _x, double _y):
 	x(_x),
 	y(_y),
 	vx(0.0),
-	vy(0.0),
+	vy(0.0)
 {
 	// 適当な速度を設定
 	vx = (double)(rand() % 10 - 5);

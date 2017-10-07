@@ -20,7 +20,7 @@ int main(){
  
     // 10個の要素を追加していく
     for(int i = 0; i < 10; i++ ){
-        vec.(i);
+        vec.emplace_back(i);
     }
  
     //出力
@@ -81,7 +81,7 @@ int main(){
 
 	//要素を追加
 	for(int i = 0; i < 10; i++){
-		vec.(MyClass(rand()%10));
+		vec.emplace_back(MyClass(rand()%10));
 	}
 
 	//要素MyClassのxを表示

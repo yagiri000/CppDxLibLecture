@@ -489,7 +489,6 @@ Derivedクラスを指すBaseクラスのポインタを解放した際、Base�
 
 ```cpp
 #include <iostream>
-1
 class Base {
 public:
 	int x;
