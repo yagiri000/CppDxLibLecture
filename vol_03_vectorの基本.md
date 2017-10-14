@@ -69,8 +69,9 @@ class MyClass{
 public:
 	int x;
 
-	MyClass(int _x){
-		x = _x;
+	MyClass(int _x):
+		x(_x)
+	{
 	}
 };
 
@@ -107,8 +108,9 @@ int main(){
 		public:
 			int x;
 
-			MyClass(int _x){
-				x = _x;
+			MyClass(int _x):
+				x(_x)
+			{
 			}
 
 			void show(){
@@ -125,9 +127,10 @@ Point2クラスのvectorを用意し、rand()などを使って適当な座標�
 			int x;
 			int y;
 			
-			Point2(int _x, int _y){
-				x = _x;
-				y = _y;
+			Point2(int _x, int _y):
+				x(_x),
+				y(_y)
+			{
 			}
 		};
 
