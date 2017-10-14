@@ -74,9 +74,9 @@ DxLibでの使用例。```DrawFormatStringToHandle```関数の```FormatString ``
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
+	SetOutApplicationLogValidFlag(FALSE);//Log.txtを生成しないように設定
 	ChangeWindowMode(TRUE);//非全画面にセット
 	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32);//画面サイズ指定
-	SetOutApplicationLogValidFlag(FALSE);//Log.txtを生成しないように設定
 	if (DxLib_Init() == 1) { return -1; }//初期化に失敗時にエラーを吐かせて終了
 	SetDrawScreen(DX_SCREEN_BACK);//描画先を裏画面に
 
