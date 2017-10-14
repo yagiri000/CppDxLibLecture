@@ -44,13 +44,13 @@ std::vector<動的配列の中に入れる型> 動的配列の変数名;
 ```
 
 > 追加の仕方  
-以下の例では、Point2(x,y)でPoint2の実体をつくり、push\_backによってvectorの末尾に追加している。
+以下の例では、Point2(x,y)でPoint2の実体をつくり、emplace\_backによってvectorの末尾に追加している。
 
 ```
 動的配列名.(追加するデータ);
 
 例：Point2型の動的配列aryに Point2(x,y)を入れるとしたら
-ary.(Point2(x,y))
+ary.emplace_back(Point2(x,y))
 ```
 
 > 配列のサイズ取得(返り値はunsigned int型)
@@ -226,5 +226,5 @@ EnemyManagerクラスを作り、敵を管理せよ。
 
 ##  Tips : emplace\_backとpush\_back
 
-vectorに要素を追加する関数は```emplace_back```と```push_back```があり、使い方はどちらも同じである。  
+vectorに要素を追加する関数は```emplace_back```と```push_back```がある。  
 ```emplace_back```はC++11から追加された関数で、```push_back```に比べ、要素追加時にコピーが発生せず処理が効率的なので、こちらを紹介した。  
