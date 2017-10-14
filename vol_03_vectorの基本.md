@@ -44,13 +44,13 @@ std::vector<動的配列の中に入れる型> 動的配列の変数名;
 ```
 
 > 追加の仕方  
-以下の例では、Vector2(x,y)でVector2の実体をつくり、push\_backによってvectorの末尾に追加している。
+以下の例では、Point2(x,y)でPoint2の実体をつくり、push\_backによってvectorの末尾に追加している。
 
 ```
 動的配列名.(追加するデータ);
 
-例：Vector2型の動的配列aryに Vector2(x,y)を入れるとしたら
-ary.(Vector2(x,y))
+例：Point2型の動的配列aryに Point2(x,y)を入れるとしたら
+ary.(Point2(x,y))
 ```
 
 > 配列のサイズ取得(返り値はunsigned int型)
@@ -117,15 +117,15 @@ int main(){
 		};
 
 
-1. 以下の様なVector2クラスを作った。  
-Vector2クラスのvectorを用意し、rand()などを使って適当な座標を10個格納し、表示せよ。  
+1. 以下の様なPoint2クラスを作った。  
+Point2クラスのvectorを用意し、rand()などを使って適当な座標を10個格納し、表示せよ。  
 
-		class Vector2{
+		class Point2{
 		public:
 			int x;
 			int y;
 			
-			Vector2(int _x, int _y){
+			Point2(int _x, int _y){
 				x = _x;
 				y = _y;
 			}
