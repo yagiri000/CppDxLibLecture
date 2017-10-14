@@ -2,63 +2,8 @@
 #include "DxLib.h"
 
 #include "MyGlobal.h"
-
-class Player {
-public:
-	double x, y, speed;
-
-	Player() :
-		x(320.0),
-		y(360.0),
-		speed(5.0)
-	{
-	}
-
-	void update() {
-		// 上下左右キーで移動
-		if (keyState[KEY_INPUT_LEFT] > 0) {
-			x -= speed;
-		}
-		if (keyState[KEY_INPUT_RIGHT] > 0) {
-			x += speed;
-		}
-		if (keyState[KEY_INPUT_UP] > 0) {
-			y -= speed;
-		}
-		if (keyState[KEY_INPUT_DOWN] > 0) {
-			y += speed;
-		}
-	}
-
-	//自機（円）を描画
-	void draw() {
-		DrawCircle(x, y, 30.0, GetColor(0, 0, 255));
-	}
-};
-
-
-class Enemy {
-public:
-	double x, y;
-
-	Enemy(double _x, double _y) :
-		x(_x),
-		y(_y)
-	{
-	}
-
-	void update() {
-		//下方向に移動
-		y += 1.0;
-	}
-
-	//エネミー（円）を描画
-	void draw() {
-		DrawCircle(x, y, 30.0, GetColor(255, 0, 0));
-	}
-};
-
-
+#include "Player.h"
+#include "Enemy.h"
 
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
