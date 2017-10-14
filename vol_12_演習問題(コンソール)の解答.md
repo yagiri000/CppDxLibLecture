@@ -3,6 +3,7 @@
 以下に演習問題(コンソール)の解答例を示す。  
 
 ## vol_1課題1(コンソール)
+
 ```cpp
 #include <iostream>
 
@@ -18,6 +19,7 @@ int main() {
 
 
 ## vol_1課題2(コンソール)
+
 ```cpp
 #include <iostream>
 
@@ -52,74 +54,38 @@ int main() {
 }
 ```
 
-## vol_2課題1(コンソール)
+## vol_3課題1(コンソール)
 
 ```cpp
 #include <iostream>
+#include <vector>
 
-int mySquare(int x) {
-	std::cout << "int型のmySquareが呼ばれました" << std::endl;
-	return x * x;
-}
+int main()
+{
+	std::vector<int> vec;
+	for (int i = 0; i < 10; i++) {
+		vec.emplace_back(rand() % 10);
+	}
 
-float mySquare(float x) {
-	std::cout << "float型のmySquareが呼ばれました" << std::endl;
-	return x * x;
-}
+	for (int i = 0; i < vec.size(); i++) {
+		std::cout << vec[i] << std::endl;
+	}
 
-double mySquare(double x) {
-	std::cout << "double型のmySquareが呼ばれました" << std::endl;
-	return x * x;
-}
+	std::cout << std::endl;
 
+	for (int i = 0; i < vec.size(); i++) {
+		int n = vec[i];
+		if (n <= 5) {
+			std::cout << n << std::endl;
+		}
+	}
 
-int main() {
-	int x = 1;
-	float y = 0.5;
-	double z = 2.1;
-	std::cout << mySquare(x) << std::endl;
-	std::cout << mySquare(y) << std::endl;
-	std::cout << mySquare(z) << std::endl;
+	return 0;
 }
 ```
 
-## vol_2課題2(コンソール)
 
-```cpp
-#include <iostream>
-
-class Vector2 {
-public:
-	int x, y;
-
-	Vector2(int _x, int _y) :
-		x(_x),
-		y(_y)
-	{
-		std::cout << "引数ありのコンストラクタが呼ばれました" << std::endl;
-	}
-
-	Vector2() :
-		x(0),
-		y(0)
-	{
-		std::cout << "引数なしのコンストラクタが呼ばれました" << std::endl;
-	}
-
-	~Vector2() {
-		std::cout << "デストラクタが呼ばれました" << std::endl;
-	}
-};
-
-int main() {
-	std::cout << "メイン関数に入りました" << std::endl;
-	Vector2 point1;
-	Vector2 point2(2, 3);
-	std::cout << "メイン関数を抜けました" << std::endl;
-}
-```
-
-## vol_2課題3(コンソール)
+## vol_3課題2(コンソール)
 
 ```cpp
 #include <iostream>
@@ -153,26 +119,27 @@ int main() {
 }
 ```
 
-## vol_4課題2(コンソール)
+## vol_3課題3(コンソール)
+
 ```cpp
 #include <iostream>
 #include <vector>
 
-class Vector2 {
+class Point2 {
 public:
 	int x;
 	int y;
 
-	Vector2(int _x, int _y) {
+	Point2(int _x, int _y) {
 		x = _x;
 		y = _y;
 	}
 };
 
 int main() {
-	std::vector<Vector2> vec;
+	std::vector<Point2> vec;
 	for (int i = 0; i < 10; i++) {
-		vec.emplace_back(Vector2(rand() % 100, rand() % 100));
+		vec.emplace_back(Point2(rand() % 100, rand() % 100));
 	}
 
 	for (int i = 0; i < vec.size(); i++) {
@@ -182,6 +149,76 @@ int main() {
 	return 0;
 }
 ```
+
+## vol_4課題1(コンソール)
+
+```cpp
+#include <iostream>
+
+int mySquare(int x) {
+	std::cout << "int型のmySquareが呼ばれました" << std::endl;
+	return x * x;
+}
+
+float mySquare(float x) {
+	std::cout << "float型のmySquareが呼ばれました" << std::endl;
+	return x * x;
+}
+
+double mySquare(double x) {
+	std::cout << "double型のmySquareが呼ばれました" << std::endl;
+	return x * x;
+}
+
+
+int main() {
+	int x = 1;
+	float y = 0.5;
+	double z = 2.1;
+	std::cout << mySquare(x) << std::endl;
+	std::cout << mySquare(y) << std::endl;
+	std::cout << mySquare(z) << std::endl;
+}
+```
+
+## vol_4課題2(コンソール)
+
+```cpp
+#include <iostream>
+
+class Vector3 {
+public:
+	int x, y;
+
+	Vector3(int _x, int _y, int _z) :
+		x(_x),
+		y(_y),
+		z(_z)
+	{
+		std::cout << "引数ありのコンストラクタが呼ばれました" << std::endl;
+	}
+
+	Vector3() :
+		x(0),
+		y(0),
+		z(0)
+	{
+		std::cout << "引数なしのコンストラクタが呼ばれました" << std::endl;
+	}
+
+	~Vector3() {
+		std::cout << "デストラクタが呼ばれました" << std::endl;
+	}
+};
+
+int main() {
+	std::cout << "メイン関数に入りました" << std::endl;
+	Vector3 pos1;
+	Vector3 pos2(2, 3, 4);
+	std::cout << "メイン関数を抜けました" << std::endl;
+}
+```
+
 
 ## vol_5課題(コンソール)
 
